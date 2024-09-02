@@ -22,12 +22,13 @@ public class AuthenticationController {
 
     private final TokenService tokenService;
 
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private  AuthenticationManager authenticationManager;
 
-    public AuthenticationController(UserData repository, TokenService tokenService, AuthenticationManager authenticationManager) {
+    public AuthenticationController(UserData repository, TokenService tokenService) {
         this.repository = repository;
         this.tokenService = tokenService;
-        this.authenticationManager = authenticationManager;
+
     }
 
     @PostMapping("/login")

@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Table(name = "usuario")
-@Entity
+@Entity(name = "usuario")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -24,6 +23,8 @@ public class UserEntity implements UserDetails {
     private Long id;
     private String login;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
 
