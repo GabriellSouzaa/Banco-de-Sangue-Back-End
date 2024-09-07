@@ -8,7 +8,7 @@ CREATE TABLE doador (
                         numero_doacoes INTEGER,
                         elegibilidade BOOLEAN,
                         notas_medicas TEXT,
-                        saldo_bonus INTEGER,
-                        imagem VARCHAR(1000),
+                        saldo_bcoins INTEGER,
+                        imagem TEXT,
                         insignia_id_insigna INTEGER REFERENCES insignia(id_insigna)
 );

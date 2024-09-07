@@ -7,5 +7,6 @@ CREATE TABLE doacao (
                         tipo_doacao VARCHAR(10),
                         quantidade_coletada NUMERIC,
                         status_doacao VARCHAR(30),
-                        observacao VARCHAR(30)
+                        observacao VARCHAR(30),
+                        pontuacao_da_doacao INTEGER
 );

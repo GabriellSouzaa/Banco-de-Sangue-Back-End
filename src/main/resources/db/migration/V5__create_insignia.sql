@@ -3,7 +3,7 @@ CREATE TABLE insignia (
                           id_insigna INTEGER DEFAULT nextval('insignia_id_seq') PRIMARY KEY,
                           nome_insigna VARCHAR(40),
                           descricao TEXT,
-                          imagem VARCHAR(1000),
+                          imagem TEXT,
                           pontos_necessarios NUMERIC,
                           data_conquista DATE
 );
