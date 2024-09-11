@@ -18,11 +18,19 @@ TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    @Value("${api.security.token.issuer}")
+    private String issuer;
+
+    @Value("${api.security.token.audience}")
+    private String audience;
+
+
     public String generateToken(UserEntity user){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer(issuer)
+                    .withAudience(audience)
                     .withSubject(user.getLogin())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
