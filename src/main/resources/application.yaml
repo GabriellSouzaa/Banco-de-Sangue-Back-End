@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/banco-de-sangue
     username: postgres
-    password: 1234
+    password: sagi
     driver-class-name: org.postgresql.Driver
 
 
@@ -16,7 +16,9 @@ spring:
 api:
   security:
       token:
-        secret: ${JWT_SECRET:my-secret-key}
+        secret: ${JWT_SECRET:banco-de-sangue-secret}
+        issuer: http://localhost:8080
+        audience: auth-api
 logging:
       level:
         org.springframework.security: DEBUG
