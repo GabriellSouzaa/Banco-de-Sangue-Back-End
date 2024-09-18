@@ -20,6 +20,7 @@ public class ChallengeEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private RewardEntity reward;
 
+
     private String challengeName;
 
     private String description;

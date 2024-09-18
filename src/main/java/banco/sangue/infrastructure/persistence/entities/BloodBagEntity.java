@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,8 +19,8 @@ public class BloodBagEntity {
     @Column(name = "id_bolsa_de_sangue")
     private Long id;
 
-    @OneToOne
-    private DonationEntity donation;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DonationEntity> donations;
 
     private String bloodType;
 

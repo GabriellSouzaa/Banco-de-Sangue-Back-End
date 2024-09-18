@@ -18,7 +18,7 @@ public class DonationEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private PeopleEntity people;
+    private DonorEntity donor;
 
     private String bloodType;
 
