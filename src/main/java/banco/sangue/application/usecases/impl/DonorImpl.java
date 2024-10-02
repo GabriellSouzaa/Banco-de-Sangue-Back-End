@@ -4,9 +4,11 @@ import banco.sangue.application.repositories.DonorRepository;
 import banco.sangue.application.usecases.DonorGateway;
 import banco.sangue.infrastructure.adapters.http.models.response.DonorResponse;
 import banco.sangue.infrastructure.persistence.entities.DonorEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DonorImpl implements DonorGateway {
 
     private final DonorRepository donorRepository;
@@ -18,7 +20,7 @@ public class DonorImpl implements DonorGateway {
     @Override
     public List<DonorResponse> getDonors() {
         List<DonorEntity> donors = donorRepository.findAll();
-        return List.of();
+        return DonorResponse.convert(donors);
     }
 
     @Override

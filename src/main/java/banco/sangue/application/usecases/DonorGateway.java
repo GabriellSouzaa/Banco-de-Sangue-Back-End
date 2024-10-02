@@ -3,7 +3,6 @@ package banco.sangue.application.usecases;
 import banco.sangue.infrastructure.adapters.http.models.response.DonorResponse;
 
 import java.util.List;
-
 public interface DonorGateway {
 
     List<DonorResponse> getDonors();
@@ -16,3 +15,4 @@ public interface DonorGateway {
 
     void deleteDonor(Long id);
 }
+
