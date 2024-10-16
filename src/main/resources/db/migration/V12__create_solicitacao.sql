@@ -5,7 +5,7 @@ CREATE TABLE solicitacao (
                              solicitante_id_solicitante INTEGER REFERENCES solicitante(id_solicitante),
                              funcionario_id_funcionario INTEGER REFERENCES funcionario(id_funcionario),
                              data_solicitacao TIMESTAMP NOT NULL,
-                             tipo_solicitado VARCHAR(10),
+                             tipo_solicitado VARCHAR,
                              componente_solicitado VARCHAR(30),
                              quantidade_solicitada NUMERIC,
                              data_necessidade DATE,

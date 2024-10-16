@@ -5,8 +5,8 @@ CREATE TABLE funcionario (
                              endereco_id_endereco INTEGER REFERENCES endereco(id_endereco),
                              cpf VARCHAR(14) NOT NULL,
                              data_contratacao DATE NOT NULL,
-                             cargo VARCHAR(12) NOT NULL,
-                             departamento VARCHAR(20) NOT NULL,
+                             cargo VARCHAR NOT NULL,
+                             departamento VARCHAR NOT NULL,
                              salario NUMERIC NOT NULL,
                              numero_registro_profissional VARCHAR(30),
                              foto text

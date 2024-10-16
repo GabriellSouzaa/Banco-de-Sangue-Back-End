@@ -7,6 +7,6 @@ CREATE TABLE solicitacao_hospital_clinica (
                                               quantidade_solicitada INTEGER,
                                               data_de_necessidade DATE,
                                               status_solicitacao VARCHAR(15),
-                                              observacao INTEGER,
+                                              observacao VARCHAR,
                                               PRIMARY KEY (id_solicitacao, hospital_clinica_id)
 );
