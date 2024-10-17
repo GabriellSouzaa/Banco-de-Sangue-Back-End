@@ -14,18 +14,35 @@ public class ChallengeEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recompensa_id_recompensa")
     private RewardEntity reward;
 
-
+    @Column(name = "nome_desafio")
     private String challengeName;
 
+    @Column(name = "descricao")
     private String description;
 
+    @Column(name = "criterios")
     private String criteria;
 
+    @Column(name = "data_inicio")
     private LocalDate startDate;
 
+    @Column(name = "data_termino")
     private LocalDate endDate;
+
+    public ChallengeEntity() {
+    }
+
+    public ChallengeEntity(RewardEntity reward, String challengeName, String description, String criteria, LocalDate startDate, LocalDate endDate) {
+        this.reward = reward;
+        this.challengeName = challengeName;
+        this.description = description;
+        this.criteria = criteria;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public Long getId() {
         return id;

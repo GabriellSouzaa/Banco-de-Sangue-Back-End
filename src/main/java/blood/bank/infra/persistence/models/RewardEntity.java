@@ -12,13 +12,27 @@ public class RewardEntity {
     @Column(name = "id_recompensa")
     private Long id;
 
+    @Column(name = "nome_recompensa")
     private String rewardName;
 
+    @Column(name = "descricao_recompensa")
     private String rewardDescription;
 
+    @Column(name = "tipo_recompensa")
     private String rewardType;
 
+    @Column(name = "valor_em_pontos")
     private String valueInPoints;
+
+    public RewardEntity() {
+    }
+
+    public RewardEntity(String rewardName, String rewardDescription, String rewardType, String valueInPoints) {
+        this.rewardName = rewardName;
+        this.rewardDescription = rewardDescription;
+        this.rewardType = rewardType;
+        this.valueInPoints = valueInPoints;
+    }
 
     public Long getId() {
         return id;

@@ -7,12 +7,9 @@ import java.time.LocalDate;
 
 public class BadgeResponse {
 
-
-
     private String badgeName;
 
     private String image;
-
 
     private Integer necessaryPoints;
 
