@@ -2,6 +2,7 @@ package blood.bank.domain.entities.donation;
 
 import blood.bank.domain.entities.badge.Badge;
 import blood.bank.domain.entities.donor.Donor;
+import jakarta.persistence.Column;
 
 import java.time.LocalDate;
 
@@ -9,21 +10,53 @@ public class Donation {
 
     private Donor donor;
 
-    private String bloodType;
+    private LocalDate dateDonation;
 
-    private LocalDate registrationDate;
+    private String donatioType;
 
-    private LocalDate lastDonationDate;
+    private Integer quantityCollected;
 
-    private Integer donationCount;
+    private String donationStatus;
 
-    private Boolean eligibility;
+    private String observation;
 
-    private String medicalNotes;
+    private Integer donationScore;
 
-    private Integer bcoinsBalance;
+    public Donation(Donor donor, String donatioType, LocalDate dateDonation, Integer quantityCollected, String donationStatus, String observation, Integer donationScore) {
+        this.donor = donor;
+        this.donatioType = donatioType;
+        this.dateDonation = dateDonation;
+        this.quantityCollected = quantityCollected;
+        this.donationStatus = donationStatus;
+        this.observation = observation;
+        this.donationScore = donationScore;
+    }
 
-    private String image;
+    public Donor getDonor() {
+        return donor;
+    }
 
-    private Badge badge;
+    public LocalDate getDateDonation() {
+        return dateDonation;
+    }
+
+    public String getDonatioType() {
+        return donatioType;
+    }
+
+    public Integer getQuantityCollected() {
+        return quantityCollected;
+    }
+
+    public String getDonationStatus() {
+        return donationStatus;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public Integer getDonationScore() {
+        return donationScore;
+    }
 }

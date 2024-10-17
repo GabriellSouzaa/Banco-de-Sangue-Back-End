@@ -13,10 +13,13 @@ public class BloodCenterEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id_endereco")
     private AddressEntity address;
 
+    @Column(name = "nome_hemocentro")
     private String bloodCenterName;
 
+    @Column(name = "email")
     private String email;
 
     public Long getId() {

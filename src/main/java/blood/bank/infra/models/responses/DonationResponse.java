@@ -1,66 +1,46 @@
-package blood.bank.infra.persistence.models;
+package blood.bank.infra.models.responses;
 
-import jakarta.persistence.*;
+import blood.bank.domain.entities.donation.Donation;
+import blood.bank.domain.entities.donor.Donor;
+import blood.bank.infra.persistence.models.DonorEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "doacao")
-public class DonationEntity {
+public class DonationResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_doacao")
-    private Long id;
+    private Donor donor;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "doador_id_doador")
-    private DonorEntity donor;
-
-    @Column(name = "data_doacao")
     private LocalDate dateDonation;
 
-    @Column(name = "tipo_doacao")
     private String donatioType;
 
-    @Column(name = "quantidade_coletada")
     private Integer quantityCollected;
 
-    @Column(name = "status_doacao")
     private String donationStatus;
 
-    @Column(name = "observacao")
     private String observation;
 
-    @Column(name = "pontuacao_da_doacao")
     private Integer donationScore;
 
-    public DonationEntity() {
+    public DonationResponse(Donation donation) {
+        this.donor = donation.getDonor();
+        this.dateDonation = donation.getDateDonation();
+        this.donatioType = donation.getDonatioType();
+        this.quantityCollected = donation.getQuantityCollected();
+        this.donationStatus = donation.getDonationStatus();
+        this.observation = donation.getObservation();
+        this.donationScore = donation.getDonationScore();
     }
 
-    public DonationEntity(DonorEntity donor, LocalDate dateDonation, String donatioType, Integer quantityCollected, String donationStatus, String observation, Integer donationScore) {
-        this.donor = donor;
-        this.dateDonation = dateDonation;
-        this.donatioType = donatioType;
-        this.quantityCollected = quantityCollected;
-        this.donationStatus = donationStatus;
-        this.observation = observation;
-        this.donationScore = donationScore;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public DonorEntity getDonor() {
+    public Donor getDonor() {
         return donor;
     }
 
-    public void setDonor(DonorEntity donor) {
+    public void setDonor(Donor donor) {
         this.donor = donor;
     }
 
@@ -79,9 +59,6 @@ public class DonationEntity {
     public void setDonatioType(String donatioType) {
         this.donatioType = donatioType;
     }
-
-
-
 
     public Integer getQuantityCollected() {
         return quantityCollected;

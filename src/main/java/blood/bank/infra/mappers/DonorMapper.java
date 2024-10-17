@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class DonorMapper {
 
 
-    public DonorEntity toEntity(Donor donor) {
+    public static DonorEntity toEntity(Donor donor) {
         PeopleEntity peopleEntity = PeopleEntityMapper.toEntity(donor.getPeople());
         List<BadgeEntity> badgeEntities = donor.getBadge().stream()
                 .map(BadgeEntityMapper::toEntity).toList();

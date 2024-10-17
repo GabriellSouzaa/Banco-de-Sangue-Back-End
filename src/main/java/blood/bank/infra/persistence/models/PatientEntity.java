@@ -12,18 +12,24 @@ public class PatientEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pessoa_id_pessoa")
     private PeopleEntity people;
 
     private String cpf;
 
+    @Column(name = "telefone")
     private String phone;
 
+    @Column(name = "tipo_sanguineo")
     private String bloodType;
 
+    @Column(name = "historico_medico")
     private String medicalHistory;
 
+    @Column(name = "numero_plano_saude")
     private String healthPlanNumber;
 
+    @Column(name = "observacoes")
     private String observations;
 
     public Long getId() {

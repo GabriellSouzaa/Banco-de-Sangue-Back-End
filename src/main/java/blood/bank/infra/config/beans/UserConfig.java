@@ -1,4 +1,4 @@
-package blood.bank.config;
+package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.UserRepositoryGateway;
 import blood.bank.application.usecases.user.LoginUser;

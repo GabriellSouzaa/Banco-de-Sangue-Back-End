@@ -1,4 +1,4 @@
-package blood.bank.infra.cors;
+package blood.bank.infra.config.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

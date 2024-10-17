@@ -13,6 +13,7 @@ public class ApplicantEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pessoa_id_pessoa")
     private PeopleEntity people;
 
     public Long getId() {

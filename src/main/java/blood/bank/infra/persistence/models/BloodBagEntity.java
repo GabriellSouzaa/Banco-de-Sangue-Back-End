@@ -17,30 +17,43 @@ public class BloodBagEntity {
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "doacao_id_doacao")
     private List<DonationEntity> donations;
 
+    @Column(name = "tipo_sanguineo")
     private String bloodType;
 
+    @Column(name = "componente_sanguineo")
     private String bloodComponent;
 
+    @Column(name = "volume_bolsa")
     private String bagVolume;
 
+    @Column(name = "data_coleta")
     private LocalDate collectionDate;
 
+    @Column(name = "data_validade")
     private LocalDate expirationDate;
 
+    @Column(name = "status_bolsa")
     private String bagStatus;
 
+    @Column(name = "resultado_teste")
     private String testResult;
 
+    @Column(name = "numero_freezer")
     private String freezerNumber;
 
+    @Column(name = "cod_lote")
     private String batchCode;
 
+    @Column(name = "status_conformidade")
     private String complianceStatus;
 
+    @Column(name = "notas")
     private String notes;
 
+    @Column(name = "data_processamento")
     private LocalDateTime processingDate;
 
     public Long getId() {

@@ -12,16 +12,22 @@ public class AddressEntity {
     @Column(name = "id_endereco")
     private Long id;
 
+    @Column(name = "logradouro")
     private String street;
 
+    @Column(name = "numero")
     private String number;
 
+    @Column(name = "bairro")
     private String neighborhood;
 
+    @Column(name = "cidade")
     private String city;
 
+    @Column(name = "estado")
     private String state;
 
+    @Column(name = "cep")
     private String postalCode;
 
     public Long getId() {
