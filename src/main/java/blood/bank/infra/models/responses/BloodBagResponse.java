@@ -1,14 +1,13 @@
-package blood.bank.domain.entities.bloodBag;
+package blood.bank.infra.models.responses;
 
+import blood.bank.domain.entities.bloodBag.BloodBag;
 import blood.bank.domain.entities.donation.Donation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class BloodBag {
-
-    private List<Donation> donations;
+public class BloodBagResponse {
 
     private String bloodType;
 
@@ -34,22 +33,23 @@ public class BloodBag {
 
     private LocalDateTime processingDate;
 
-    public BloodBag(List<Donation> donations, String bloodType, String bloodComponent, String bagVolume, LocalDate collectionDate, LocalDate expirationDate, String bagStatus, String testResult, String freezerNumber, String batchCode, String complianceStatus, String notes, LocalDateTime processingDate) {
-        this.donations = donations;
-        this.bloodType = bloodType;
-        this.bloodComponent = bloodComponent;
-        this.bagVolume = bagVolume;
-        this.collectionDate = collectionDate;
-        this.expirationDate = expirationDate;
-        this.bagStatus = bagStatus;
-        this.testResult = testResult;
-        this.freezerNumber = freezerNumber;
-        this.batchCode = batchCode;
-        this.complianceStatus = complianceStatus;
-        this.notes = notes;
-        this.processingDate = processingDate;
-    }
+    private List<Donation> donations;
 
+    public BloodBagResponse(BloodBag bloodBag) {
+        this.donations = bloodBag.getDonations();
+        this.bloodType = bloodBag.getBloodType();
+        this.bloodComponent = bloodBag.getBloodComponent();
+        this.bagVolume = bloodBag.getBagVolume();
+        this.collectionDate = bloodBag.getCollectionDate();
+        this.expirationDate = bloodBag.getExpirationDate();
+        this.bagStatus = bloodBag.getBagStatus();
+        this.testResult = bloodBag.getTestResult();
+        this.freezerNumber = bloodBag.getFreezerNumber();
+        this.batchCode = bloodBag.getBatchCode();
+        this.complianceStatus = bloodBag.getComplianceStatus();
+        this.notes = bloodBag.getNotes();
+        this.processingDate = bloodBag.getProcessingDate();
+    }
 
     public List<Donation> getDonations() {
         return donations;

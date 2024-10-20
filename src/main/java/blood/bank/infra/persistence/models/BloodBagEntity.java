@@ -17,7 +17,7 @@ public class BloodBagEntity {
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "doacao_id_doacao")
+    @JoinColumn(name = "id_doacao")
     private List<DonationEntity> donations;
 
     @Column(name = "tipo_sanguineo")
@@ -55,6 +55,28 @@ public class BloodBagEntity {
 
     @Column(name = "data_processamento")
     private LocalDateTime processingDate;
+
+    public BloodBagEntity() {
+
+    }
+
+    public BloodBagEntity(List<DonationEntity> donations, String bloodType, String bloodComponent, String bagVolume, LocalDate collectionDate, LocalDate expirationDate, String bagStatus, String testResult, String freezerNumber, String batchCode, String complianceStatus, String notes, LocalDateTime processingDate) {
+        this.donations = donations;
+        this.bloodType = bloodType;
+        this.bloodComponent = bloodComponent;
+        this.bagVolume = bagVolume;
+        this.collectionDate = collectionDate;
+        this.expirationDate = expirationDate;
+        this.bagStatus = bagStatus;
+        this.testResult = testResult;
+        this.freezerNumber = freezerNumber;
+        this.batchCode = batchCode;
+        this.complianceStatus = complianceStatus;
+        this.notes = notes;
+        this.processingDate = processingDate;
+    }
+
+
 
     public Long getId() {
         return id;
