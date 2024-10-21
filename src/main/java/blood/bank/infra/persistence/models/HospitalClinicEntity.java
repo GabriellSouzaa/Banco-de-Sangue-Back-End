@@ -8,17 +8,31 @@ public class HospitalClinicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_hospital_clinica")
+    @Column(name = "id")
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id_endereco")
     private AddressEntity address;
 
+    @Column(name = "nome")
     private String name;
 
+    @Column(name = "telefone")
     private String phone;
 
     private String email;
+
+    public HospitalClinicEntity(AddressEntity addressEntity, String name, String phone, String email) {
+        this.address = addressEntity;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public HospitalClinicEntity() {
+
+    }
 
     public Long getId() {
         return id;

@@ -1,6 +1,8 @@
-package blood.bank.domain.entities.address;
+package blood.bank.infra.models.responses;
 
-public class Address {
+import blood.bank.domain.entities.address.Address;
+
+public class AddressResponse {
 
     private String street;
 
@@ -14,13 +16,13 @@ public class Address {
 
     private String postalCode;
 
-    public Address(String street, String number, String neighborhood, String city, String state, String postalCode) {
-        this.street = street;
-        this.number = number;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
+    public AddressResponse(Address address){
+        this.street = address.getStreet();
+        this.number = address.getNumber();
+        this.neighborhood = address.getNeighborhood();
+        this.city = address.getCity();
+        this.state = address.getState();
+        this.postalCode = address.getPostalCode();
     }
 
     public String getStreet() {

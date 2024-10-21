@@ -30,6 +30,19 @@ public class AddressEntity {
     @Column(name = "cep")
     private String postalCode;
 
+    public AddressEntity(String street, String number, String neighborhood, String city, String state, String postalCode) {
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+    }
+
+    public AddressEntity() {
+
+    }
+
     public Long getId() {
         return id;
     }

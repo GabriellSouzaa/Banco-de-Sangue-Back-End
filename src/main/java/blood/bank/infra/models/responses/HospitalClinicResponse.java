@@ -1,10 +1,8 @@
-package blood.bank.domain.entities.hospitalClinic;
+package blood.bank.infra.models.responses;
 
-import blood.bank.domain.entities.address.Address;
+import blood.bank.domain.entities.hospitalClinic.HospitalClinic;
 
-public class HospitalClinic {
-
-    private Address address;
+public class HospitalClinicResponse {
 
     private String name;
 
@@ -12,18 +10,20 @@ public class HospitalClinic {
 
     private String email;
 
-    public HospitalClinic(Address address, String name, String phone, String email) {
-        this.address = address;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
+    private AddressResponse address;
+
+    public HospitalClinicResponse(HospitalClinic hospitalClinic){
+        this.address = new AddressResponse(hospitalClinic.getAddress());
+        this.name = hospitalClinic.getName();
+        this.phone = hospitalClinic.getPhone();
+        this.email = hospitalClinic.getEmail();
     }
 
-    public Address getAddress() {
+    public AddressResponse getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressResponse address) {
         this.address = address;
     }
 
