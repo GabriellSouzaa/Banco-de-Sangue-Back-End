@@ -22,6 +22,15 @@ public class BloodCenterEntity {
     @Column(name = "email")
     private String email;
 
+    public BloodCenterEntity() {
+    }
+
+    public BloodCenterEntity(AddressEntity address, String bloodCenterName, String email) {
+        this.address = address;
+        this.bloodCenterName = bloodCenterName;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }
