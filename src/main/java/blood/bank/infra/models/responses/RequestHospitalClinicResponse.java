@@ -1,73 +1,44 @@
-package blood.bank.infra.persistence.models;
+package blood.bank.infra.models.responses;
 
-
-import jakarta.persistence.*;
+import blood.bank.domain.entities.requestHospitalClinic.RequestHospitalClinic;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "solicitacao_hospital_clinica")
-public class RequestHospitalClinicEntity {
+public class RequestHospitalClinicResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_solicitacao")
-    private Long id;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "hospital_clinica_id")
-    private HospitalClinicEntity hospitalClinic;
-
-    @Column(name = "data_solicitacao")
     private LocalDateTime requestDate;
 
-    @Column(name = "tipo_sangue_solicitado")
     private String requestedBloodType;
 
-    @Column(name = "componente_sangue_solicitado")
     private String requestedBloodComponent;
 
-    @Column(name = "quantidade_solicitada")
     private Integer requestedQuantity;
 
-    @Column(name = "data_de_necessidade")
     private LocalDate needByDate;
 
-    @Column(name = "status_solicitacao")
     private String requestStatus;
 
-    @Column(name = "observacao")
     private String observation;
 
-    public RequestHospitalClinicEntity(HospitalClinicEntity hospitalClinicEntity, LocalDateTime requestDate, String requestedBloodType, String requestedBloodComponent, LocalDate needByDate, String requestStatus, String observation) {
-        this.hospitalClinic = hospitalClinicEntity;
-        this.requestDate = requestDate;
-        this.requestedBloodType = requestedBloodType;
-        this.requestedBloodComponent = requestedBloodComponent;
-        this.needByDate = needByDate;
-        this.requestStatus = requestStatus;
-        this.observation = observation;
+    private HospitalClinicResponse hospitalClinic;
+
+    public RequestHospitalClinicResponse(RequestHospitalClinic requestHospitalClinic){
+        this.hospitalClinic = new HospitalClinicResponse(requestHospitalClinic.getHospitalClinic());
+        this.requestDate = requestHospitalClinic.getRequestDate();
+        this.requestedBloodType = requestHospitalClinic.getRequestedBloodType();
+        this.requestedBloodComponent = requestHospitalClinic.getRequestedBloodComponent();
+        this.requestedQuantity = requestHospitalClinic.getRequestedQuantity();
+        this.needByDate = requestHospitalClinic.getNeedByDate();
+        this.requestStatus = requestHospitalClinic.getRequestStatus();
+        this.observation = requestHospitalClinic.getObservation();
     }
 
-    public RequestHospitalClinicEntity() {
-
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public HospitalClinicEntity getHospitalClinic() {
+    public HospitalClinicResponse getHospitalClinic() {
         return hospitalClinic;
     }
 
-    public void setHospitalClinic(HospitalClinicEntity hospitalClinic) {
+    public void setHospitalClinic(HospitalClinicResponse hospitalClinic) {
         this.hospitalClinic = hospitalClinic;
     }
 

@@ -21,5 +21,80 @@ public class RequestHospitalClinic {
 
     private String requestStatus;
 
-    private Integer observation;
+    private String observation;
+
+    public RequestHospitalClinic(HospitalClinic hospitalClinic, LocalDateTime requestDate, String requestedBloodType, String requestedBloodComponent, Integer requestedQuantity, LocalDate needByDate, String requestStatus, String observation) {
+        this.hospitalClinic = hospitalClinic;
+        this.requestDate = requestDate;
+        this.requestedBloodType = requestedBloodType;
+        this.requestedBloodComponent = requestedBloodComponent;
+        this.requestedQuantity = requestedQuantity;
+        this.needByDate = needByDate;
+        this.requestStatus = requestStatus;
+        this.observation = observation;
+    }
+
+    public HospitalClinic getHospitalClinic() {
+        return hospitalClinic;
+    }
+
+    public void setHospitalClinic(HospitalClinic hospitalClinic) {
+        this.hospitalClinic = hospitalClinic;
+    }
+
+    public LocalDateTime getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(LocalDateTime requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public String getRequestedBloodType() {
+        return requestedBloodType;
+    }
+
+    public void setRequestedBloodType(String requestedBloodType) {
+        this.requestedBloodType = requestedBloodType;
+    }
+
+    public String getRequestedBloodComponent() {
+        return requestedBloodComponent;
+    }
+
+    public void setRequestedBloodComponent(String requestedBloodComponent) {
+        this.requestedBloodComponent = requestedBloodComponent;
+    }
+
+    public Integer getRequestedQuantity() {
+        return requestedQuantity;
+    }
+
+    public void setRequestedQuantity(Integer requestedQuantity) {
+        this.requestedQuantity = requestedQuantity;
+    }
+
+    public LocalDate getNeedByDate() {
+        return needByDate;
+    }
+
+    public void setNeedByDate(LocalDate needByDate) {
+        this.needByDate = needByDate;
+    }
+
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(String requestStatus) {
+        this.requestStatus = requestStatus;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
 }
