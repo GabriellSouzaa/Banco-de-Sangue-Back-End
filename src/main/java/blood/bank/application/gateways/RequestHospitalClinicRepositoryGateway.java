@@ -9,5 +9,5 @@ public interface RequestHospitalClinicRepositoryGateway {
 
     List<RequestHospitalClinic> getRequestsHospitalClinic();
 
-    RequestHospitalClinic updateStatusOfRequestHospitalClinic(LocalDateTime dateOfRequest);
+    RequestHospitalClinic updateStatusOfRequestHospitalClinic(LocalDateTime dateOfRequest, String status);
 }

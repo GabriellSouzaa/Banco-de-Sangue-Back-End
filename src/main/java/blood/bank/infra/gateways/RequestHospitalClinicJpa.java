@@ -29,7 +29,7 @@ public class RequestHospitalClinicJpa implements RequestHospitalClinicRepository
     }
 
     @Override
-    public RequestHospitalClinic updateStatusOfRequestHospitalClinic(LocalDateTime dateOfRequest) {
+    public RequestHospitalClinic updateStatusOfRequestHospitalClinic(LocalDateTime dateOfRequest, String status) {
         Optional<RequestHospitalClinicEntity> requestHospitalClinicEntity
                 = this.requestHospitalClinicRepository.findByRequestDate(dateOfRequest);
 
@@ -37,7 +37,7 @@ public class RequestHospitalClinicJpa implements RequestHospitalClinicRepository
             throw new RuntimeException("Não existe Solitação com essa data");
         } else {
             RequestHospitalClinicEntity requestHospitalClinic =  requestHospitalClinicEntity.get();
-            requestHospitalClinic.setRequestStatus("Atendida");
+            requestHospitalClinic.setRequestStatus(status);
 
             this.requestHospitalClinicRepository.save(requestHospitalClinic);
         }

@@ -29,9 +29,9 @@ public class RequestHospitalClinicController {
         return requestHospitalClinics.stream().map(RequestHospitalClinicResponse::new).collect(Collectors.toList());
     }
 
-    @PutMapping("/update-status/{dateOfRequest}")
-    RequestHospitalClinicResponse updateStatusOfRequestHospitalClinic(@PathVariable LocalDateTime dateOfRequest){
-        RequestHospitalClinic requestHospitalClinic = this.updateStatusOfRequestHospitalClinic.updateStatusOfRequestHospitalClinic(dateOfRequest);
+    @PutMapping("/update-status/{dateOfRequest}/{status}")
+    RequestHospitalClinicResponse updateStatusOfRequestHospitalClinic(@PathVariable LocalDateTime dateOfRequest, @PathVariable String status){
+        RequestHospitalClinic requestHospitalClinic = this.updateStatusOfRequestHospitalClinic.updateStatusOfRequestHospitalClinic(dateOfRequest, status);
         return new RequestHospitalClinicResponse(requestHospitalClinic);
     }
 }

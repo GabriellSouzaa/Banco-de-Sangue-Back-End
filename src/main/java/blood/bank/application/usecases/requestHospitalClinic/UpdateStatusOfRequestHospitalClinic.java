@@ -13,7 +13,7 @@ public class UpdateStatusOfRequestHospitalClinic {
         this.requestHospitalClinicRepositoryGateway = requestHospitalClinicRepositoryGateway;
     }
 
-    public RequestHospitalClinic updateStatusOfRequestHospitalClinic(LocalDateTime dateOfRequest) {
-        return this.requestHospitalClinicRepositoryGateway.updateStatusOfRequestHospitalClinic( dateOfRequest);
+    public RequestHospitalClinic updateStatusOfRequestHospitalClinic(LocalDateTime dateOfRequest, String status) {
+        return this.requestHospitalClinicRepositoryGateway.updateStatusOfRequestHospitalClinic( dateOfRequest, status);
     }
 }
