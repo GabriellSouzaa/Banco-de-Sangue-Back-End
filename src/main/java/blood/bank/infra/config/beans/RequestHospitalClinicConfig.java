@@ -2,6 +2,7 @@ package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.RequestHospitalClinicRepositoryGateway;
 import blood.bank.application.usecases.requestHospitalClinic.ListRequestHospitalClinic;
+import blood.bank.application.usecases.requestHospitalClinic.UpdateStatusOfRequestHospitalClinic;
 import blood.bank.infra.gateways.RequestHospitalClinicJpa;
 import blood.bank.infra.mappers.RequestHospitalClinicEntityMapper;
 import blood.bank.infra.persistence.repositories.RequestHospitalClinicRepository;
@@ -14,6 +15,11 @@ public class RequestHospitalClinicConfig {
     @Bean
     RequestHospitalClinicEntityMapper requestHospitalClinicEntityMapper() {
         return new RequestHospitalClinicEntityMapper();
+    }
+
+    @Bean
+    UpdateStatusOfRequestHospitalClinic updateStatusOfRequestHospitalClinic(RequestHospitalClinicRepositoryGateway requestHospitalClinicRepositoryGateway) {
+        return new UpdateStatusOfRequestHospitalClinic(requestHospitalClinicRepositoryGateway);
     }
 
     @Bean
