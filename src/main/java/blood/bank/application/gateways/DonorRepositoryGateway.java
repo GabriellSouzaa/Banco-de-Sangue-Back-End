@@ -7,4 +7,6 @@ import java.util.List;
 public interface DonorRepositoryGateway {
 
     List<Donor> getDonors();
+
+    Donor awardPoints(String donorFullName, String donorEmail, Long points);
 }

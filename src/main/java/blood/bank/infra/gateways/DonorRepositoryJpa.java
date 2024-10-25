@@ -25,4 +25,11 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
         List<DonorEntity> donors = donorRepository.findAll();
         return donors.stream().map(DonorMapper::toDonor).collect(Collectors.toList());
     }
+
+    @Override
+    public Donor awardPoints(String donorFullName, String donorEmail, Long points) {
+        DonorEntity donorEntity = donorRepository.findDonorEntityByPeople_FullNameAndPeople_Email(donorFullName, donorEmail);
+        donorEntity.setbCoinsBalance(donorEntity.getbCoinsBalance() + points);
+        return DonorMapper.toDonor(donorRepository.save(donorEntity));
+    }
 }

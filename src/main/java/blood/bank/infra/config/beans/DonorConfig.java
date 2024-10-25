@@ -1,6 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.DonorRepositoryGateway;
+import blood.bank.application.usecases.donor.AwardPoints;
 import blood.bank.application.usecases.donor.ListDonor;
 import blood.bank.infra.gateways.DonorRepositoryJpa;
 import blood.bank.infra.mappers.DonorMapper;
@@ -24,5 +25,10 @@ public class DonorConfig {
     @Bean
     ListDonor listDonor (DonorRepositoryGateway donorRepositoryGateway) {
         return new ListDonor(donorRepositoryGateway);
+    }
+
+    @Bean
+    AwardPoints awardPoints (DonorRepositoryGateway donorRepositoryGateway) {
+        return new AwardPoints(donorRepositoryGateway);
     }
 }
