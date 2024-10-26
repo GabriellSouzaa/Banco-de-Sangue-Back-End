@@ -1,17 +1,16 @@
-package blood.bank.domain.entities.employee;
+package blood.bank.infra.models.responses;
 
-import blood.bank.domain.entities.address.Address;
-import blood.bank.domain.entities.people.People;
+import blood.bank.domain.entities.employee.Employee;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Employee {
+public class EmployeeResponse {
 
-    private People people;
+    private PeopleResponse people;
 
-    private Address address;
+    private AddressResponse address;
 
     private String cpf;
 
@@ -27,31 +26,31 @@ public class Employee {
 
     private UUID photo;
 
-    public Employee(People people, Address address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, UUID photo) {
-        this.people = people;
-        this.address = address;
-        this.cpf = cpf;
-        this.hiringDate = hiringDate;
-        this.position = position;
-        this.department = department;
-        this.salary = salary;
-        this.professionalRegistrationNumber = professionalRegistrationNumber;
-        this.photo = photo;
+    public EmployeeResponse(Employee  employee) {
+        this.people = new PeopleResponse(employee.getPeople());
+        this.address = new AddressResponse(employee.getAddress());
+        this.cpf = employee.getCpf();
+        this.hiringDate = employee.getHiringDate();
+        this.position = employee.getPosition();
+        this.department = employee.getDepartment();
+        this.salary = employee.getSalary();
+        this.professionalRegistrationNumber = employee.getProfessionalRegistrationNumber();
+        this.photo = employee.getPhoto();
     }
 
-    public People getPeople() {
+    public PeopleResponse getPeople() {
         return people;
     }
 
-    public void setPeople(People people) {
+    public void setPeople(PeopleResponse people) {
         this.people = people;
     }
 
-    public Address getAddress() {
+    public AddressResponse getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressResponse address) {
         this.address = address;
     }
 

@@ -16,24 +16,48 @@ public class EmployeeEntity {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "pessoa_id_pessoa")
     private PeopleEntity people;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id_endereco")
     private AddressEntity address;
 
     private String cpf;
 
+    @Column(name = "data_contratacao")
     private LocalDate hiringDate;
 
+    @Column(name = "cargo")
     private String position;
 
+    @Column(name = "departamento")
     private String department;
 
+    @Column(name = "salario")
     private BigDecimal salary;
 
+    @Column(name = "numero_registro_profissional")
     private String professionalRegistrationNumber;
 
+    @Column(name = "foto")
     private UUID photo;
+
+    public EmployeeEntity(PeopleEntity people, AddressEntity address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, UUID photo) {
+        this.people = people;
+        this.address = address;
+        this.cpf = cpf;
+        this.hiringDate = hiringDate;
+        this.position = position;
+        this.department = department;
+        this.salary = salary;
+        this.professionalRegistrationNumber = professionalRegistrationNumber;
+        this.photo = photo;
+    }
+
+    public EmployeeEntity() {
+
+    }
 
     public Long getId() {
         return id;
