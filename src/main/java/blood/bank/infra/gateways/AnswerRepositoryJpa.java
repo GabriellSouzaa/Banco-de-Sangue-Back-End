@@ -49,20 +49,21 @@ public class AnswerRepositoryJpa  implements AnswerRepositoryGateway {
     public void saveAnswer(AnswerRequest answerRequest) {
         AnswerEntity answer = new AnswerEntity();
 
-        DonorEntity donor = donorRepository.findById(answerRequest.getDoadorId())
+        DonorEntity donor = donorRepository.findById(answerRequest.getDonorId())
                 .orElseThrow(() -> new EntityNotFoundException("Doador não encontrado"));
 
-        QuestionEntity question = questionRepository.findById(answerRequest.getPerguntaId())
+        QuestionEntity question = questionRepository.findById(answerRequest.getQuestionId())
                 .orElseThrow(() -> new EntityNotFoundException("Questão não encontrada"));
 
         answer.setDonor(donor);
         answer.setQuestion(question);
 
         if(question.getType().equals(AnswerType.MULTIPLA_ESCOLHA)){
-            QuestionOptionEntity option = questionOptionRepository.findById(answerRequest.getOpcaoId())
+            QuestionOptionEntity option = questionOptionRepository.findById(answerRequest.getOptionId())
                     .orElseThrow(() -> new EntityNotFoundException("Alternativa não encontrada"));
+            answer.setOption(option);
         } else if (question.getType().equals(AnswerType.DISSERTATIVA)){
-            answer.setAnswer(answerRequest.getRespostaDissertativa());
+            answer.setAnswer(answerRequest.getEssayAnswer());
         } else {
             throw new IllegalArgumentException("Tipo de Pergunta não suportado");
         }

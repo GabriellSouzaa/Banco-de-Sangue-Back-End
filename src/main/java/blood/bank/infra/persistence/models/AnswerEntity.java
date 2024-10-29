@@ -7,7 +7,8 @@ import jakarta.persistence.*;
 public class AnswerEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "resposta_id_seq")
+    @SequenceGenerator(name = "resposta_id_seq", sequenceName = "resposta_id_seq", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

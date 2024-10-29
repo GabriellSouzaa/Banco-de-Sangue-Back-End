@@ -1,43 +1,43 @@
 package blood.bank.infra.models.requests;
 
 public class AnswerRequest {
-    private Long doadorId;
+    private Long donorId;
 
-    private Long perguntaId;
+    private Long questionId;
 
-    private Long opcaoId;
+    private Long optionId;
 
-    private String respostaDissertativa;
+    private String essayAnswer;
 
-    public Long getDoadorId() {
-        return doadorId;
+    public Long getDonorId() {
+        return donorId;
     }
 
-    public void setDoadorId(Long doadorId) {
-        this.doadorId = doadorId;
+    public void setDonorId(Long donorId) {
+        this.donorId = donorId;
     }
 
-    public Long getPerguntaId() {
-        return perguntaId;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setPerguntaId(Long perguntaId) {
-        this.perguntaId = perguntaId;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
 
-    public Long getOpcaoId() {
-        return opcaoId;
+    public Long getOptionId() {
+        return optionId;
     }
 
-    public void setOpcaoId(Long opcaoId) {
-        this.opcaoId = opcaoId;
+    public void setOptionId(Long optionId) {
+        this.optionId = optionId;
     }
 
-    public String getRespostaDissertativa() {
-        return respostaDissertativa;
+    public String getEssayAnswer() {
+        return essayAnswer;
     }
 
-    public void setRespostaDissertativa(String respostaDissertativa) {
-        this.respostaDissertativa = respostaDissertativa;
+    public void setEssayAnswer(String essayAnswer) {
+        this.essayAnswer = essayAnswer;
     }
 }
