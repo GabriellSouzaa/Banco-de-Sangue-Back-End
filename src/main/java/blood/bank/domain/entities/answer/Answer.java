@@ -6,6 +6,8 @@ import blood.bank.domain.entities.questionOption.QuestionOption;
 
 public class Answer {
 
+    private Long id;
+
     private Donor donor;
 
     private Question question;
@@ -14,11 +16,23 @@ public class Answer {
 
     private QuestionOption option;
 
-    public Answer(Donor donor, Question question, String answer, QuestionOption option) {
+    public Answer(Long id, Donor donor, Question question, String answer, QuestionOption option) {
+        this.id = id;
         this.donor = donor;
         this.question = question;
         this.answer = answer;
         this.option = option;
+    }
+
+    public Answer() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Donor getDonor() {

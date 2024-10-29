@@ -4,6 +4,9 @@ import blood.bank.application.usecases.answer.ListAnswersByDonorFullNameAndEmail
 import blood.bank.infra.gateways.AnswerRepositoryJpa;
 import blood.bank.infra.mappers.AnswerEntityMapper;
 import blood.bank.infra.persistence.repositories.AnswerRepository;
+import blood.bank.infra.persistence.repositories.DonorRepository;
+import blood.bank.infra.persistence.repositories.QuestionOptionRepository;
+import blood.bank.infra.persistence.repositories.QuestionRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,8 +19,8 @@ public class AnswerConfig {
     }
 
     @Bean
-    AnswerRepositoryJpa answerRepositoryJpa(AnswerRepository answerRepository, AnswerEntityMapper answerEntityMapper) {
-        return new AnswerRepositoryJpa(answerRepository, answerEntityMapper);
+    AnswerRepositoryJpa answerRepositoryJpa(AnswerRepository answerRepository, AnswerEntityMapper answerEntityMapper, QuestionRepository questionRepository, DonorRepository donorRepository, QuestionOptionRepository questionOptionRepository) {
+        return new AnswerRepositoryJpa(answerRepository, answerEntityMapper, questionRepository, donorRepository, questionOptionRepository);
     }
 
     @Bean

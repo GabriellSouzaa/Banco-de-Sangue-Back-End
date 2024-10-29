@@ -25,7 +25,8 @@ public class QuestionEntity {
     @Column(name = "tipo")
     private AnswerType type;
 
-    public QuestionEntity(QuestionaryEntity questionary, String text, boolean obrigatoryAnswer, AnswerType type) {
+    public QuestionEntity(Long id, QuestionaryEntity questionary, String text, boolean obrigatoryAnswer, AnswerType type) {
+        this.id = id;
         this.questionary = questionary;
         this.text = text;
         this.obrigatoryAnswer = obrigatoryAnswer;

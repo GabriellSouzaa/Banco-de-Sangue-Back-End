@@ -5,6 +5,8 @@ import blood.bank.domain.enums.AnswerType;
 
 public class Question {
 
+    private Long id;
+
     private Questionary questionary;
 
     private String text;
@@ -12,6 +14,14 @@ public class Question {
     private boolean obrigatoryAnswer;
 
     private AnswerType type;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Questionary getQuestionary() {
         return questionary;
@@ -45,7 +55,8 @@ public class Question {
         this.type = type;
     }
 
-    public Question(Questionary questionary, String text, boolean obrigatoryAnswer, AnswerType type) {
+    public Question(Long id, Questionary questionary, String text, boolean obrigatoryAnswer, AnswerType type) {
+        this.id = id;
         this.questionary = questionary;
         this.text = text;
         this.obrigatoryAnswer = obrigatoryAnswer;

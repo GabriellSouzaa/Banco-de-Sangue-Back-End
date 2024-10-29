@@ -4,13 +4,24 @@ import blood.bank.domain.entities.questionOption.QuestionOption;
 
 public class QuestionOptionResponse {
 
+    private Long id;
+
     private QuestionResponse question;
 
     private String text;
 
     public QuestionOptionResponse(QuestionOption questionOption){
+        this.id = questionOption.getId();
         this.question = new QuestionResponse(questionOption.getQuestion());
         this.text = questionOption.getText();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public QuestionResponse getQuestion() {

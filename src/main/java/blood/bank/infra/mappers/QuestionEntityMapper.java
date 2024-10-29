@@ -9,11 +9,11 @@ public class QuestionEntityMapper {
 
     public static QuestionEntity toEntity(Question question) {
         QuestionaryEntity questionaryEntity = QuestionaryEntityMapper.toEntity(question.getQuestionary());
-        return new QuestionEntity(questionaryEntity, question.getText(), question.isObrigatoryAnswer(), question.getType());
+        return new QuestionEntity(question.getId(), questionaryEntity, question.getText(), question.isObrigatoryAnswer(), question.getType());
     }
 
     public static Question toQuestion(QuestionEntity questionEntity) {
         Questionary questionary = QuestionaryEntityMapper.toQuestionary(questionEntity.getQuestionary());
-        return new Question(questionary, questionEntity.getText(), questionEntity.isObrigatoryAnswer(), questionEntity.getType());
+        return new Question(questionEntity.getId(), questionary, questionEntity.getText(), questionEntity.isObrigatoryAnswer(), questionEntity.getType());
     }
 }

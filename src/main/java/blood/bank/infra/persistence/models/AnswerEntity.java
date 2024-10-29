@@ -26,7 +26,8 @@ public class AnswerEntity {
     @JoinColumn(name = "opcao_id")
     private QuestionOptionEntity option;
 
-    public AnswerEntity(DonorEntity donor, QuestionEntity question, String answer, QuestionOptionEntity option) {
+    public AnswerEntity(Long id, DonorEntity donor, QuestionEntity question, String answer, QuestionOptionEntity option) {
+        this.id = id;
         this.donor = donor;
         this.question = question;
         this.answer = answer;

@@ -6,10 +6,10 @@ import blood.bank.infra.persistence.models.QuestionaryEntity;
 public class QuestionaryEntityMapper {
 
     public static QuestionaryEntity toEntity(Questionary questionary){
-        return new QuestionaryEntity(questionary.getName(), questionary.getDescription());
+        return new QuestionaryEntity(questionary.getId(), questionary.getName(), questionary.getDescription());
     }
 
     public static Questionary toQuestionary(QuestionaryEntity questionaryEntity){
-        return new Questionary(questionaryEntity.getName(), questionaryEntity.getDescription());
+        return new Questionary(questionaryEntity.getId(), questionaryEntity.getName(), questionaryEntity.getDescription());
     }
 }

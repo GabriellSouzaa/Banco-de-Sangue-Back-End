@@ -15,13 +15,13 @@ public class AnswerEntityMapper {
         DonorEntity donorEntity = DonorMapper.toEntity(answer.getDonor());
         QuestionEntity questionEntity = QuestionEntityMapper.toEntity(answer.getQuestion());
         QuestionOptionEntity questionOptionEntity = QuestionOptionEntityMapper.toEntity(answer.getOption());
-        return new AnswerEntity(donorEntity, questionEntity, answer.getAnswer(), questionOptionEntity);
+        return new AnswerEntity(answer.getId(), donorEntity, questionEntity, answer.getAnswer(), questionOptionEntity);
     }
 
     public static Answer toAnswer(AnswerEntity answerEntity){
         Donor donor = DonorMapper.toDonor(answerEntity.getDonor());
         Question question = QuestionEntityMapper.toQuestion(answerEntity.getQuestion());
         QuestionOption option = QuestionOptionEntityMapper.toQuestionOption(answerEntity.getOption());
-        return new Answer(donor, question, answerEntity.getAnswer(), option);
+        return new Answer(answerEntity.getId(), donor, question, answerEntity.getAnswer(), option);
     }
 }

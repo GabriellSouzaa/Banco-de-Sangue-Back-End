@@ -17,7 +17,8 @@ public class QuestionOptionEntity {
     @Column(name = "texto")
     private String text;
 
-    public QuestionOptionEntity(QuestionEntity question, String text) {
+    public QuestionOptionEntity(Long id, QuestionEntity question, String text) {
+        this.id = id;
         this.question = question;
         this.text = text;
     }

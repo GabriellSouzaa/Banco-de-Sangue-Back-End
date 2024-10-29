@@ -4,6 +4,8 @@ import blood.bank.domain.entities.answer.Answer;
 
 public class AnswerResponse {
 
+    private Long id;
+
     private DonorResponse donor;
 
     private QuestionResponse question;
@@ -13,10 +15,19 @@ public class AnswerResponse {
     private QuestionOptionResponse option;
 
     public AnswerResponse(Answer answer){
+        this.id = answer.getId();
         this.donor = new DonorResponse(answer.getDonor());
         this.question = new QuestionResponse(answer.getQuestion());
         this.answer = answer.getAnswer();
         this.option = new QuestionOptionResponse(answer.getOption());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public DonorResponse getDonor() {
