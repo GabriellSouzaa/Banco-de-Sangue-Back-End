@@ -1,10 +1,10 @@
-package blood.bank.domain.entities.patient;
+package blood.bank.infra.models.responses;
 
-import blood.bank.domain.entities.people.People;
+import blood.bank.domain.entities.patient.Patient;
 
-public class Patient {
+public class PatientResponse {
 
-    private People people;
+    private PeopleResponse people;
 
     private String cpf;
 
@@ -18,24 +18,21 @@ public class Patient {
 
     private String observations;
 
-    public Patient(People people, String cpf, String phone, String bloodType, String medicalHistory, String healthPlanNumber, String observations) {
-        this.people = people;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.bloodType = bloodType;
-        this.medicalHistory = medicalHistory;
-        this.healthPlanNumber = healthPlanNumber;
-        this.observations = observations;
+    public PatientResponse(Patient patient){
+        this.people = new PeopleResponse(patient.getPeople());
+        this.cpf = patient.getCpf();
+        this.phone = patient.getPhone();
+        this.bloodType = patient.getBloodType();
+        this.medicalHistory = patient.getMedicalHistory();
+        this.healthPlanNumber = patient.getHealthPlanNumber();
+        this.observations = patient.getObservations();
     }
 
-    public Patient() {
-    }
-
-    public People getPeople() {
+    public PeopleResponse getPeople() {
         return people;
     }
 
-    public void setPeople(People people) {
+    public void setPeople(PeopleResponse people) {
         this.people = people;
     }
 

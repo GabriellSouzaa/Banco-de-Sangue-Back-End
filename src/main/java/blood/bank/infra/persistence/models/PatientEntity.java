@@ -32,6 +32,19 @@ public class PatientEntity {
     @Column(name = "observacoes")
     private String observations;
 
+    public PatientEntity(PeopleEntity people, String cpf, String phone, String bloodType, String medicalHistory, String healthPlanNumber, String observations) {
+        this.people = people;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.bloodType = bloodType;
+        this.medicalHistory = medicalHistory;
+        this.healthPlanNumber = healthPlanNumber;
+        this.observations = observations;
+    }
+
+    public PatientEntity() {
+    }
+
     public Long getId() {
         return id;
     }
