@@ -17,19 +17,49 @@ public class RequestEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id_paciente")
     private PatientEntity patient;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "solicitante_id_solicitante")
+    private ApplicantEntity applicant;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "funcionario_id_funcionario")
+    private EmployeeEntity employee;
+
+    @Column(name = "data_solicitacao")
     private LocalDateTime requestDate;
 
+    @Column(name = "tipo_solicitado")
     private String requestedType;
 
+    @Column(name = "componente_solicitado")
     private String requestedComponent;
 
+    @Column(name = "quantidade_solicitada")
     private BigDecimal requestedQuantity;
 
+    @Column(name = "data_necessidade")
     private LocalDate needByDate;
 
+    @Column(name = "data_atendimento")
     private LocalDateTime fulfillmentDate;
+
+    public RequestEntity(PatientEntity patient, ApplicantEntity applicant, EmployeeEntity employee, LocalDateTime requestDate, String requestedType, String requestedComponent, BigDecimal requestedQuantity, LocalDate needByDate, LocalDateTime fulfillmentDate) {
+        this.patient = patient;
+        this.applicant = applicant;
+        this.employee = employee;
+        this.requestDate = requestDate;
+        this.requestedType = requestedType;
+        this.requestedComponent = requestedComponent;
+        this.requestedQuantity = requestedQuantity;
+        this.needByDate = needByDate;
+        this.fulfillmentDate = fulfillmentDate;
+    }
+
+    public RequestEntity() {
+    }
 
     public Long getId() {
         return id;
@@ -45,6 +75,22 @@ public class RequestEntity {
 
     public void setPatient(PatientEntity patient) {
         this.patient = patient;
+    }
+
+    public ApplicantEntity getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(ApplicantEntity applicant) {
+        this.applicant = applicant;
+    }
+
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
     }
 
     public LocalDateTime getRequestDate() {
@@ -63,20 +109,20 @@ public class RequestEntity {
         this.requestedType = requestedType;
     }
 
-    public BigDecimal getRequestedQuantity() {
-        return requestedQuantity;
-    }
-
-    public void setRequestedQuantity(BigDecimal requestedQuantity) {
-        this.requestedQuantity = requestedQuantity;
-    }
-
     public String getRequestedComponent() {
         return requestedComponent;
     }
 
     public void setRequestedComponent(String requestedComponent) {
         this.requestedComponent = requestedComponent;
+    }
+
+    public BigDecimal getRequestedQuantity() {
+        return requestedQuantity;
+    }
+
+    public void setRequestedQuantity(BigDecimal requestedQuantity) {
+        this.requestedQuantity = requestedQuantity;
     }
 
     public LocalDate getNeedByDate() {

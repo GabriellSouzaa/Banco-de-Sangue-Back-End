@@ -16,6 +16,14 @@ public class ApplicantEntity {
     @JoinColumn(name = "pessoa_id_pessoa")
     private PeopleEntity people;
 
+    public ApplicantEntity(PeopleEntity people) {
+        this.people = people;
+    }
+
+    public ApplicantEntity() {
+
+    }
+
     public Long getId() {
         return id;
     }

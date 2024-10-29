@@ -1,20 +1,18 @@
-package blood.bank.domain.entities.request;
+package blood.bank.infra.models.responses;
 
-import blood.bank.domain.entities.applicant.Applicant;
-import blood.bank.domain.entities.employee.Employee;
-import blood.bank.domain.entities.patient.Patient;
+import blood.bank.domain.entities.request.Request;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Request {
+public class RequestResponse {
 
-    private Patient patient;
+    private PatientResponse patient;
 
-    private Applicant applicant;
+    private ApplicantResponse applicant;
 
-    private Employee employee;
+    private EmployeeResponse employee;
 
     private LocalDateTime requestDate;
 
@@ -28,42 +26,39 @@ public class Request {
 
     private LocalDateTime fulfillmentDate;
 
-    public Request(Patient patient, Applicant applicant, Employee employee, LocalDateTime requestDate, String requestedType, String requestedComponent, BigDecimal requestedQuantity, LocalDate needByDate, LocalDateTime fulfillmentDate) {
-        this.patient = patient;
-        this.applicant = applicant;
-        this.employee = employee;
-        this.requestDate = requestDate;
-        this.requestedType = requestedType;
-        this.requestedComponent = requestedComponent;
-        this.requestedQuantity = requestedQuantity;
-        this.needByDate = needByDate;
-        this.fulfillmentDate = fulfillmentDate;
+    public RequestResponse(Request request) {
+        this.patient = new PatientResponse(request.getPatient());
+        this.applicant = new ApplicantResponse(request.getApplicant());
+        this.employee = new EmployeeResponse(request.getEmployee());
+        this.requestDate = request.getRequestDate();
+        this.requestedType = request.getRequestedType();
+        this.requestedComponent = request.getRequestedComponent();
+        this.requestedQuantity = request.getRequestedQuantity();
+        this.needByDate = request.getNeedByDate();
+        this.fulfillmentDate = request.getFulfillmentDate();
     }
 
-    public Request() {
-    }
-
-    public Patient getPatient() {
+    public PatientResponse getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientResponse patient) {
         this.patient = patient;
     }
 
-    public Applicant getApplicant() {
+    public ApplicantResponse getApplicant() {
         return applicant;
     }
 
-    public void setApplicant(Applicant applicant) {
+    public void setApplicant(ApplicantResponse applicant) {
         this.applicant = applicant;
     }
 
-    public Employee getEmployee() {
+    public EmployeeResponse getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeResponse employee) {
         this.employee = employee;
     }
 
