@@ -2,6 +2,7 @@ package blood.bank.infra.controller;
 
 
 import blood.bank.application.usecases.donor.AwardPoints;
+import blood.bank.application.usecases.donor.GetAvaibleDonors;
 import blood.bank.application.usecases.donor.ListDonor;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.models.requests.AwardPointsRequest;
@@ -19,9 +20,12 @@ public class DonorController {
 
     private final AwardPoints awardPoints;
 
-    public DonorController(ListDonor listDonor, AwardPoints awardPoints) {
+    private final GetAvaibleDonors getAvaibleDonors;
+
+    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors) {
         this.listDonor = listDonor;
         this.awardPoints = awardPoints;
+        this.getAvaibleDonors = getAvaibleDonors;
     }
 
     @GetMapping
@@ -34,5 +38,11 @@ public class DonorController {
     DonorResponse awardPoints(@RequestBody AwardPointsRequest awardPointsRequest){
         Donor donor = awardPoints.awardPoints(awardPointsRequest.getDonorFullName(), awardPointsRequest.getDonorEmail(), awardPointsRequest.getPoints());
         return new DonorResponse(donor);
+    }
+
+    @GetMapping("/avaible-donors")
+    List<DonorResponse> getAvaibleDonors(){
+        List<Donor> avaibleDonors = getAvaibleDonors.getAvailableDonors();
+        return avaibleDonors.stream().map(DonorResponse::new).collect(Collectors.toList());
     }
 }
