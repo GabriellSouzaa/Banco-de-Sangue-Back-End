@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BloodBagRepositoryGateway {
     List<BloodBag> getBloodBags();
+
+    void deleteExpiredBloodBags();
 }

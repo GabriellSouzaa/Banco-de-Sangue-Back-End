@@ -6,6 +6,7 @@ import blood.bank.infra.mappers.BloodBagEntityMapper;
 import blood.bank.infra.persistence.models.BloodBagEntity;
 import blood.bank.infra.persistence.repositories.BloodBagRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,4 +26,16 @@ public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
         List<BloodBagEntity> bloodBags = bloodBagRepository.findAll();
         return bloodBags.stream().map(BloodBagEntityMapper::toBloodBag).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteExpiredBloodBags() {
+        List<BloodBagEntity> bloodBags = bloodBagRepository.findAll();
+
+        List<BloodBagEntity> expiredBloodBags = bloodBags.stream()
+                .filter(bloodBag -> bloodBag.getExpirationDate().isBefore(LocalDate.now()))
+                .toList();
+
+        bloodBagRepository.deleteAll(expiredBloodBags);
+    }
+
 }
