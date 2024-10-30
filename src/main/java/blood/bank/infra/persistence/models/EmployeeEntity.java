@@ -41,9 +41,9 @@ public class EmployeeEntity {
     private String professionalRegistrationNumber;
 
     @Column(name = "foto")
-    private UUID photo;
+    private String photo;
 
-    public EmployeeEntity(PeopleEntity people, AddressEntity address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, UUID photo) {
+    public EmployeeEntity(PeopleEntity people, AddressEntity address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, String photo) {
         this.people = people;
         this.address = address;
         this.cpf = cpf;
@@ -131,11 +131,11 @@ public class EmployeeEntity {
         this.professionalRegistrationNumber = professionalRegistrationNumber;
     }
 
-    public UUID getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(UUID photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 }

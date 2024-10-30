@@ -24,7 +24,7 @@ public class EmployeeResponse {
 
     private String professionalRegistrationNumber;
 
-    private UUID photo;
+    private String photo;
 
     public EmployeeResponse(Employee  employee) {
         this.people = new PeopleResponse(employee.getPeople());
@@ -102,11 +102,11 @@ public class EmployeeResponse {
         this.professionalRegistrationNumber = professionalRegistrationNumber;
     }
 
-    public UUID getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(UUID photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 }

@@ -25,9 +25,9 @@ public class Employee {
 
     private String professionalRegistrationNumber;
 
-    private UUID photo;
+    private String photo;
 
-    public Employee(People people, Address address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, UUID photo) {
+    public Employee(People people, Address address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, String photo) {
         this.people = people;
         this.address = address;
         this.cpf = cpf;
@@ -103,11 +103,11 @@ public class Employee {
         this.professionalRegistrationNumber = professionalRegistrationNumber;
     }
 
-    public UUID getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(UUID photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 }
