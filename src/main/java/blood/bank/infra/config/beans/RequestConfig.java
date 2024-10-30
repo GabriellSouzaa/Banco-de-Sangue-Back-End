@@ -2,6 +2,7 @@ package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.RequestRepositoryGateway;
 import blood.bank.application.usecases.request.ListRequests;
+import blood.bank.application.usecases.request.SendRequestOpinion;
 import blood.bank.infra.gateways.RequestRepositoryJpa;
 import blood.bank.infra.mappers.RequestEntityMapper;
 import blood.bank.infra.persistence.repositories.RequestRepository;
@@ -24,5 +25,10 @@ public class RequestConfig {
     @Bean
     ListRequests listRequests(RequestRepositoryGateway requestRepositoryGateway) {
         return new ListRequests(requestRepositoryGateway);
+    }
+
+    @Bean
+    SendRequestOpinion sendRequestOpinion(RequestRepositoryGateway requestRepositoryGateway) {
+        return new SendRequestOpinion(requestRepositoryGateway);
     }
 }

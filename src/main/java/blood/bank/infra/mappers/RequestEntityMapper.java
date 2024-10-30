@@ -15,13 +15,13 @@ public class RequestEntityMapper {
         PatientEntity patient = PatientEntityMapper.toEntity(request.getPatient());
         ApplicantEntity applicant = ApplicantMapper.toEntity(request.getApplicant());
         EmployeeEntity employee = EmployeeEntityMapper.toEntity(request.getEmployee());
-        return new RequestEntity(patient, applicant, employee, request.getRequestDate(), request.getRequestedType(), request.getRequestedComponent(), request.getRequestedQuantity(), request.getNeedByDate(), request.getFulfillmentDate());
+        return new RequestEntity(patient, applicant, employee, request.getRequestDate(), request.getRequestedType(), request.getRequestedComponent(), request.getRequestedQuantity(), request.getNeedByDate(), request.getFulfillmentDate(), request.getOpinion());
     }
 
     public static Request toRequest(RequestEntity requestEntity){
         Patient patient = PatientEntityMapper.toPatient(requestEntity.getPatient());
         Applicant applicant = ApplicantMapper.toApplicant(requestEntity.getApplicant());
         Employee employee = EmployeeEntityMapper.toEmployee(requestEntity.getEmployee());
-        return new Request(patient, applicant, employee, requestEntity.getRequestDate(), requestEntity.getRequestedType(), requestEntity.getRequestedComponent(), requestEntity.getRequestedQuantity(), requestEntity.getNeedByDate(), requestEntity.getFulfillmentDate());
+        return new Request(patient, applicant, employee, requestEntity.getRequestDate(), requestEntity.getRequestedType(), requestEntity.getRequestedComponent(), requestEntity.getRequestedQuantity(), requestEntity.getNeedByDate(), requestEntity.getFulfillmentDate(), requestEntity.getOpinion());
     }
 }

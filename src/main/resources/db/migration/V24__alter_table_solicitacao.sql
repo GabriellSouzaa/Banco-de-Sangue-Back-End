@@ -1,0 +1,2 @@
+ALTER TABLE solicitacao
+ADD COLUMN parecer VARCHAR(100);

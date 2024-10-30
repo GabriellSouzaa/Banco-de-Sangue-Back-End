@@ -28,7 +28,9 @@ public class Request {
 
     private LocalDateTime fulfillmentDate;
 
-    public Request(Patient patient, Applicant applicant, Employee employee, LocalDateTime requestDate, String requestedType, String requestedComponent, BigDecimal requestedQuantity, LocalDate needByDate, LocalDateTime fulfillmentDate) {
+    private String opinion;
+
+    public Request(Patient patient, Applicant applicant, Employee employee, LocalDateTime requestDate, String requestedType, String requestedComponent, BigDecimal requestedQuantity, LocalDate needByDate, LocalDateTime fulfillmentDate, String opinion) {
         this.patient = patient;
         this.applicant = applicant;
         this.employee = employee;
@@ -38,6 +40,7 @@ public class Request {
         this.requestedQuantity = requestedQuantity;
         this.needByDate = needByDate;
         this.fulfillmentDate = fulfillmentDate;
+        this.opinion = opinion;
     }
 
     public Request() {
@@ -113,5 +116,13 @@ public class Request {
 
     public void setFulfillmentDate(LocalDateTime fulfillmentDate) {
         this.fulfillmentDate = fulfillmentDate;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 }

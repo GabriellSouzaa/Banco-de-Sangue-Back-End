@@ -26,6 +26,8 @@ public class RequestResponse {
 
     private LocalDateTime fulfillmentDate;
 
+    private String opinion;
+
     public RequestResponse(Request request) {
         this.patient = new PatientResponse(request.getPatient());
         this.applicant = new ApplicantResponse(request.getApplicant());
@@ -36,6 +38,7 @@ public class RequestResponse {
         this.requestedQuantity = request.getRequestedQuantity();
         this.needByDate = request.getNeedByDate();
         this.fulfillmentDate = request.getFulfillmentDate();
+        this.opinion = request.getOpinion();
     }
 
     public PatientResponse getPatient() {
@@ -108,5 +111,13 @@ public class RequestResponse {
 
     public void setFulfillmentDate(LocalDateTime fulfillmentDate) {
         this.fulfillmentDate = fulfillmentDate;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 }

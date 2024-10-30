@@ -46,7 +46,10 @@ public class RequestEntity {
     @Column(name = "data_atendimento")
     private LocalDateTime fulfillmentDate;
 
-    public RequestEntity(PatientEntity patient, ApplicantEntity applicant, EmployeeEntity employee, LocalDateTime requestDate, String requestedType, String requestedComponent, BigDecimal requestedQuantity, LocalDate needByDate, LocalDateTime fulfillmentDate) {
+    @Column(name = "parecer")
+    private String opinion;
+
+    public RequestEntity(PatientEntity patient, ApplicantEntity applicant, EmployeeEntity employee, LocalDateTime requestDate, String requestedType, String requestedComponent, BigDecimal requestedQuantity, LocalDate needByDate, LocalDateTime fulfillmentDate, String opinion) {
         this.patient = patient;
         this.applicant = applicant;
         this.employee = employee;
@@ -56,6 +59,7 @@ public class RequestEntity {
         this.requestedQuantity = requestedQuantity;
         this.needByDate = needByDate;
         this.fulfillmentDate = fulfillmentDate;
+        this.opinion = opinion;
     }
 
     public RequestEntity() {
@@ -139,5 +143,13 @@ public class RequestEntity {
 
     public void setFulfillmentDate(LocalDateTime fulfillmentDate) {
         this.fulfillmentDate = fulfillmentDate;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 }
