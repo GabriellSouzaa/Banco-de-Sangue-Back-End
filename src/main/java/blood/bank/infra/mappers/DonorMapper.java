@@ -17,7 +17,7 @@ public class DonorMapper {
         PeopleEntity peopleEntity = PeopleEntityMapper.toEntity(donor.getPeople());
         List<BadgeEntity> badgeEntities = donor.getBadge().stream()
                 .map(BadgeEntityMapper::toEntity).toList();
-        return new DonorEntity(peopleEntity, donor.getBloodType(), donor.getRegisterDate(),
+        return new DonorEntity(donor.getId(), peopleEntity, donor.getBloodType(), donor.getRegisterDate(),
                 donor.getLastDonationDate(), donor.getNumberOfDonations(), donor.getEligibility(), donor.getMedicalNotes(), donor.getbCoinsBalance(),
                 donor.getImage(), badgeEntities);
     }
@@ -26,7 +26,7 @@ public class DonorMapper {
         People people = PeopleEntityMapper.toPeople(donorEntity.getPeople());
         List<Badge> badges = donorEntity.getBadge().stream()
                 .map(BadgeEntityMapper::toBadge).toList();
-        return new Donor(people, donorEntity.getBloodType(), donorEntity.getRegisterDate(),
+        return new Donor(donorEntity.getId(), people, donorEntity.getBloodType(), donorEntity.getRegisterDate(),
                 donorEntity.getLastDonationDate(), donorEntity.getNumberOfDonations(), donorEntity.getEligibility(),
                 donorEntity.getMedicalNotes(), donorEntity.getbCoinsBalance(), donorEntity.getImage(), badges
         );

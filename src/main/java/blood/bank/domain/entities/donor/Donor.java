@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Donor {
 
+    private Long id;
+
     private People people;
 
     private String bloodType;
@@ -27,6 +29,14 @@ public class Donor {
     private String image;
 
     private List<Badge> badge;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public People getPeople() {
         return people;
@@ -108,7 +118,8 @@ public class Donor {
         this.badge = badge;
     }
 
-    public Donor(People people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image, List<Badge> badge) {
+    public Donor(Long id, People people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image, List<Badge> badge) {
+        this.id = id;
         this.people = people;
         this.bloodType = bloodType;
         this.registerDate = registerDate;

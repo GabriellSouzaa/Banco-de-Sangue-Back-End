@@ -49,7 +49,8 @@ public class DonorEntity {
     public DonorEntity() {
     }
 
-    public DonorEntity(PeopleEntity people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image, List<BadgeEntity> badge) {
+    public DonorEntity(Long id, PeopleEntity people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image, List<BadgeEntity> badge) {
+        this.id = id;
         this.people = people;
         this.bloodType = bloodType;
         this.registerDate = registerDate;

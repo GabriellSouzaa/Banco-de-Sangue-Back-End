@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class DonorResponse {
 
+    private Long id;
 
     private PeopleResponse people;
 
@@ -34,6 +35,7 @@ public class DonorResponse {
     private List<BadgeResponse> badge;
 
     public DonorResponse(Donor donor) {
+        this.id = donor.getId();
         this.people = new PeopleResponse(donor.getPeople());
         this.bloodType = donor.getBloodType();
         this.registerDate = donor.getRegisterDate();
@@ -44,6 +46,14 @@ public class DonorResponse {
         this.bCoinsBalance = donor.getbCoinsBalance();
         this.image = donor.getImage();
         this.badge = donor.getBadge().stream().map(BadgeResponse::new).toList();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public PeopleResponse getPeople() {
