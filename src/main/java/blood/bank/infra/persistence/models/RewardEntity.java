@@ -27,7 +27,8 @@ public class RewardEntity {
     public RewardEntity() {
     }
 
-    public RewardEntity(String rewardName, String rewardDescription, String rewardType, String valueInPoints) {
+    public RewardEntity(Long id, String rewardName, String rewardDescription, String rewardType, String valueInPoints) {
+        this.id = id;
         this.rewardName = rewardName;
         this.rewardDescription = rewardDescription;
         this.rewardType = rewardType;

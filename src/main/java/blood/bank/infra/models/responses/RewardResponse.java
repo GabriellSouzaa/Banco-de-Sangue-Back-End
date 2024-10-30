@@ -4,6 +4,8 @@ import blood.bank.domain.entities.reward.Reward;
 
 public class RewardResponse {
 
+    private Long id;
+
     private String rewardName;
 
     private String rewardDescription;
@@ -13,10 +15,19 @@ public class RewardResponse {
     private String valueInPoints;
 
     public RewardResponse(Reward reward){
+        this.id = reward.getId();
         this.rewardName = reward.getRewardName();
         this.rewardDescription = reward.getRewardDescription();
         this.rewardType = reward.getRewardType();
         this.valueInPoints = reward.getValueInPoints();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getRewardName() {

@@ -4,28 +4,28 @@ import blood.bank.domain.entities.donorReward.DonorReward;
 
 public class DonorRewardResponse {
 
-    private DonorResponse donorResponse;
+    private DonorResponse donor;
 
-    private RewardResponse rewardResponse;
+    private RewardResponse reward;
 
     public DonorRewardResponse(DonorReward donorReward) {
-        this.donorResponse = new DonorResponse(donorReward.getDonor());
-        this.rewardResponse = new RewardResponse(donorReward.getReward());
+        this.donor = new DonorResponse(donorReward.getDonor());
+        this.reward = new RewardResponse(donorReward.getReward());
     }
 
-    public DonorResponse getDonorResponse() {
-        return donorResponse;
+    public DonorResponse getDonor() {
+        return donor;
     }
 
-    public void setDonorResponse(DonorResponse donorResponse) {
-        this.donorResponse = donorResponse;
+    public void setDonor(DonorResponse donor) {
+        this.donor = donor;
     }
 
-    public RewardResponse getRewardResponse() {
-        return rewardResponse;
+    public RewardResponse getReward() {
+        return reward;
     }
 
-    public void setRewardResponse(RewardResponse rewardResponse) {
-        this.rewardResponse = rewardResponse;
+    public void setReward(RewardResponse reward) {
+        this.reward = reward;
     }
 }

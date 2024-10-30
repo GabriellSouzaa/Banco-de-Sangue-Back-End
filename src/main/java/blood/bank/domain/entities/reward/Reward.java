@@ -2,6 +2,8 @@ package blood.bank.domain.entities.reward;
 
 public class Reward {
 
+    private Long id;
+
     private String rewardName;
 
     private String rewardDescription;
@@ -10,11 +12,20 @@ public class Reward {
 
     private String valueInPoints;
 
-    public Reward(String rewardName, String rewardDescription, String rewardType, String valueInPoints) {
+    public Reward(Long id, String rewardName, String rewardDescription, String rewardType, String valueInPoints) {
+        this.id = id;
         this.rewardName = rewardName;
         this.rewardDescription = rewardDescription;
         this.rewardType = rewardType;
         this.valueInPoints = valueInPoints;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getRewardName() {
