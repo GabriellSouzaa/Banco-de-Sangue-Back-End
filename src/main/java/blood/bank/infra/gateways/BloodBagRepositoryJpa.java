@@ -5,6 +5,7 @@ import blood.bank.domain.entities.bloodBag.BloodBag;
 import blood.bank.infra.mappers.BloodBagEntityMapper;
 import blood.bank.infra.persistence.models.BloodBagEntity;
 import blood.bank.infra.persistence.repositories.BloodBagRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,9 +17,12 @@ public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
 
     private final BloodBagEntityMapper bloodBagEntityMapper;
 
-    public BloodBagRepositoryJpa(BloodBagRepository bloodBagRepository, BloodBagEntityMapper bloodBagEntityMapper) {
+    private final JdbcTemplate jdbcTemplate;
+
+    public BloodBagRepositoryJpa(BloodBagRepository bloodBagRepository, BloodBagEntityMapper bloodBagEntityMapper, JdbcTemplate jdbcTemplate) {
         this.bloodBagRepository = bloodBagRepository;
         this.bloodBagEntityMapper = bloodBagEntityMapper;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
@@ -29,13 +33,8 @@ public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
 
     @Override
     public void deleteExpiredBloodBags() {
-        List<BloodBagEntity> bloodBags = bloodBagRepository.findAll();
-
-        List<BloodBagEntity> expiredBloodBags = bloodBags.stream()
-                .filter(bloodBag -> bloodBag.getExpirationDate().isBefore(LocalDate.now()))
-                .toList();
-
-        bloodBagRepository.deleteAll(expiredBloodBags);
+        String sql = "DELETE FROM bolsa_de_sangue WHERE data_validade < ?";
+        jdbcTemplate.update(sql, LocalDate.now());
     }
 
 }
