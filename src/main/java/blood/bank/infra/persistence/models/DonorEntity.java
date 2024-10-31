@@ -3,7 +3,6 @@ package blood.bank.infra.persistence.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "doador")
@@ -42,14 +41,10 @@ public class DonorEntity {
     @Column(name = "imagem")
     private String image;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_insigna")
-    private List<BadgeEntity> badge;
-
     public DonorEntity() {
     }
 
-    public DonorEntity(Long id, PeopleEntity people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image, List<BadgeEntity> badge) {
+    public DonorEntity(Long id, PeopleEntity people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image) {
         this.id = id;
         this.people = people;
         this.bloodType = bloodType;
@@ -60,8 +55,6 @@ public class DonorEntity {
         this.medicalNotes = medicalNotes;
         this.bCoinsBalance = bCoinsBalance;
         this.image = image;
-        this.badge = badge;
-
     }
 
     public Long getId() {
@@ -142,14 +135,6 @@ public class DonorEntity {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public List<BadgeEntity> getBadge() {
-        return badge;
-    }
-
-    public void setBadge(List<BadgeEntity> badge) {
-        this.badge = badge;
     }
 }
 

@@ -11,6 +11,7 @@ import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.repositories.ChallengeRepository;
 import blood.bank.infra.persistence.repositories.DonorChallengeRepository;
 import blood.bank.infra.persistence.repositories.DonorRepository;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,5 +56,10 @@ public class DonorChallengeRepositoryJpa implements DonorChallengeRepositoryGate
         donorChallengeEntity.setChallenge(challenge);
 
         donorChallengeRepository.save(donorChallengeEntity);
+    }
+
+    @Override
+    public ResponseEntity<Byte[]> generateReportOnActiveAndInactiveDonors() {
+        return null;
     }
 }

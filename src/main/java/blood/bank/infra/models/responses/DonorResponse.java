@@ -1,12 +1,8 @@
 package blood.bank.infra.models.responses;
 
 import blood.bank.domain.entities.donor.Donor;
-import blood.bank.infra.persistence.models.BadgeEntity;
-import blood.bank.infra.persistence.models.PeopleEntity;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DonorResponse {
 
@@ -31,9 +27,6 @@ public class DonorResponse {
 
     private String image;
 
-
-    private List<BadgeResponse> badge;
-
     public DonorResponse(Donor donor) {
         this.id = donor.getId();
         this.people = new PeopleResponse(donor.getPeople());
@@ -45,7 +38,6 @@ public class DonorResponse {
         this.eligibility = donor.getEligibility();
         this.bCoinsBalance = donor.getbCoinsBalance();
         this.image = donor.getImage();
-        this.badge = donor.getBadge().stream().map(BadgeResponse::new).toList();
     }
 
     public Long getId() {
@@ -118,14 +110,6 @@ public class DonorResponse {
 
     public void setbCoinsBalance(Long bCoinsBalance) {
         this.bCoinsBalance = bCoinsBalance;
-    }
-
-    public List<BadgeResponse> getBadge() {
-        return badge;
-    }
-
-    public void setBadge(List<BadgeResponse> badge) {
-        this.badge = badge;
     }
 
     public String getImage() {

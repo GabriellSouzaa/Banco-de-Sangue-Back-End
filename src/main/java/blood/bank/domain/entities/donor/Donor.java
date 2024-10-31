@@ -1,10 +1,8 @@
 package blood.bank.domain.entities.donor;
 
-import blood.bank.domain.entities.badge.Badge;
 import blood.bank.domain.entities.people.People;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Donor {
 
@@ -27,8 +25,6 @@ public class Donor {
     private Long bCoinsBalance;
 
     private String image;
-
-    private List<Badge> badge;
 
     public Long getId() {
         return id;
@@ -110,15 +106,8 @@ public class Donor {
         this.image = image;
     }
 
-    public List<Badge> getBadge() {
-        return badge;
-    }
 
-    public void setBadge(List<Badge> badge) {
-        this.badge = badge;
-    }
-
-    public Donor(Long id, People people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image, List<Badge> badge) {
+    public Donor(Long id, People people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image) {
         this.id = id;
         this.people = people;
         this.bloodType = bloodType;
@@ -129,6 +118,5 @@ public class Donor {
         this.medicalNotes = medicalNotes;
         this.bCoinsBalance = bCoinsBalance;
         this.image = image;
-        this.badge = badge;
     }
 }
