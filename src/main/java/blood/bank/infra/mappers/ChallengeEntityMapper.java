@@ -14,6 +14,6 @@ public class ChallengeEntityMapper {
 
     public static Challenge toChallenge(ChallengeEntity challengeEntity) {
         Reward reward = RewardEntityMapper.toReward(challengeEntity.getReward());
-        return new Challenge(reward, challengeEntity.getChallengeName(), challengeEntity.getDescription(), challengeEntity.getCriteria(), challengeEntity.getStartDate(), challengeEntity.getEndDate());
+        return new Challenge(challengeEntity.getId(), reward, challengeEntity.getChallengeName(), challengeEntity.getDescription(), challengeEntity.getCriteria(), challengeEntity.getStartDate(), challengeEntity.getEndDate());
     }
 }

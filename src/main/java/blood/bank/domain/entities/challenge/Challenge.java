@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public class Challenge {
 
+    private Long id;
+
     private Reward reward;
 
     private String challengeName;
@@ -19,13 +21,18 @@ public class Challenge {
 
     private LocalDate endDate;
 
-    public Challenge(Reward reward, String challengeName, String description, String criteria, LocalDate startDate, LocalDate endDate) {
+    public Challenge(Long id, Reward reward, String challengeName, String description, String criteria, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
         this.reward = reward;
         this.challengeName = challengeName;
         this.description = description;
         this.criteria = criteria;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getChallengeName() {

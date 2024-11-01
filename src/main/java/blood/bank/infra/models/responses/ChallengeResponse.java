@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public class ChallengeResponse {
 
+    private Long id;
+
     private Reward reward;
 
     private String challengeName;
@@ -20,6 +22,7 @@ public class ChallengeResponse {
     private LocalDate endDate;
 
     public ChallengeResponse(Challenge challenge) {
+        this.id = challenge.getId();
         this.reward = challenge.getReward();
         this.challengeName = challenge.getChallengeName();
         this.description = challenge.getDescription();
@@ -28,8 +31,16 @@ public class ChallengeResponse {
         this.endDate = challenge.getEndDate();
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Reward getReward() {
         return reward;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setReward(Reward reward) {
