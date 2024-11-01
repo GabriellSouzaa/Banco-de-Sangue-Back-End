@@ -2,11 +2,13 @@ package blood.bank.infra.controller;
 
 
 import blood.bank.application.usecases.donor.AwardPoints;
+import blood.bank.application.usecases.donor.GenerateReportOnActiveAndInactiveDonors;
 import blood.bank.application.usecases.donor.GetAvaibleDonors;
 import blood.bank.application.usecases.donor.ListDonor;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.models.requests.AwardPointsRequest;
 import blood.bank.infra.models.responses.DonorResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,10 +24,13 @@ public class DonorController {
 
     private final GetAvaibleDonors getAvaibleDonors;
 
-    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors) {
+    private final GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors;
+
+    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors, GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors) {
         this.listDonor = listDonor;
         this.awardPoints = awardPoints;
         this.getAvaibleDonors = getAvaibleDonors;
+        this.generateReportOnActiveAndInactiveDonors = generateReportOnActiveAndInactiveDonors;
     }
 
     @GetMapping
@@ -44,5 +49,10 @@ public class DonorController {
     List<DonorResponse> getAvaibleDonors(){
         List<Donor> avaibleDonors = getAvaibleDonors.getAvailableDonors();
         return avaibleDonors.stream().map(DonorResponse::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/report-active-inactive-donors")
+    ResponseEntity<byte[]> generateReportOnActiveAndInactiveDonors(){
+        return this.generateReportOnActiveAndInactiveDonors.generateReportOnActiveAndInactiveDonors();
     }
 }

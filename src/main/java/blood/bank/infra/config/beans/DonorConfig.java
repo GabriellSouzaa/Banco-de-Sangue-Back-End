@@ -2,6 +2,7 @@ package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.DonorRepositoryGateway;
 import blood.bank.application.usecases.donor.AwardPoints;
+import blood.bank.application.usecases.donor.GenerateReportOnActiveAndInactiveDonors;
 import blood.bank.application.usecases.donor.GetAvaibleDonors;
 import blood.bank.application.usecases.donor.ListDonor;
 import blood.bank.infra.gateways.DonorRepositoryJpa;
@@ -16,6 +17,11 @@ public class DonorConfig {
     @Bean
     DonorMapper donorMapper() {
         return new DonorMapper();
+    }
+
+    @Bean
+    GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors(DonorRepositoryGateway donorRepository) {
+        return new GenerateReportOnActiveAndInactiveDonors(donorRepository);
     }
 
     @Bean

@@ -12,5 +12,5 @@ public interface DonorChallengeRepositoryGateway {
 
     void grantDonorChallenge(GrantDonorChallengeRequest grantDonorChallengeRequest);
 
-    ResponseEntity<Byte[]> generateReportOnActiveAndInactiveDonors();
+
 }

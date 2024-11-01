@@ -5,10 +5,19 @@ import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.mappers.DonorMapper;
 import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.repositories.DonorRepository;
+import blood.bank.infra.utils.reports.JasperReportUtils;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.springframework.http.ResponseEntity;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class DonorRepositoryJpa implements DonorRepositoryGateway {
@@ -50,5 +59,26 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
             return daysSinceLastDonation >= 90;
         }
         return false;
+    }
+
+    @Override
+    public ResponseEntity<byte[]> generateReportOnActiveAndInactiveDonors() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource("reports/donor.jrxml")).getFile());
+
+        List<Donor> donors = this.getDonors();
+
+        LocalDateTime dataEmissao = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String dataEmissaoFormatada = dataEmissao.format(formatter);
+
+        JRBeanCollectionDataSource donorActiveAndInactive = new JRBeanCollectionDataSource(donors);
+        Map<String, Object> parametros = new HashMap<>();
+
+        parametros.put("donors", donorActiveAndInactive);
+        parametros.put("dataEmissaoFormatada", dataEmissaoFormatada);
+        byte[] bytes = JasperReportUtils.geraRelatorioEmPDF(file.getAbsolutePath(), parametros);
+
+        return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
     }
 }

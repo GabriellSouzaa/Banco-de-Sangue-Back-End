@@ -58,8 +58,5 @@ public class DonorChallengeRepositoryJpa implements DonorChallengeRepositoryGate
         donorChallengeRepository.save(donorChallengeEntity);
     }
 
-    @Override
-    public ResponseEntity<Byte[]> generateReportOnActiveAndInactiveDonors() {
-        return null;
-    }
+
 }
