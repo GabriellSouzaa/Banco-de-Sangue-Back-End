@@ -1,12 +1,10 @@
 package blood.bank.infra.controller;
 
 
-import blood.bank.application.usecases.donor.AwardPoints;
-import blood.bank.application.usecases.donor.GenerateReportOnActiveAndInactiveDonors;
-import blood.bank.application.usecases.donor.GetAvaibleDonors;
-import blood.bank.application.usecases.donor.ListDonor;
+import blood.bank.application.usecases.donor.*;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.models.requests.AwardPointsRequest;
+import blood.bank.infra.models.requests.DonorRequest;
 import blood.bank.infra.models.responses.DonorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +24,20 @@ public class DonorController {
 
     private final GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors;
 
-    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors, GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors) {
+    private final CreateDonor createDonor;
+
+    private final UpdateDonor updateDonor;
+
+    private final DeleteDonor deleteDonor;
+
+    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors, GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors, CreateDonor createDonor, UpdateDonor updateDonor, DeleteDonor deleteDonor) {
         this.listDonor = listDonor;
         this.awardPoints = awardPoints;
         this.getAvaibleDonors = getAvaibleDonors;
         this.generateReportOnActiveAndInactiveDonors = generateReportOnActiveAndInactiveDonors;
+        this.createDonor = createDonor;
+        this.updateDonor = updateDonor;
+        this.deleteDonor = deleteDonor;
     }
 
     @GetMapping
@@ -54,5 +61,20 @@ public class DonorController {
     @GetMapping("/report-active-inactive-donors")
     ResponseEntity<byte[]> generateReportOnActiveAndInactiveDonors(){
         return this.generateReportOnActiveAndInactiveDonors.generateReportOnActiveAndInactiveDonors();
+    }
+
+    @PostMapping
+    void createDonor(@RequestBody DonorRequest donorRequest){
+        this.createDonor.createDonor(donorRequest);
+    }
+
+    @PutMapping("/{id}")
+    void updateDonor(@PathVariable Long id, @RequestBody DonorRequest donorRequest){
+        this.updateDonor.updateDonor(id, donorRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteDonor(@PathVariable Long id){
+        this.deleteDonor.deleteDonor(id);
     }
 }

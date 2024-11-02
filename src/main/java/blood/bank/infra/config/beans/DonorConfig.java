@@ -1,10 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.DonorRepositoryGateway;
-import blood.bank.application.usecases.donor.AwardPoints;
-import blood.bank.application.usecases.donor.GenerateReportOnActiveAndInactiveDonors;
-import blood.bank.application.usecases.donor.GetAvaibleDonors;
-import blood.bank.application.usecases.donor.ListDonor;
+import blood.bank.application.usecases.donor.*;
 import blood.bank.infra.gateways.DonorRepositoryJpa;
 import blood.bank.infra.mappers.DonorMapper;
 import blood.bank.infra.persistence.repositories.DonorRepository;
@@ -27,7 +24,7 @@ public class DonorConfig {
     @Bean
     DonorRepositoryJpa donorRepositoryJpa(DonorRepository donorRepository, DonorMapper donorMapper) {
         return new DonorRepositoryJpa(donorRepository, donorMapper);
-    };
+    }
 
     @Bean
     ListDonor listDonor (DonorRepositoryGateway donorRepositoryGateway) {
@@ -42,5 +39,20 @@ public class DonorConfig {
     @Bean
     GetAvaibleDonors getAvaibleDonors(DonorRepositoryGateway donorRepositoryGateway) {
         return new GetAvaibleDonors(donorRepositoryGateway);
+    }
+
+    @Bean
+    CreateDonor createDonor(DonorRepositoryGateway donorRepositoryGateway) {
+        return new CreateDonor(donorRepositoryGateway);
+    }
+
+    @Bean
+    UpdateDonor updateDonor(DonorRepositoryGateway donorRepositoryGateway) {
+        return new UpdateDonor(donorRepositoryGateway);
+    }
+
+    @Bean
+    DeleteDonor deleteDonor(DonorRepositoryGateway donorRepositoryGateway){
+        return new DeleteDonor(donorRepositoryGateway);
     }
 }

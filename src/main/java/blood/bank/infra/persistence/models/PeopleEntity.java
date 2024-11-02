@@ -9,7 +9,8 @@ import java.time.LocalDate;
 public class PeopleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_id_seq")
+    @SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq", allocationSize = 1)
     @Column(name = "id_pessoa")
     private Long id;
 

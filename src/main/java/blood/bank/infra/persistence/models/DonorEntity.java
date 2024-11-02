@@ -9,7 +9,8 @@ import java.time.LocalDate;
 public class DonorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doador_id_seq")
+    @SequenceGenerator(name = "doador_id_seq", sequenceName = "doador_id_seq", allocationSize = 1)
     @Column(name = "id_doador")
     private Long id;
 

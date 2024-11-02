@@ -3,9 +3,12 @@ package blood.bank.infra.gateways;
 import blood.bank.application.gateways.DonorRepositoryGateway;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.mappers.DonorMapper;
+import blood.bank.infra.models.requests.DonorRequest;
 import blood.bank.infra.persistence.models.DonorEntity;
+import blood.bank.infra.persistence.models.PeopleEntity;
 import blood.bank.infra.persistence.repositories.DonorRepository;
 import blood.bank.infra.utils.reports.JasperReportUtils;
+import jakarta.persistence.EntityNotFoundException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.http.ResponseEntity;
 
@@ -14,10 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DonorRepositoryJpa implements DonorRepositoryGateway {
@@ -81,4 +81,58 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
 
         return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
     }
+
+    @Override
+    public void createDonor(DonorRequest donorRequest) {
+        DonorEntity donorEntity = new DonorEntity();
+        PeopleEntity peopleEntity = new PeopleEntity();
+
+        peopleEntity.setFullName(donorRequest.getPeople().getFullName());
+        peopleEntity.setDateOfBirth(donorRequest.getPeople().getDateOfBirth());
+        peopleEntity.setGender(donorRequest.getPeople().getGender());
+        peopleEntity.setEmail(donorRequest.getPeople().getEmail());
+        donorEntity.setPeople(peopleEntity);
+        donorEntity.setBloodType(donorRequest.getBloodType());
+        donorEntity.setRegisterDate(donorRequest.getRegisterDate());
+        donorEntity.setLastDonationDate(donorRequest.getLastDonationDate());
+        donorEntity.setNumberOfDonations(donorRequest.getNumberOfDonations());
+        donorEntity.setEligibility(donorRequest.getEligibility());
+        donorEntity.setMedicalNotes(donorRequest.getMedicalNotes());
+        donorEntity.setbCoinsBalance(donorRequest.getbCoinsBalance());
+        donorEntity.setImage(donorRequest.getImage());
+
+        donorRepository.save(donorEntity);
+    }
+
+    @Override
+    public void updateDonor(Long donorId, DonorRequest donorRequest) {
+        DonorEntity donorEntity = donorRepository.findById(donorId)
+                .orElseThrow(() -> new EntityNotFoundException("Doador não encontrado com o id: " + donorId));
+
+        PeopleEntity peopleEntity = donorEntity.getPeople();
+        peopleEntity.setFullName(donorRequest.getPeople().getFullName());
+        peopleEntity.setDateOfBirth(donorRequest.getPeople().getDateOfBirth());
+        peopleEntity.setGender(donorRequest.getPeople().getGender());
+        peopleEntity.setEmail(donorRequest.getPeople().getEmail());
+
+        donorEntity.setBloodType(donorRequest.getBloodType());
+        donorEntity.setRegisterDate(donorRequest.getRegisterDate());
+        donorEntity.setLastDonationDate(donorRequest.getLastDonationDate());
+        donorEntity.setNumberOfDonations(donorRequest.getNumberOfDonations());
+        donorEntity.setEligibility(donorRequest.getEligibility());
+        donorEntity.setMedicalNotes(donorRequest.getMedicalNotes());
+        donorEntity.setbCoinsBalance(donorRequest.getbCoinsBalance());
+        donorEntity.setImage(donorRequest.getImage());
+
+        donorRepository.save(donorEntity);
+    }
+
+    @Override
+    public void deleteDonor(Long donorId) {
+        DonorEntity donorEntity = donorRepository.findById(donorId)
+                .orElseThrow(() -> new EntityNotFoundException("Doador não encontrado com o id: " + donorId));
+
+        donorRepository.delete(donorEntity);
+    }
+
 }
