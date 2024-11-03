@@ -9,7 +9,8 @@ import java.time.LocalDate;
 public class ChallengeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "desafio_id_seq")
+    @SequenceGenerator(name = "desafio_id_seq", sequenceName = "desafio_id_seq", allocationSize = 1)
     @Column(name = "id_desafio")
     private Long id;
 

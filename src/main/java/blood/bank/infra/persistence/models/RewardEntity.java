@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class RewardEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recompensa_id_seq")
+    @SequenceGenerator(name = "recompensa_id_seq", sequenceName = "recompensa_id_seq", allocationSize = 1)
     @Column(name = "id_recompensa")
     private Long id;
 

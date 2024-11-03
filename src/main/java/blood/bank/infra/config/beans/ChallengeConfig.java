@@ -1,6 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.ChallengeRepositoryGateway;
+import blood.bank.application.usecases.challenge.CreateChallenge;
 import blood.bank.application.usecases.challenge.ListChallenge;
 import blood.bank.infra.gateways.ChallengeRepositoryJpa;
 import blood.bank.infra.mappers.ChallengeEntityMapper;
@@ -24,6 +25,11 @@ public class ChallengeConfig {
     @Bean
     ChallengeRepositoryJpa challengeRepositoryJpa(ChallengeRepository challengeRepository, ChallengeEntityMapper challengeEntityMapper) {
         return new ChallengeRepositoryJpa(challengeRepository, challengeEntityMapper);
+    }
+
+    @Bean
+    CreateChallenge createChallenge(ChallengeRepositoryGateway challengeRepositoryGateway) {
+        return new CreateChallenge(challengeRepositoryGateway);
     }
 }
 
