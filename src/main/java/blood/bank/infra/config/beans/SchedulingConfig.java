@@ -1,6 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.SchedulingRepositoryGateway;
+import blood.bank.application.usecases.scheduling.GenerateReportSchedulingCanceled;
 import blood.bank.application.usecases.scheduling.GenerateReportSchedulingMonth;
 import blood.bank.application.usecases.scheduling.ListScheduling;
 import blood.bank.infra.gateways.SchedulingRepositoryJpa;
@@ -30,5 +31,10 @@ public class SchedulingConfig {
     @Bean
     GenerateReportSchedulingMonth generateReportSchedulingMonth(SchedulingRepositoryGateway schedulingRepositoryGateway) {
         return new GenerateReportSchedulingMonth(schedulingRepositoryGateway);
+    }
+
+    @Bean
+    GenerateReportSchedulingCanceled generateReportSchedulingCanceled(SchedulingRepositoryGateway schedulingRepositoryGateway) {
+        return new GenerateReportSchedulingCanceled(schedulingRepositoryGateway);
     }
 }

@@ -1,5 +1,6 @@
 package blood.bank.infra.controller;
 
+import blood.bank.application.usecases.scheduling.GenerateReportSchedulingCanceled;
 import blood.bank.application.usecases.scheduling.GenerateReportSchedulingMonth;
 import blood.bank.application.usecases.scheduling.ListScheduling;
 import blood.bank.domain.entities.scheduling.Scheduling;
@@ -20,9 +21,12 @@ public class SchedulingController {
 
     private final GenerateReportSchedulingMonth generateReportSchedulingMonth;
 
-    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth) {
+    private final GenerateReportSchedulingCanceled generateReportSchedulingCanceled;
+
+    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled) {
         this.listScheduling = listScheduling;
         this.generateReportSchedulingMonth = generateReportSchedulingMonth;
+        this.generateReportSchedulingCanceled = generateReportSchedulingCanceled;
     }
 
     @GetMapping
@@ -34,5 +38,10 @@ public class SchedulingController {
     @GetMapping("/report-schedulings")
     ResponseEntity<byte[]> generateReportSchedulings() {
         return this.generateReportSchedulingMonth.generateReportSchedulingMonth();
+    }
+
+    @GetMapping("/report-schedulings-canceled")
+    ResponseEntity<byte[]> generateReportSchedulingsCanceled() {
+        return this.generateReportSchedulingCanceled.generateReportSchedulingCanceled();
     }
 }

@@ -10,4 +10,6 @@ public interface SchedulingRepositoryGateway {
     List<Scheduling> getSchedulings();
 
     ResponseEntity<byte[]> generateReportSchedulingMonth();
+
+    ResponseEntity<byte[]> generateReportSchedulingCanceled();
 }

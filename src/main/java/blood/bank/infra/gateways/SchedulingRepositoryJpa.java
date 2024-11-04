@@ -58,4 +58,29 @@ public class SchedulingRepositoryJpa implements SchedulingRepositoryGateway {
 
         return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
     }
+
+    @Override
+    public ResponseEntity<byte[]> generateReportSchedulingCanceled() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource("reports/schedulingCanceled.jrxml")).getFile());
+
+        List<Scheduling> schedulings = this.getSchedulings();
+
+        List<Scheduling> schedulingCanceled =  schedulings.stream()
+                .filter(Scheduling::isCanceled)
+                .collect(Collectors.toList());
+
+        LocalDateTime dataEmissao = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String dataEmissaoFormatada = dataEmissao.format(formatter);
+
+        JRBeanCollectionDataSource schedulingsCanceled = new JRBeanCollectionDataSource(schedulingCanceled);
+        Map<String, Object> parametros = new HashMap<>();
+
+        parametros.put("schedulings", schedulingsCanceled);
+        parametros.put("dataEmissaoFormatada", dataEmissaoFormatada);
+        byte[] bytes = JasperReportUtils.geraRelatorioEmPDF(file.getAbsolutePath(), parametros);
+
+        return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
+    }
 }
