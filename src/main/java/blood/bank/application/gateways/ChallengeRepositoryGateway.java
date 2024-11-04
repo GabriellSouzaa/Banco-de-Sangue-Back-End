@@ -11,4 +11,8 @@ public interface ChallengeRepositoryGateway {
     List<Challenge> getChallenges();
 
     void createChallenge(ChallengeRequest challengeRequest);
+
+    void updateChallenge(Long challengeId, ChallengeRequest challengeRequest);
+
+    void deleteChallenge(Long challengeId);
 }

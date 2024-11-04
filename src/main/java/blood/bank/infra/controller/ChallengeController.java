@@ -2,6 +2,8 @@ package blood.bank.infra.controller;
 
 import blood.bank.application.gateways.ChallengeRepositoryGateway;
 import blood.bank.application.usecases.challenge.CreateChallenge;
+import blood.bank.application.usecases.challenge.DeleteChallenge;
+import blood.bank.application.usecases.challenge.UpdateChallenge;
 import blood.bank.domain.entities.challenge.Challenge;
 import blood.bank.infra.models.requests.ChallengeRequest;
 import blood.bank.infra.models.responses.ChallengeResponse;
@@ -18,9 +20,15 @@ public class ChallengeController {
 
     private final CreateChallenge createChallenge;
 
-    public ChallengeController(ChallengeRepositoryGateway challengeRepositoryGateway, CreateChallenge createChallenge) {
+    private final UpdateChallenge updateChallenge;
+
+    private final DeleteChallenge deleteChallenge;
+
+    public ChallengeController(ChallengeRepositoryGateway challengeRepositoryGateway, CreateChallenge createChallenge, UpdateChallenge updateChallenge, DeleteChallenge deleteChallenge) {
         this.challengeRepositoryGateway = challengeRepositoryGateway;
         this.createChallenge = createChallenge;
+        this.updateChallenge = updateChallenge;
+        this.deleteChallenge = deleteChallenge;
     }
 
     @GetMapping
@@ -31,6 +39,16 @@ public class ChallengeController {
 
     @PostMapping
     void createChallenge(@RequestBody ChallengeRequest challengeRequest){
-        this.challengeRepositoryGateway.createChallenge(challengeRequest);
+        this.createChallenge.createChallenge(challengeRequest);
+    }
+
+    @PutMapping("/{challengeId}")
+    void updateChallenge(@PathVariable Long challengeId, @RequestBody ChallengeRequest challengeRequest){
+        this.updateChallenge.updateChallenge(challengeId, challengeRequest);
+    }
+
+    @DeleteMapping("/{challengeId}")
+    void deleteChallenge(@PathVariable Long challengeId){
+        this.deleteChallenge.deleteChallenge(challengeId);
     }
 }

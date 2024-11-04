@@ -1,7 +1,10 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.BadgeRepositoryGateway;
+import blood.bank.application.usecases.badge.CreateBadge;
+import blood.bank.application.usecases.badge.DeleteBadge;
 import blood.bank.application.usecases.badge.ListBadges;
+import blood.bank.application.usecases.badge.UpdateBadge;
 import blood.bank.infra.gateways.BadgeRepositoryJpa;
 import blood.bank.infra.mappers.BadgeEntityMapper;
 import blood.bank.infra.persistence.repositories.BadgeRepository;
@@ -24,5 +27,20 @@ public class BadgeConfig {
     @Bean
     ListBadges listBadges(BadgeRepositoryGateway badgeRepositoryGateway){
         return new ListBadges(badgeRepositoryGateway);
+    }
+
+    @Bean
+    CreateBadge createBadge(BadgeRepositoryGateway badgeRepositoryGateway){
+        return new CreateBadge(badgeRepositoryGateway);
+    }
+
+    @Bean
+    UpdateBadge updateBadge(BadgeRepositoryGateway badgeRepositoryGateway){
+        return new UpdateBadge(badgeRepositoryGateway);
+    }
+
+    @Bean
+    DeleteBadge deleteBadge(BadgeRepositoryGateway badgeRepositoryGateway){
+        return new DeleteBadge(badgeRepositoryGateway);
     }
 }

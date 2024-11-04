@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BloodBagRepository extends JpaRepository<BloodBagEntity, Long> {
+
+    BloodBagEntity findBloodBagEntityByBatchCode(String batchCode);
 }
