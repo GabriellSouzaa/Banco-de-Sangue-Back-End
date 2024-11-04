@@ -1,6 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.DonationRepositoryGateway;
+import blood.bank.application.usecases.donation.GenerateReportDonationsMonth;
 import blood.bank.application.usecases.donation.ListDonation;
 import blood.bank.infra.gateways.DonationRepositoryJpa;
 import blood.bank.infra.persistence.repositories.DonationRepository;
@@ -18,5 +19,10 @@ public class DonationConfig {
     @Bean
     ListDonation listDonation(DonationRepositoryGateway donationRepositoryGateway) {
         return new ListDonation(donationRepositoryGateway);
+    }
+
+    @Bean
+    GenerateReportDonationsMonth generateReportDonationsMonth(DonationRepositoryGateway donationRepository) {
+        return new GenerateReportDonationsMonth(donationRepository);
     }
 }
