@@ -11,7 +11,8 @@ import java.util.UUID;
 public class EmployeeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "funcionario_id_seq")
+    @SequenceGenerator(name = "funcionario_id_seq", sequenceName = "funcionario_id_seq", allocationSize = 1)
     @Column(name = "id_funcionario")
     private Long id;
 

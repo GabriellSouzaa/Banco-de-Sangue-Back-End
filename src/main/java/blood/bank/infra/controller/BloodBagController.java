@@ -1,13 +1,10 @@
 package blood.bank.infra.controller;
 
-import blood.bank.application.usecases.bloodBag.DeleteExpiredBloodBags;
-import blood.bank.application.usecases.bloodBag.ListBloodBag;
+import blood.bank.application.usecases.bloodBag.*;
 import blood.bank.domain.entities.bloodBag.BloodBag;
+import blood.bank.infra.models.requests.BloodBagRequest;
 import blood.bank.infra.models.responses.BloodBagResponse;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,9 +17,18 @@ public class BloodBagController {
 
     private final DeleteExpiredBloodBags deleteExpiredBloodBags;
 
-    public BloodBagController(ListBloodBag listBloodBag, DeleteExpiredBloodBags deleteExpiredBloodBags) {
+    private final CreateBloodBag createBloodBag;
+
+    private final UpdateBloodBag updateBloodBag;
+
+    private final DeleteBloodBag deleteBloodBag;
+
+    public BloodBagController(ListBloodBag listBloodBag, DeleteExpiredBloodBags deleteExpiredBloodBags, CreateBloodBag createBloodBag, UpdateBloodBag updateBloodBag, DeleteBloodBag deleteBloodBag) {
         this.listBloodBag = listBloodBag;
         this.deleteExpiredBloodBags = deleteExpiredBloodBags;
+        this.createBloodBag = createBloodBag;
+        this.updateBloodBag = updateBloodBag;
+        this.deleteBloodBag = deleteBloodBag;
     }
 
     @GetMapping
@@ -34,5 +40,20 @@ public class BloodBagController {
     @DeleteMapping("/delete-expired-blood-bags")
     void deleteExpiredBloodBags(){
         this.deleteExpiredBloodBags.deleteExpiredBloodBags();
+    }
+
+    @PostMapping
+    void createBloodBag(@RequestBody BloodBagRequest bloodBag){
+        this.createBloodBag.createBloodBag(bloodBag);
+    }
+
+    @PutMapping()
+    void updateBloodBag(@RequestParam String batchCode, @RequestBody BloodBagRequest bloodBag){
+        this.updateBloodBag.updateBloodBag(batchCode, bloodBag);
+    }
+
+    @DeleteMapping()
+    void deleteBloodBag(@RequestParam String batchCode){
+        this.deleteBloodBag.deleteBloodBag(batchCode);
     }
 }

@@ -12,7 +12,8 @@ import java.util.List;
 public class BloodBagEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bolsa_de_sangue_id_seq")
+    @SequenceGenerator(name = "bolsa_de_sangue_id_seq", sequenceName = "bolsa_de_sangue_id_seq", allocationSize = 1)
     @Column(name = "id_bolsa_de_sangue")
     private Long id;
 
