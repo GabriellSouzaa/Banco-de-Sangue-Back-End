@@ -1,6 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.SchedulingRepositoryGateway;
+import blood.bank.application.usecases.scheduling.GenerateReportSchedulingMonth;
 import blood.bank.application.usecases.scheduling.ListScheduling;
 import blood.bank.infra.gateways.SchedulingRepositoryJpa;
 import blood.bank.infra.mappers.SchedulingEntityMapper;
@@ -24,5 +25,10 @@ public class SchedulingConfig {
     @Bean
     ListScheduling listScheduling(SchedulingRepositoryGateway schedulingRepositoryGateway) {
         return new ListScheduling(schedulingRepositoryGateway);
+    }
+
+    @Bean
+    GenerateReportSchedulingMonth generateReportSchedulingMonth(SchedulingRepositoryGateway schedulingRepositoryGateway) {
+        return new GenerateReportSchedulingMonth(schedulingRepositoryGateway);
     }
 }
