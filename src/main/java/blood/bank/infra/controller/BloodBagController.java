@@ -31,7 +31,9 @@ public class BloodBagController {
 
     private final DeleteBloodBag deleteBloodBag;
 
-    public BloodBagController(ListBloodBag listBloodBag, DeleteExpiredBloodBags deleteExpiredBloodBags, CreateBloodBag createBloodBag, UpdateBloodBag updateBloodBag, DeleteBloodBag deleteBloodBag) {
+    private final GenerateReportBloodBag generateReportBloodBag;
+
+    public BloodBagController(ListBloodBag listBloodBag, DeleteExpiredBloodBags deleteExpiredBloodBags, CreateBloodBag createBloodBag, UpdateBloodBag updateBloodBag, DeleteBloodBag deleteBloodBag, GenerateReportBloodBag generateReportBloodBag) {
         this.listBloodBag = listBloodBag;
         this.deleteExpiredBloodBags = deleteExpiredBloodBags;
         this.generateReportBloodBag = generateReportBloodBag;

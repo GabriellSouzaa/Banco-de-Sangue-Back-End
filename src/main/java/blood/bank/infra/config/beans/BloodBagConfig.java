@@ -49,7 +49,8 @@ public class BloodBagConfig {
     DeleteBloodBag deleteBloodBag(BloodBagRepositoryGateway bloodBagRepositoryGateway){
         return new DeleteBloodBag(bloodBagRepositoryGateway);
     }
-    
+
+    @Bean
     GenerateReportBloodBag generateReportBloodBag(BloodBagRepositoryGateway bloodBagRepositoryGateway){
         return new GenerateReportBloodBag(bloodBagRepositoryGateway);
     }
