@@ -2,6 +2,7 @@ package blood.bank.infra.gateways;
 
 import blood.bank.application.gateways.BloodBagRepositoryGateway;
 import blood.bank.domain.entities.bloodBag.BloodBag;
+import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.mappers.BloodBagEntityMapper;
 import blood.bank.infra.models.requests.BloodBagRequest;
 import blood.bank.infra.models.requests.DonationRequest;
@@ -10,10 +11,19 @@ import blood.bank.infra.persistence.models.DonationEntity;
 import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.models.PeopleEntity;
 import blood.bank.infra.persistence.repositories.BloodBagRepository;
+import blood.bank.infra.utils.reports.JasperReportUtils;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
@@ -142,6 +152,27 @@ public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
     public void deleteBloodBag(String batchCode) {
         BloodBagEntity bloodBagEntity = bloodBagRepository.findBloodBagEntityByBatchCode(batchCode);
         bloodBagRepository.delete(bloodBagEntity);
+    }
+
+    @Override
+    public ResponseEntity<byte[]> generateReportBloodBag() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource("reports/bloodBag.jrxml")).getFile());
+
+        List<BloodBag> bloodBags = this.getBloodBags();
+
+        LocalDateTime dataEmissao = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String dataEmissaoFormatada = dataEmissao.format(formatter);
+
+        JRBeanCollectionDataSource bloodBagsJrBean = new JRBeanCollectionDataSource(bloodBags);
+        Map<String, Object> parametros = new HashMap<>();
+
+        parametros.put("bloodBag", bloodBagsJrBean);
+        parametros.put("dataEmissaoFormatada", dataEmissaoFormatada);
+        byte[] bytes = JasperReportUtils.geraRelatorioEmPDF(file.getAbsolutePath(), parametros);
+
+        return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
     }
 
 }

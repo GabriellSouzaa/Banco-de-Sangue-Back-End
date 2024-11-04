@@ -2,6 +2,9 @@ package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.BloodBagRepositoryGateway;
 import blood.bank.application.usecases.bloodBag.*;
+import blood.bank.application.usecases.bloodBag.DeleteExpiredBloodBags;
+import blood.bank.application.usecases.bloodBag.GenerateReportBloodBag;
+import blood.bank.application.usecases.bloodBag.ListBloodBag;
 import blood.bank.infra.gateways.BloodBagRepositoryJpa;
 import blood.bank.infra.mappers.BloodBagEntityMapper;
 import blood.bank.infra.persistence.repositories.BloodBagRepository;
@@ -45,5 +48,9 @@ public class BloodBagConfig {
     @Bean
     DeleteBloodBag deleteBloodBag(BloodBagRepositoryGateway bloodBagRepositoryGateway){
         return new DeleteBloodBag(bloodBagRepositoryGateway);
+    }
+    
+    GenerateReportBloodBag generateReportBloodBag(BloodBagRepositoryGateway bloodBagRepositoryGateway){
+        return new GenerateReportBloodBag(bloodBagRepositoryGateway);
     }
 }
