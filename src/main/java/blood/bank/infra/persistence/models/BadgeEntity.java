@@ -10,7 +10,8 @@ import java.time.LocalDate;
 public class BadgeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "insignia_id_seq")
+    @SequenceGenerator(name = "insignia_id_seq", sequenceName = "insignia_id_seq", allocationSize = 1)
     @Column(name = "id_insigna")
     private Long id;
 
