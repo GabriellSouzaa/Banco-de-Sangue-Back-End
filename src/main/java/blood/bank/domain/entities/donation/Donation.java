@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 public class Donation {
 
+    private Long id;
+
     private Donor donor;
 
     private LocalDate dateDonation;
@@ -22,7 +24,8 @@ public class Donation {
 
     private Integer donationScore;
 
-    public Donation(Donor donor, String donatioType, LocalDate dateDonation, Integer quantityCollected, String donationStatus, String observation, Integer donationScore) {
+    public Donation(Donor donor,Long id, String donatioType, LocalDate dateDonation, Integer quantityCollected, String donationStatus, String observation, Integer donationScore) {
+       this.id = id;
         this.donor = donor;
         this.donatioType = donatioType;
         this.dateDonation = dateDonation;
@@ -32,6 +35,9 @@ public class Donation {
         this.donationScore = donationScore;
     }
 
+    public Long getId() {
+        return id;
+    }
     public Donor getDonor() {
         return donor;
     }

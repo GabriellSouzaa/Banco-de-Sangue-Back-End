@@ -10,7 +10,7 @@ public class DonationRequest {
 
     private String donatioType;
 
-    private String quantityCollected;
+    private Integer quantityCollected;
 
     private String donationStatus;
 
@@ -42,11 +42,11 @@ public class DonationRequest {
         this.donatioType = donatioType;
     }
 
-    public String getQuantityCollected() {
+    public Integer getQuantityCollected() {
         return quantityCollected;
     }
 
-    public void setQuantityCollected(String quantityCollected) {
+    public void setQuantityCollected(Integer quantityCollected) {
         this.quantityCollected = quantityCollected;
     }
 

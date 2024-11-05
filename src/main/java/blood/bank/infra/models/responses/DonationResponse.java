@@ -12,6 +12,8 @@ import java.time.LocalDate;
 
 public class DonationResponse {
 
+    private Long id;
+
     private Donor donor;
 
     private LocalDate dateDonation;

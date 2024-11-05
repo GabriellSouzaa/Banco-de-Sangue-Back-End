@@ -2,9 +2,11 @@ package blood.bank.infra.gateways;
 
 import blood.bank.application.gateways.DonationRepositoryGateway;
 import blood.bank.domain.entities.donation.Donation;
-import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.mappers.DonationEntityMapper;
+import blood.bank.infra.mappers.DonorMapper;
+import blood.bank.infra.models.requests.DonationRequest;
 import blood.bank.infra.persistence.models.DonationEntity;
+import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.repositories.DonationRepository;
 import blood.bank.infra.persistence.repositories.DonorRepository;
 import blood.bank.infra.utils.reports.JasperReportUtils;
@@ -25,9 +27,12 @@ public class DonationRepositoryJpa implements DonationRepositoryGateway {
 
     private final DonationRepository donationRepository;
 
+    private final DonorRepository donorRepository;
 
-    public DonationRepositoryJpa(DonationRepository donationRepository) {
+
+    public DonationRepositoryJpa(DonationRepository donationRepository, DonorRepository donorRepository) {
         this.donationRepository = donationRepository;
+        this.donorRepository = donorRepository;
     }
 
     @Override
@@ -60,5 +65,45 @@ public class DonationRepositoryJpa implements DonationRepositoryGateway {
         byte[] bytes = JasperReportUtils.geraRelatorioEmPDF(file.getAbsolutePath(), parametros);
 
         return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
+    }
+
+    @Override
+    public void createDonation(Long idDonor, DonationRequest donationRequest) {
+        DonorEntity donor = this.donorRepository.findById(idDonor).orElseThrow(() -> new RuntimeException("Não Existe Doador com ess Id"));
+        DonationEntity donation = new DonationEntity();
+        donation.setDateDonation(donationRequest.getDateDonation());
+        donation.setDonor(donor);
+        donation.setDateDonation(LocalDate.now());
+        donation.setDonatioType(donationRequest.getDonatioType());
+        donation.setQuantityCollected(donationRequest.getQuantityCollected());
+        donation.setDonationStatus(donationRequest.getDonationStatus());
+        donation.setObservation(donationRequest.getObservation());
+        donation.setDonationScore(donationRequest.getDonationScore());
+        donationRepository.save(donation);
+
+    }
+
+    @Override
+    public void updateDonation(Long id, DonationRequest donationRequest) {
+        DonationEntity donation = this.donationRepository.findById(id).orElseThrow(
+                () ->  new RuntimeException("Não Existe Doação com esse id!")
+        );
+        donation.setDateDonation(donationRequest.getDateDonation());
+        donation.setDonor(donation.getDonor());
+        donation.setDateDonation(donationRequest.getDateDonation());
+        donation.setDonatioType(donationRequest.getDonatioType());
+        donation.setQuantityCollected(donationRequest.getQuantityCollected());
+        donation.setDonationStatus(donationRequest.getDonationStatus());
+        donation.setObservation(donationRequest.getObservation());
+        donation.setDonationScore(donationRequest.getDonationScore());
+        donationRepository.save(donation);
+    }
+
+    @Override
+    public void deleteDonation(Long id) {
+        DonationEntity donation = this.donationRepository.findById(id).orElseThrow(
+                () ->  new RuntimeException("Não Existe Doação com esse id!")
+        );
+        this.donationRepository.delete(donation);
     }
 }

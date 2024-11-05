@@ -1,14 +1,13 @@
 package blood.bank.infra.controller;
 
-import blood.bank.application.usecases.donation.GenerateReportDonationsMonth;
-import blood.bank.application.usecases.donation.ListDonation;
+import blood.bank.application.usecases.donation.*;
 import blood.bank.domain.entities.donation.Donation;
+import blood.bank.infra.models.requests.DonationRequest;
 import blood.bank.infra.models.responses.DonationResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +19,18 @@ public class DonationController {
 
     private final GenerateReportDonationsMonth generateReportDonationsMonth;
 
-    public DonationController(ListDonation listDonation, GenerateReportDonationsMonth generateReportDonationsMonth) {
+    private final CreateDonation createDonation;
+
+    private final DeleteDonation deleteDonation;
+
+    private final UpdateDonation updateDonation;
+
+    public DonationController(ListDonation listDonation, GenerateReportDonationsMonth generateReportDonationsMonth, CreateDonation createDonation, DeleteDonation deleteDonation, UpdateDonation updateDonation) {
         this.listDonation = listDonation;
         this.generateReportDonationsMonth = generateReportDonationsMonth;
+        this.createDonation = createDonation;
+        this.deleteDonation = deleteDonation;
+        this.updateDonation = updateDonation;
     }
 
     @GetMapping
@@ -34,6 +42,21 @@ public class DonationController {
     @GetMapping("/report-donation")
     ResponseEntity<byte[]> generateReportOnActiveAndInactiveDonors(){
         return this.generateReportDonationsMonth.generateReportDonationsMonth();
+    }
+
+    @PostMapping("/create/{idDonor}")
+    public void createDonation(@PathVariable Long idDonor, @RequestBody DonationRequest donationRequest){
+        this.createDonation.createDonation(idDonor, donationRequest);
+    }
+
+    @PutMapping("/update/{idDonation}")
+    public void updateDonation(@PathVariable Long idDonation, @RequestBody DonationRequest donationRequest){
+        this.updateDonation.updateDonation(idDonation, donationRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteByDateOfDonation(@PathVariable Long id){
+        this.deleteDonation.deleteDonation(id);
     }
 
 }
