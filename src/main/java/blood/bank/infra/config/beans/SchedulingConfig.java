@@ -1,11 +1,10 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.SchedulingRepositoryGateway;
-import blood.bank.application.usecases.scheduling.GenerateReportSchedulingCanceled;
-import blood.bank.application.usecases.scheduling.GenerateReportSchedulingMonth;
-import blood.bank.application.usecases.scheduling.ListScheduling;
+import blood.bank.application.usecases.scheduling.*;
 import blood.bank.infra.gateways.SchedulingRepositoryJpa;
 import blood.bank.infra.mappers.SchedulingEntityMapper;
+import blood.bank.infra.persistence.repositories.DonorRepository;
 import blood.bank.infra.persistence.repositories.SchedulingRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +18,8 @@ public class SchedulingConfig {
     }
 
     @Bean
-    SchedulingRepositoryJpa schedulingRepositoryJpa(SchedulingEntityMapper schedulingEntityMapper, SchedulingRepository schedulingRepository) {
-        return new SchedulingRepositoryJpa(schedulingRepository, schedulingEntityMapper);
+    SchedulingRepositoryJpa schedulingRepositoryJpa(SchedulingEntityMapper schedulingEntityMapper, SchedulingRepository schedulingRepository, DonorRepository donorRepository) {
+        return new SchedulingRepositoryJpa(schedulingRepository, schedulingEntityMapper, donorRepository);
     }
 
     @Bean
@@ -36,5 +35,20 @@ public class SchedulingConfig {
     @Bean
     GenerateReportSchedulingCanceled generateReportSchedulingCanceled(SchedulingRepositoryGateway schedulingRepositoryGateway) {
         return new GenerateReportSchedulingCanceled(schedulingRepositoryGateway);
+    }
+
+    @Bean
+    CreateScheduling createScheduling(SchedulingRepositoryGateway schedulingRepositoryGateway) {
+        return new CreateScheduling(schedulingRepositoryGateway);
+    }
+
+    @Bean
+    DeleteSchedulingById deleteSchedulingById(SchedulingRepositoryGateway schedulingRepositoryGateway) {
+        return new DeleteSchedulingById(schedulingRepositoryGateway);
+    }
+
+    @Bean
+    UpdateScheduling updateScheduling(SchedulingRepositoryGateway schedulingRepositoryGateway) {
+        return new UpdateScheduling(schedulingRepositoryGateway);
     }
 }

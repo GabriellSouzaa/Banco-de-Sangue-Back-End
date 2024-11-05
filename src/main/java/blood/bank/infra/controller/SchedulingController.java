@@ -1,14 +1,11 @@
 package blood.bank.infra.controller;
 
-import blood.bank.application.usecases.scheduling.GenerateReportSchedulingCanceled;
-import blood.bank.application.usecases.scheduling.GenerateReportSchedulingMonth;
-import blood.bank.application.usecases.scheduling.ListScheduling;
+import blood.bank.application.usecases.scheduling.*;
 import blood.bank.domain.entities.scheduling.Scheduling;
+import blood.bank.infra.models.requests.SchedulingRequest;
 import blood.bank.infra.models.responses.SchedulingResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,10 +20,16 @@ public class SchedulingController {
 
     private final GenerateReportSchedulingCanceled generateReportSchedulingCanceled;
 
-    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled) {
+    private final DeleteSchedulingById deleteSchedulingById;
+
+    private final CreateScheduling createScheduling;
+
+    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled, DeleteSchedulingById deleteSchedulingById, CreateScheduling createScheduling) {
         this.listScheduling = listScheduling;
         this.generateReportSchedulingMonth = generateReportSchedulingMonth;
         this.generateReportSchedulingCanceled = generateReportSchedulingCanceled;
+        this.deleteSchedulingById = deleteSchedulingById;
+        this.createScheduling = createScheduling;
     }
 
     @GetMapping
@@ -44,4 +47,15 @@ public class SchedulingController {
     ResponseEntity<byte[]> generateReportSchedulingsCanceled() {
         return this.generateReportSchedulingCanceled.generateReportSchedulingCanceled();
     }
+
+    @PostMapping("/create/{idDonor}")
+    public void create(Long idDonor, @RequestBody SchedulingRequest schedulingRequest) {
+        this.createScheduling.createScheduling(idDonor, schedulingRequest);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        this.deleteSchedulingById.deleteById(id);
+    }
+
 }

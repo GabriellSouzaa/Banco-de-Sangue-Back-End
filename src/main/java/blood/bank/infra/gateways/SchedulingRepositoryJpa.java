@@ -4,7 +4,10 @@ import blood.bank.application.gateways.SchedulingRepositoryGateway;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.domain.entities.scheduling.Scheduling;
 import blood.bank.infra.mappers.SchedulingEntityMapper;
+import blood.bank.infra.models.requests.SchedulingRequest;
+import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.models.SchedulingEntity;
+import blood.bank.infra.persistence.repositories.DonorRepository;
 import blood.bank.infra.persistence.repositories.SchedulingRepository;
 import blood.bank.infra.utils.reports.JasperReportUtils;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -21,8 +24,11 @@ public class SchedulingRepositoryJpa implements SchedulingRepositoryGateway {
 
     private final SchedulingRepository schedulingRepository;
 
-    public SchedulingRepositoryJpa(SchedulingRepository schedulingRepository, SchedulingEntityMapper schedulingEntityMapper) {
+    private final DonorRepository donorRepository;
+
+    public SchedulingRepositoryJpa(SchedulingRepository schedulingRepository, SchedulingEntityMapper schedulingEntityMapper, DonorRepository donorRepository) {
         this.schedulingRepository = schedulingRepository;
+        this.donorRepository = donorRepository;
     }
 
 
@@ -82,5 +88,33 @@ public class SchedulingRepositoryJpa implements SchedulingRepositoryGateway {
         byte[] bytes = JasperReportUtils.geraRelatorioEmPDF(file.getAbsolutePath(), parametros);
 
         return JasperReportUtils.retornaResponseEntityRelatorio(bytes);
+    }
+
+    @Override
+    public void createScheduling(Long idDonor, SchedulingRequest schedulingRequest) {
+        SchedulingEntity schedulingEntity = new SchedulingEntity();
+        DonorEntity donor = donorRepository.findById(idDonor).orElseThrow(() -> new RuntimeException("Não existe Doador com esse id!"));
+        schedulingEntity.setDonor(donor);
+        schedulingEntity.setDateTimeSchedule(schedulingRequest.getDateTimeSchedule());
+        schedulingEntity.setStatus(schedulingRequest.getStatus());
+        schedulingEntity.setObservations(schedulingRequest.getObservations());
+        schedulingEntity.setCanceled(schedulingRequest.isCanceled());
+
+    }
+
+    @Override
+    public void updateScheduling(Long id, SchedulingRequest schedulingRequest) {
+        SchedulingEntity schedulingEntity = this.schedulingRepository.findById(id).orElseThrow(() -> new RuntimeException("Não existe agendamento com esse id!"));
+        schedulingEntity.setDonor(schedulingEntity.getDonor());
+        schedulingEntity.setDateTimeSchedule(schedulingRequest.getDateTimeSchedule());
+        schedulingEntity.setStatus(schedulingRequest.getStatus());
+        schedulingEntity.setObservations(schedulingRequest.getObservations());
+        schedulingEntity.setCanceled(schedulingRequest.isCanceled());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        SchedulingEntity schedulingEntity = this.schedulingRepository.findById(id).orElseThrow(() -> new RuntimeException("Não existe agendamento com esse id!"));
+        this.schedulingRepository.delete(schedulingEntity);
     }
 }

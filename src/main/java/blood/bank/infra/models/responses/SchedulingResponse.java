@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 
 public class SchedulingResponse {
 
+    private Long id;
+
     private DonorResponse donor;
 
     private LocalDateTime dateTimeSchedule;
@@ -18,6 +20,7 @@ public class SchedulingResponse {
     private boolean canceled;
 
     public SchedulingResponse(Scheduling scheduling){
+
         this.donor = new DonorResponse(scheduling.getDonor());
         this.dateTimeSchedule = scheduling.getDateTimeSchedule();
         this.status = scheduling.getStatus();

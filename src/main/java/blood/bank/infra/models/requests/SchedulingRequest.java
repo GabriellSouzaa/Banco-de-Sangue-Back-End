@@ -1,16 +1,17 @@
-package blood.bank.domain.entities.scheduling;
+package blood.bank.infra.models.requests;
 
-import blood.bank.domain.entities.donor.Donor;
+import blood.bank.infra.persistence.models.DonorEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 
-public class Scheduling {
-
-    private Long id;
+public class SchedulingRequest {
 
 
-
-    private Donor donor;
+    private DonorRequest donor;
 
     private LocalDateTime dateTimeSchedule;
 
@@ -20,26 +21,11 @@ public class Scheduling {
 
     private boolean canceled;
 
-    public Scheduling(Donor donor, Long id, LocalDateTime dateTimeSchedule, String status, String observations, boolean canceled) {
-        this.id = id;
-        this.donor = donor;
-        this.dateTimeSchedule = dateTimeSchedule;
-        this.status = status;
-        this.observations = observations;
-        this.canceled = canceled;
-    }
-
-    public Scheduling() {
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public Donor getDonor() {
+    public DonorRequest getDonor() {
         return donor;
     }
 
-    public void setDonor(Donor donor) {
+    public void setDonor(DonorRequest donor) {
         this.donor = donor;
     }
 
