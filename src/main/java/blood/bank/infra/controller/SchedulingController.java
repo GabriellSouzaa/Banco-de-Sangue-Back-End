@@ -24,12 +24,15 @@ public class SchedulingController {
 
     private final CreateScheduling createScheduling;
 
-    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled, DeleteSchedulingById deleteSchedulingById, CreateScheduling createScheduling) {
+    private final UpdateScheduling updateScheduling;
+
+    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled, DeleteSchedulingById deleteSchedulingById, CreateScheduling createScheduling, UpdateScheduling updateScheduling) {
         this.listScheduling = listScheduling;
         this.generateReportSchedulingMonth = generateReportSchedulingMonth;
         this.generateReportSchedulingCanceled = generateReportSchedulingCanceled;
         this.deleteSchedulingById = deleteSchedulingById;
         this.createScheduling = createScheduling;
+        this.updateScheduling = updateScheduling;
     }
 
     @GetMapping
@@ -51,6 +54,11 @@ public class SchedulingController {
     @PostMapping("/create/{idDonor}")
     public void create(Long idDonor, @RequestBody SchedulingRequest schedulingRequest) {
         this.createScheduling.createScheduling(idDonor, schedulingRequest);
+    }
+
+    @PutMapping("/update/{id}")
+    public void update(@PathVariable Long id, @RequestBody SchedulingRequest schedulingRequest) {
+        this.updateScheduling.updateScheduling(id, schedulingRequest);
     }
 
     @DeleteMapping("/delete/{id}")

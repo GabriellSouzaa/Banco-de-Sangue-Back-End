@@ -99,6 +99,7 @@ public class SchedulingRepositoryJpa implements SchedulingRepositoryGateway {
         schedulingEntity.setStatus(schedulingRequest.getStatus());
         schedulingEntity.setObservations(schedulingRequest.getObservations());
         schedulingEntity.setCanceled(schedulingRequest.isCanceled());
+        this.schedulingRepository.save(schedulingEntity);
 
     }
 
@@ -110,6 +111,7 @@ public class SchedulingRepositoryJpa implements SchedulingRepositoryGateway {
         schedulingEntity.setStatus(schedulingRequest.getStatus());
         schedulingEntity.setObservations(schedulingRequest.getObservations());
         schedulingEntity.setCanceled(schedulingRequest.isCanceled());
+        this.schedulingRepository.save(schedulingEntity);
     }
 
     @Override
