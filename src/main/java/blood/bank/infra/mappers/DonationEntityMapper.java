@@ -17,7 +17,7 @@ public class DonationEntityMapper {
 
     public static Donation toDonation(DonationEntity donationEntity){
         Donor donor = DonorMapper.toDonor(donationEntity.getDonor());
-        return new Donation(donor, donationEntity.getDonatioType(), donationEntity.getDateDonation(), donationEntity.getQuantityCollected(),
+        return new Donation(donor, donationEntity.getId(), donationEntity.getDonatioType(), donationEntity.getDateDonation(), donationEntity.getQuantityCollected(),
                 donationEntity.getDonationStatus(), donationEntity.getObservation(), donationEntity.getDonationScore());
     }
 }

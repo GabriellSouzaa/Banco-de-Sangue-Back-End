@@ -31,6 +31,15 @@ public class Scheduling {
 
     public Scheduling() {
     }
+
+    public Scheduling(Donor donor, LocalDateTime dateTimeSchedule, String status, String observations, boolean canceled) {
+        this.donor = donor;
+        this.dateTimeSchedule = dateTimeSchedule;
+        this.status = status;
+        this.observations = observations;
+        this.canceled = canceled;
+    }
+
     public Long getId() {
         return id;
     }
