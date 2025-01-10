@@ -6,8 +6,6 @@ spring:
     username: postgres
     password: sagi
     driver-class-name: org.postgresql.Driver
-
-
   flyway:
     baseline-on-migrate: true
     enabled: true
@@ -19,6 +17,7 @@ api:
       secret: ${JWT_SECRET:banco-de-sangue-secret}
       issuer: http://localhost:8080
       audience: auth-api
+
 logging:
   level:
     org.springframework.security: DEBUG
