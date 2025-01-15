@@ -3,7 +3,12 @@ package blood.bank.domain.enums;
 public enum UserRole {
 
     ADMIN("admin"),
-    USER("user");
+    USER("user"),
+    GESTOR("gestor"),
+    ENFERMEIRA("enfermeira"),
+    ATENDENTE("atendente"),
+    RH("rh");
+
 
     private String role;
 

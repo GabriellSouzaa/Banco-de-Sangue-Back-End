@@ -1,5 +1,7 @@
 package blood.bank.domain.entities.user;
 
+import blood.bank.domain.entities.donor.Donor;
+import blood.bank.domain.entities.employee.Employee;
 import blood.bank.domain.enums.UserRole;
 
 public class User {
@@ -10,10 +12,16 @@ public class User {
 
     private UserRole role;
 
-    public User(String login, String password, UserRole role) {
+    private Employee employee;
+
+    private Donor donor;
+
+    public User(String login, String password, UserRole role, Employee employee, Donor donor) {
         this.login = login;
         this.role = role;
         this.password = password;
+        this.employee = employee;
+        this.donor = donor;
     }
 
     public String getLogin() {
@@ -38,6 +46,22 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Donor getDonor() {
+        return donor;
+    }
+
+    public void setDonor(Donor donor) {
+        this.donor = donor;
     }
 
     @Override

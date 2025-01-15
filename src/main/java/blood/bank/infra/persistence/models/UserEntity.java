@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Table(name = "usuario")
 @Entity(name = "usuario")
@@ -19,23 +18,48 @@ public class UserEntity  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String password;
 
-    public UserEntity() {
-    }
+    private String login;
+
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "funcionario_id")
+    private EmployeeEntity employee;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doador_id")
+    private DonorEntity donor;
 
-    public UserEntity(String login, String password, UserRole role){
+    public UserEntity() {
+    }
+
+    public UserEntity(String login, String password, UserRole role, EmployeeEntity employee, DonorEntity donor) {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.employee = employee;
+        this.donor = donor;
     }
 
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
+    }
+
+    public DonorEntity getDonor() {
+        return donor;
+    }
+
+    public void setDonor(DonorEntity donor) {
+        this.donor = donor;
+    }
 
     public Long getId() {
         return id;

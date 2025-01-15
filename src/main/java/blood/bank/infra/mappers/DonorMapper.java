@@ -17,7 +17,7 @@ public class DonorMapper {
 
     public static Donor toDonor(DonorEntity donorEntity){
         People people = PeopleEntityMapper.toPeople(donorEntity.getPeople());
-        return new Donor(donorEntity.getId(), people, donorEntity.getBloodType(), donorEntity.getRegisterDate(),
+        return new Donor(people, donorEntity.getBloodType(), donorEntity.getRegisterDate(),
                 donorEntity.getLastDonationDate(), donorEntity.getNumberOfDonations(), donorEntity.getEligibility(), donorEntity.getMedicalNotes(), donorEntity.getbCoinsBalance(),
                 donorEntity.getImage());
     }

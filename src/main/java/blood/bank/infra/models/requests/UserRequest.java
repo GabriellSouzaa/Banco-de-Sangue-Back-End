@@ -10,6 +10,10 @@ public class UserRequest {
 
     UserRole role;
 
+    EmployeeRequest employee;
+
+    DonorRequest donor;
+
     public String getLogin() {
         return login;
     }
@@ -21,4 +25,8 @@ public class UserRequest {
     public String getPassword() {
         return password;
     }
+
+    public EmployeeRequest getEmployee() { return employee; }
+
+    public DonorRequest getDonor() { return donor; }
 }
