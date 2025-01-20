@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "funcionario")
@@ -44,7 +43,8 @@ public class EmployeeEntity {
     @Column(name = "foto")
     private String photo;
 
-    public EmployeeEntity(PeopleEntity people, AddressEntity address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, String photo) {
+    public EmployeeEntity(Long id, PeopleEntity people, AddressEntity address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, String photo) {
+        this.id = id;
         this.people = people;
         this.address = address;
         this.cpf = cpf;

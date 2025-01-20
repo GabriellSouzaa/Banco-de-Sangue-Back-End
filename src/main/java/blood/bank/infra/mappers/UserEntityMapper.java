@@ -11,15 +11,15 @@ import blood.bank.infra.persistence.models.UserEntity;
 
 public class UserEntityMapper {
 
-    public UserEntity toEntity(User user){
-        EmployeeEntity employee  = EmployeeEntityMapper.toEntity(user.getEmployee());
-        DonorEntity donor = DonorMapper.toEntity(user.getDonor());
+    public UserEntity toEntity(User user) {
+        EmployeeEntity employee = user.getEmployee() != null ? EmployeeEntityMapper.toEntity(user.getEmployee()) : null;
+        DonorEntity donor = user.getDonor() != null ? DonorMapper.toEntity(user.getDonor()) : null;
         return new UserEntity(user.getLogin(), user.getPassword(), user.getRole(), employee, donor);
     }
 
     public User toUser(UserEntity userEntity){
-        Employee employee = EmployeeEntityMapper.toEmployee(userEntity.getEmployee());
-        Donor donor = DonorMapper.toDonor(userEntity.getDonor());
+        Employee employee = userEntity.getEmployee() != null ? EmployeeEntityMapper.toEmployee(userEntity.getEmployee()) : null;
+        Donor donor = userEntity.getDonor() != null ? DonorMapper.toDonor(userEntity.getDonor()) : null;
         return new User(userEntity.getLogin(), userEntity.getPassword(), userEntity.getRole(), employee, donor);
     }
 }

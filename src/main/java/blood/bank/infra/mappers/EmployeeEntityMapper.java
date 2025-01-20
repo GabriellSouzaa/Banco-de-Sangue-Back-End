@@ -12,12 +12,12 @@ public class EmployeeEntityMapper {
     public static EmployeeEntity toEntity(Employee employee) {
         PeopleEntity peopleEntity = PeopleEntityMapper.toEntity(employee.getPeople());
         AddressEntity addressEntity = AddressEntityMapper.toEntity(employee.getAddress());
-        return new EmployeeEntity(peopleEntity, addressEntity, employee.getCpf(), employee.getHiringDate(), employee.getPosition(), employee.getDepartment(), employee.getSalary(), employee.getProfessionalRegistrationNumber(), employee.getPhoto());
+        return new EmployeeEntity(employee.getId(), peopleEntity, addressEntity, employee.getCpf(), employee.getHiringDate(), employee.getPosition(), employee.getDepartment(), employee.getSalary(), employee.getProfessionalRegistrationNumber(), employee.getPhoto());
     }
 
     public static Employee toEmployee(EmployeeEntity employeeEntity){
         People people = PeopleEntityMapper.toPeople(employeeEntity.getPeople());
         Address address = AddressEntityMapper.toAddress(employeeEntity.getAddress());
-        return new Employee(people, address, employeeEntity.getCpf(), employeeEntity.getHiringDate(), employeeEntity.getPosition(), employeeEntity.getDepartment(), employeeEntity.getSalary(), employeeEntity.getProfessionalRegistrationNumber(), employeeEntity.getPhoto());
+        return new Employee(employeeEntity.getId(), people, address, employeeEntity.getCpf(), employeeEntity.getHiringDate(), employeeEntity.getPosition(), employeeEntity.getDepartment(), employeeEntity.getSalary(), employeeEntity.getProfessionalRegistrationNumber(), employeeEntity.getPhoto());
     }
 }

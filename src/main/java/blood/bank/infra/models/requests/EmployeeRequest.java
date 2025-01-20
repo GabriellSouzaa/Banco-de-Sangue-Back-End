@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 public class EmployeeRequest {
 
+    private Long id;
+
     private PeopleRequest people;
 
     private AddressRequest address;
@@ -22,6 +24,14 @@ public class EmployeeRequest {
     private String professionalRegistrationNumber;
 
     private String photo;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public PeopleRequest getPeople() {
         return people;

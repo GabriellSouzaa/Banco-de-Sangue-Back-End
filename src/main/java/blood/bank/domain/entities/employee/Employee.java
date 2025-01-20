@@ -5,9 +5,10 @@ import blood.bank.domain.entities.people.People;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class Employee {
+
+    private Long id;
 
     private People people;
 
@@ -27,7 +28,8 @@ public class Employee {
 
     private String photo;
 
-    public Employee(People people, Address address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, String photo) {
+    public Employee(Long id, People people, Address address, String cpf, LocalDate hiringDate, String position, String department, BigDecimal salary, String professionalRegistrationNumber, String photo) {
+        this.id = id;
         this.people = people;
         this.address = address;
         this.cpf = cpf;
@@ -37,6 +39,14 @@ public class Employee {
         this.salary = salary;
         this.professionalRegistrationNumber = professionalRegistrationNumber;
         this.photo = photo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public People getPeople() {

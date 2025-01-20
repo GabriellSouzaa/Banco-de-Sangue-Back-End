@@ -26,7 +26,7 @@ public class UserEntity  implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "funcionario_id")
     private EmployeeEntity employee;
 

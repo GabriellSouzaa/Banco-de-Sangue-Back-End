@@ -10,9 +10,9 @@ public class UserRequest {
 
     UserRole role;
 
-    EmployeeRequest employee;
+    Long employeeId;
 
-    DonorRequest donor;
+    Long donorId;
 
     public String getLogin() {
         return login;
@@ -26,7 +26,11 @@ public class UserRequest {
         return password;
     }
 
-    public EmployeeRequest getEmployee() { return employee; }
+    public Long getEmployeeId() {
+        return employeeId;
+    }
 
-    public DonorRequest getDonor() { return donor; }
+    public Long getDonorId() {
+        return donorId;
+    }
 }
