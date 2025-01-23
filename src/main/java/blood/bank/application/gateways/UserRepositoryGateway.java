@@ -12,4 +12,5 @@ public interface UserRepositoryGateway {
 
     String loginUser(UserResponse userResponse);
 
+    User getUser(String login);
 }

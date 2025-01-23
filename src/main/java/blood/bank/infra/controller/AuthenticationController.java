@@ -1,20 +1,23 @@
 package blood.bank.infra.controller;
 
+import blood.bank.application.usecases.user.GetUser;
 import blood.bank.application.usecases.user.LoginUser;
 import blood.bank.application.usecases.user.RegisterUser;
+import blood.bank.domain.entities.donor.Donor;
+import blood.bank.domain.entities.employee.Employee;
 import blood.bank.domain.entities.user.User;
 import blood.bank.infra.mappers.DonorMapper;
 import blood.bank.infra.mappers.EmployeeEntityMapper;
 import blood.bank.infra.models.requests.UserRequest;
+import blood.bank.infra.models.responses.DonorResponse;
+import blood.bank.infra.models.responses.EmployeeResponse;
 import blood.bank.infra.models.responses.UserResponse;
 import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.models.EmployeeEntity;
 import blood.bank.infra.persistence.repositories.DonorRepository;
 import blood.bank.infra.persistence.repositories.EmployeeRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
     @RequestMapping("/auth")
@@ -28,12 +31,15 @@ public class AuthenticationController {
 
     private final DonorRepository donorRepository;
 
+    private final GetUser getUser;
 
-    public AuthenticationController(RegisterUser registerUser, LoginUser loginUser, EmployeeRepository employeeRepository, DonorRepository donorRepository) {
+
+    public AuthenticationController(RegisterUser registerUser, LoginUser loginUser, EmployeeRepository employeeRepository, DonorRepository donorRepository, GetUser getUser) {
         this.registerUser = registerUser;
         this.loginUser = loginUser;
         this.employeeRepository = employeeRepository;
         this.donorRepository = donorRepository;
+        this.getUser = getUser;
     }
 
     @PostMapping("/login")
@@ -64,5 +70,21 @@ public class AuthenticationController {
 
         return new UserResponse(save.getLogin(), save.getPassword());
 
+    }
+
+    @GetMapping("/get-authenticated-employee/{login}")
+    public ResponseEntity<EmployeeResponse> getAuthenticatedEmployee(@PathVariable String login) {
+
+        Employee employee = getUser.getUser(login).getEmployee();
+
+        return ResponseEntity.ok(new EmployeeResponse(employee));
+    }
+
+    @GetMapping("/get-authenticated-donor/{login}")
+    public ResponseEntity<DonorResponse> getAuthenticatedDonor(@PathVariable String login) {
+
+        Donor donor = getUser.getUser(login).getDonor();
+
+        return ResponseEntity.ok(new DonorResponse(donor));
     }
 }

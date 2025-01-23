@@ -9,8 +9,8 @@ import blood.bank.infra.persistence.repositories.UserRepository;
 import blood.bank.infra.security.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -44,10 +44,8 @@ public class UserRepositoryJpa  implements UserRepositoryGateway {
         Optional<UserEntity> userEntity = userRepository.findByLogin(login);
         if(userEntity.isPresent()) {
             user = true;
-            return user;
-        } else {
-            return user;
         }
+        return user;
     }
 
     @Override
@@ -55,5 +53,15 @@ public class UserRepositoryJpa  implements UserRepositoryGateway {
         var usernamePassword = new UsernamePasswordAuthenticationToken(userResponse.login(), userResponse.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         return tokenService.generateToken((UserEntity) auth.getPrincipal());
+    }
+
+    @Override
+    public User getUser(String login) {
+        Optional<UserEntity> userEntity = userRepository.findByLogin(login);
+        if(userEntity.isPresent()) {
+            return userEntityMapper.toUser(userEntity.get());
+        }else{
+            throw new UsernameNotFoundException("Usuário não encontrado");
+        }
     }
 }

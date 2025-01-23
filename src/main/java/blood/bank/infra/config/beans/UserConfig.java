@@ -1,6 +1,7 @@
 package blood.bank.infra.config.beans;
 
 import blood.bank.application.gateways.UserRepositoryGateway;
+import blood.bank.application.usecases.user.GetUser;
 import blood.bank.application.usecases.user.LoginUser;
 import blood.bank.application.usecases.user.RegisterUser;
 import blood.bank.infra.gateways.UserRepositoryJpa;
@@ -22,15 +23,20 @@ public class UserConfig {
     @Bean
     UserRepositoryJpa userRepositoryJpa(UserRepository userRepository, UserEntityMapper userEntityMapper, TokenService tokenService, AuthenticationManager authenticationManager) {
         return new UserRepositoryJpa(userRepository, userEntityMapper,  authenticationManager, tokenService);
-    };
+    }
 
     @Bean
     RegisterUser registerUser(UserRepositoryGateway userRepositoryGateway) {
         return new RegisterUser( userRepositoryGateway);
-    };
+    }
 
     @Bean
     LoginUser loginUser(UserRepositoryGateway userRepositoryGateway) {
         return new LoginUser( userRepositoryGateway);
+    }
+
+    @Bean
+    GetUser getUser(UserRepositoryGateway userRepositoryGateway) {
+        return new GetUser( userRepositoryGateway);
     }
 }

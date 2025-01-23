@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public class EmployeeResponse {
 
+    private Long id;
+
     private PeopleResponse people;
 
     private AddressResponse address;
@@ -27,6 +29,7 @@ public class EmployeeResponse {
     private String photo;
 
     public EmployeeResponse(Employee  employee) {
+        this.id = employee.getId();
         this.people = new PeopleResponse(employee.getPeople());
         this.address = new AddressResponse(employee.getAddress());
         this.cpf = employee.getCpf();
@@ -36,6 +39,14 @@ public class EmployeeResponse {
         this.salary = employee.getSalary();
         this.professionalRegistrationNumber = employee.getProfessionalRegistrationNumber();
         this.photo = employee.getPhoto();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public PeopleResponse getPeople() {

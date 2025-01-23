@@ -107,7 +107,8 @@ public class Donor {
     }
 
 
-    public Donor(People people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image) {
+    public Donor(Long id, People people, String bloodType, LocalDate registerDate, LocalDate lastDonationDate, Long numberOfDonations, Boolean eligibility, String medicalNotes, Long bCoinsBalance, String image) {
+        this.id = id;
         this.people = people;
         this.bloodType = bloodType;
         this.registerDate = registerDate;
