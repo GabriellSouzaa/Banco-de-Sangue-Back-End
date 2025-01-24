@@ -19,7 +19,7 @@ public interface DonorRepositoryGateway {
 
     ResponseEntity<byte[]> generateReportOnActiveAndInactiveDonors();
 
-    void createDonor(DonorRequest donorRequest);
+    Donor createDonor(DonorRequest donorRequest);
 
     void updateDonor(Long donorId, DonorRequest donorRequest);
 

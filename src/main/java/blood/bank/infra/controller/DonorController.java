@@ -64,8 +64,9 @@ public class DonorController {
     }
 
     @PostMapping
-    void createDonor(@RequestBody DonorRequest donorRequest){
-        this.createDonor.createDonor(donorRequest);
+    DonorResponse createDonor(@RequestBody DonorRequest donorRequest){
+        Donor donor = this.createDonor.createDonor(donorRequest);
+        return new DonorResponse(donor);
     }
 
     @PutMapping("/{id}")

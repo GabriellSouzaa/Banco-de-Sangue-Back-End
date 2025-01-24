@@ -83,7 +83,7 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
     }
 
     @Override
-    public void createDonor(DonorRequest donorRequest) {
+    public Donor createDonor(DonorRequest donorRequest) {
         DonorEntity donorEntity = new DonorEntity();
         PeopleEntity peopleEntity = new PeopleEntity();
 
@@ -93,15 +93,15 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
         peopleEntity.setEmail(donorRequest.getPeople().getEmail());
         donorEntity.setPeople(peopleEntity);
         donorEntity.setBloodType(donorRequest.getBloodType());
-        donorEntity.setRegisterDate(donorRequest.getRegisterDate());
+        donorEntity.setRegisterDate(LocalDate.now());
         donorEntity.setLastDonationDate(donorRequest.getLastDonationDate());
-        donorEntity.setNumberOfDonations(donorRequest.getNumberOfDonations());
-        donorEntity.setEligibility(donorRequest.getEligibility());
-        donorEntity.setMedicalNotes(donorRequest.getMedicalNotes());
-        donorEntity.setbCoinsBalance(donorRequest.getbCoinsBalance());
-        donorEntity.setImage(donorRequest.getImage());
+        donorEntity.setNumberOfDonations(0L);
+        donorEntity.setEligibility(true);
+        donorEntity.setMedicalNotes("");
+        donorEntity.setbCoinsBalance(0L);
+        donorEntity.setImage("");
 
-        donorRepository.save(donorEntity);
+        return DonorMapper.toDonor(donorRepository.save(donorEntity));
     }
 
     @Override
