@@ -30,7 +30,7 @@ public class UserEntity  implements UserDetails {
     @JoinColumn(name = "funcionario_id")
     private EmployeeEntity employee;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "doador_id")
     private DonorEntity donor;
 
