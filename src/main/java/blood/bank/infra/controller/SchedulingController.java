@@ -26,13 +26,16 @@ public class SchedulingController {
 
     private final UpdateScheduling updateScheduling;
 
-    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled, DeleteSchedulingById deleteSchedulingById, CreateScheduling createScheduling, UpdateScheduling updateScheduling) {
+    private final ListDonorScheduling listDonorScheduling;
+
+    public SchedulingController(ListScheduling listScheduling, GenerateReportSchedulingMonth generateReportSchedulingMonth, GenerateReportSchedulingCanceled generateReportSchedulingCanceled, DeleteSchedulingById deleteSchedulingById, CreateScheduling createScheduling, UpdateScheduling updateScheduling, ListDonorScheduling listDonorScheduling) {
         this.listScheduling = listScheduling;
         this.generateReportSchedulingMonth = generateReportSchedulingMonth;
         this.generateReportSchedulingCanceled = generateReportSchedulingCanceled;
         this.deleteSchedulingById = deleteSchedulingById;
         this.createScheduling = createScheduling;
         this.updateScheduling = updateScheduling;
+        this.listDonorScheduling = listDonorScheduling;
     }
 
     @GetMapping
@@ -64,6 +67,12 @@ public class SchedulingController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         this.deleteSchedulingById.deleteById(id);
+    }
+
+    @GetMapping("/donor/{idDonor}")
+    List<SchedulingResponse> listDonorScheduling(@PathVariable Long idDonor) {
+        List<Scheduling> schedulings = listDonorScheduling.getDonorSchedulings(idDonor);
+        return schedulings.stream().map(SchedulingResponse::new).collect(Collectors.toList());
     }
 
 }

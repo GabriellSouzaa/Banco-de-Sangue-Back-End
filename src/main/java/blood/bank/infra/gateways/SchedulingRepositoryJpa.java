@@ -1,7 +1,6 @@
 package blood.bank.infra.gateways;
 
 import blood.bank.application.gateways.SchedulingRepositoryGateway;
-import blood.bank.domain.entities.donor.Donor;
 import blood.bank.domain.entities.scheduling.Scheduling;
 import blood.bank.infra.mappers.SchedulingEntityMapper;
 import blood.bank.infra.models.requests.SchedulingRequest;
@@ -118,5 +117,12 @@ public class SchedulingRepositoryJpa implements SchedulingRepositoryGateway {
     public void deleteById(Long id) {
         SchedulingEntity schedulingEntity = this.schedulingRepository.findById(id).orElseThrow(() -> new RuntimeException("Não existe agendamento com esse id!"));
         this.schedulingRepository.delete(schedulingEntity);
+    }
+
+    @Override
+    public List<Scheduling> getSchedulingsByDonor(Long idDonor) {
+        DonorEntity donor = donorRepository.findById(idDonor).orElseThrow(() -> new RuntimeException("Não existe Doador com esse id!"));
+        List<SchedulingEntity> schedulings = this.schedulingRepository.findAllByDonorId(donor.getId());
+        return schedulings.stream().map(SchedulingEntityMapper::toScheduling).collect(Collectors.toList());
     }
 }

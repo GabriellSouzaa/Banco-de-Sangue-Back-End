@@ -51,4 +51,9 @@ public class SchedulingConfig {
     UpdateScheduling updateScheduling(SchedulingRepositoryGateway schedulingRepositoryGateway) {
         return new UpdateScheduling(schedulingRepositoryGateway);
     }
+
+    @Bean
+    ListDonorScheduling listDonorScheduling(SchedulingRepositoryGateway schedulingRepositoryGateway) {
+        return new ListDonorScheduling(schedulingRepositoryGateway);
+    }
 }

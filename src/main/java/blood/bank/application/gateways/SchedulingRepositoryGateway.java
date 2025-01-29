@@ -19,4 +19,6 @@ public interface SchedulingRepositoryGateway {
     void updateScheduling(Long id, SchedulingRequest schedulingRequest);
 
     void deleteById(Long id);
+
+    List<Scheduling> getSchedulingsByDonor(Long idDonor);
 }
