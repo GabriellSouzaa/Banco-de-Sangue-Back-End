@@ -7,7 +7,6 @@ import blood.bank.infra.models.responses.DonationResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +24,15 @@ public class DonationController {
 
     private final UpdateDonation updateDonation;
 
-    public DonationController(ListDonation listDonation, GenerateReportDonationsMonth generateReportDonationsMonth, CreateDonation createDonation, DeleteDonation deleteDonation, UpdateDonation updateDonation) {
+    private final ListDonorDonations listDonorDonations;
+
+    public DonationController(ListDonation listDonation, GenerateReportDonationsMonth generateReportDonationsMonth, CreateDonation createDonation, DeleteDonation deleteDonation, UpdateDonation updateDonation, ListDonorDonations listDonorDonations) {
         this.listDonation = listDonation;
         this.generateReportDonationsMonth = generateReportDonationsMonth;
         this.createDonation = createDonation;
         this.deleteDonation = deleteDonation;
         this.updateDonation = updateDonation;
+        this.listDonorDonations = listDonorDonations;
     }
 
     @GetMapping
@@ -59,4 +61,9 @@ public class DonationController {
         this.deleteDonation.deleteDonation(id);
     }
 
+    @GetMapping("/donor/{idDonor}")
+    public List<DonationResponse> getDonorDonations(@PathVariable Long idDonor){
+        List<Donation> donations = this.listDonorDonations.getDonorDonations(idDonor);
+        return donations.stream().map(DonationResponse::new).collect(Collectors.toList());
+    }
 }

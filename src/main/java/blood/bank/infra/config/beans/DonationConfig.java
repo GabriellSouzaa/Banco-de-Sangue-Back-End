@@ -40,4 +40,9 @@ public class DonationConfig {
     DeleteDonation deleteDonation(DonationRepositoryGateway donationRepositoryGateway) {
         return new DeleteDonation(donationRepositoryGateway);
     }
+
+    @Bean
+    ListDonorDonations listDonorDonations(DonationRepositoryGateway donationRepositoryGateway) {
+        return new ListDonorDonations(donationRepositoryGateway);
+    }
 }

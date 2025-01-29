@@ -3,7 +3,6 @@ package blood.bank.infra.gateways;
 import blood.bank.application.gateways.DonationRepositoryGateway;
 import blood.bank.domain.entities.donation.Donation;
 import blood.bank.infra.mappers.DonationEntityMapper;
-import blood.bank.infra.mappers.DonorMapper;
 import blood.bank.infra.models.requests.DonationRequest;
 import blood.bank.infra.persistence.models.DonationEntity;
 import blood.bank.infra.persistence.models.DonorEntity;
@@ -38,6 +37,13 @@ public class DonationRepositoryJpa implements DonationRepositoryGateway {
     @Override
     public List<Donation> getDonations() {
         List<DonationEntity> donationEntities = this.donationRepository.findAll();
+        return donationEntities.stream().map(DonationEntityMapper::toDonation).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Donation> getDonorDonations(Long idDonor) {
+        DonorEntity donor = this.donorRepository.findById(idDonor).orElseThrow(() -> new RuntimeException("Não Existe Doador com ess Id"));
+        List<DonationEntity> donationEntities = this.donationRepository.findAllByDonorId(donor.getId());
         return donationEntities.stream().map(DonationEntityMapper::toDonation).collect(Collectors.toList());
     }
 
