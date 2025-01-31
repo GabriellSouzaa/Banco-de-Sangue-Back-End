@@ -16,10 +16,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DonationRepositoryJpa implements DonationRepositoryGateway {
@@ -56,7 +53,7 @@ public class DonationRepositoryJpa implements DonationRepositoryGateway {
         List<Donation> donationsMonth = donations.stream()
                 .filter(d -> d.getDateDonation().getMonth() == LocalDate.now().getMonth() &&
                         d.getDateDonation().getYear() == LocalDate.now().getYear())
-                .sorted((d1, d2) -> d1.getDateDonation().compareTo(d2.getDateDonation()))
+                .sorted(Comparator.comparing(Donation::getDateDonation))
                 .toList();
 
         LocalDateTime dataEmissao = LocalDateTime.now();
@@ -111,5 +108,24 @@ public class DonationRepositoryJpa implements DonationRepositoryGateway {
                 () ->  new RuntimeException("Não Existe Doação com esse id!")
         );
         this.donationRepository.delete(donation);
+    }
+
+    @Override
+    public Integer getDonorPosition(Long idDonor) {
+
+        List<DonationEntity> donationEntities = donationRepository.findAllByOrderByDonorIdAsc();
+        Map<Long, Long> ranking = donationEntities.stream()
+                .collect(Collectors.groupingBy(d -> d.getDonor().getId(), Collectors.counting()));
+
+        List<Map.Entry<Long, Long>> rankingList = ranking.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .toList();
+
+        for (int i = 0; i < rankingList.size(); i++) {
+            if (rankingList.get(i).getKey().equals(idDonor)) {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 }

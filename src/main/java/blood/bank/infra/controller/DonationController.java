@@ -26,13 +26,16 @@ public class DonationController {
 
     private final ListDonorDonations listDonorDonations;
 
-    public DonationController(ListDonation listDonation, GenerateReportDonationsMonth generateReportDonationsMonth, CreateDonation createDonation, DeleteDonation deleteDonation, UpdateDonation updateDonation, ListDonorDonations listDonorDonations) {
+    private final GetDonorPosition getDonorPosition;
+
+    public DonationController(ListDonation listDonation, GenerateReportDonationsMonth generateReportDonationsMonth, CreateDonation createDonation, DeleteDonation deleteDonation, UpdateDonation updateDonation, ListDonorDonations listDonorDonations, GetDonorPosition getDonorPosition) {
         this.listDonation = listDonation;
         this.generateReportDonationsMonth = generateReportDonationsMonth;
         this.createDonation = createDonation;
         this.deleteDonation = deleteDonation;
         this.updateDonation = updateDonation;
         this.listDonorDonations = listDonorDonations;
+        this.getDonorPosition = getDonorPosition;
     }
 
     @GetMapping
@@ -65,5 +68,10 @@ public class DonationController {
     public List<DonationResponse> getDonorDonations(@PathVariable Long idDonor){
         List<Donation> donations = this.listDonorDonations.getDonorDonations(idDonor);
         return donations.stream().map(DonationResponse::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/donor-position/{idDonor}")
+    public Integer getPosition(@PathVariable Long idDonor){
+        return this.getDonorPosition.getDonorPosition(idDonor);
     }
 }

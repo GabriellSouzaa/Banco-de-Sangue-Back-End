@@ -19,4 +19,6 @@ public interface DonationRepositoryGateway {
     void updateDonation(Long id, DonationRequest donationRequest);
 
     void deleteDonation(Long id);
+
+    Integer getDonorPosition(Long idDonor);
 }

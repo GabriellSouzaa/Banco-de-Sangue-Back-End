@@ -45,4 +45,9 @@ public class DonationConfig {
     ListDonorDonations listDonorDonations(DonationRepositoryGateway donationRepositoryGateway) {
         return new ListDonorDonations(donationRepositoryGateway);
     }
+
+    @Bean
+    GetDonorPosition getDonorPosition(DonationRepositoryGateway donationRepositoryGateway) {
+        return new GetDonorPosition(donationRepositoryGateway);
+    }
 }

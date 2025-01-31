@@ -15,4 +15,8 @@ public interface DonationRepository extends JpaRepository<DonationEntity, Long> 
     Optional<DonationEntity> findByDateDonation(LocalDate date);
 
     List<DonationEntity> findAllByDonorId(Long idDonor);
+
+    Long countByDonor_Id(Long donorId);
+
+    List<DonationEntity> findAllByOrderByDonorIdAsc();
 }
