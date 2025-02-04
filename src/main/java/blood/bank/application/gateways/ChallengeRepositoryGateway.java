@@ -15,4 +15,6 @@ public interface ChallengeRepositoryGateway {
     void updateChallenge(Long challengeId, ChallengeRequest challengeRequest);
 
     void deleteChallenge(Long challengeId);
+
+    Long countDonorChallenges(Long donorId);
 }

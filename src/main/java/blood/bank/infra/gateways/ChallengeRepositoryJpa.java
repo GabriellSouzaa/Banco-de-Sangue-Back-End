@@ -75,4 +75,9 @@ public class ChallengeRepositoryJpa implements ChallengeRepositoryGateway {
                 .orElseThrow(() -> new EntityNotFoundException("Desafio não encontrado"));
         this.challengeRepository.delete(challenge);
     }
+
+    @Override
+    public Long countDonorChallenges(Long donorId) {
+        return 0L;
+    }
 }
