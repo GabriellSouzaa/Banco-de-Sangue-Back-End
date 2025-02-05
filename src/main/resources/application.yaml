@@ -14,7 +14,7 @@ spring:
 api:
   security:
     token:
-      secret: ${JWT_SECRET:banco-de-sangue-secret}
+      secret: GJMdO3DfUsG5eY3+t5DgUj0PLbKH2Gf6X3z1yTb9w9c=
       issuer: http://localhost:8080
       audience: auth-api
 

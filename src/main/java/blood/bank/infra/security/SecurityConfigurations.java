@@ -34,7 +34,6 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register-employee").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register-donor").permitAll()
-                        .requestMatchers("/chat/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
