@@ -5,6 +5,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import java.net.URI;
 import java.util.Map;
 
 public class JwtHandshakeInterceptor implements HandshakeInterceptor {
@@ -12,17 +13,23 @@ public class JwtHandshakeInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        String token = request.getHeaders().getFirst("Authorization");
-        if(token != null && token.startsWith("Bearer ")){
-            token = token.substring(7);
-            String username = JwtUtil.extractUsername(token);
 
+        URI uri = request.getURI();
+        String query = uri.getQuery();
+
+        if(query != null && query.startsWith("token=")){
+            String token = query.substring(6);
+
+            String username = JwtUtil.extractUsername(token);
             if(username != null){
                 attributes.put("username", username);
-                System.out.println(username);
+                System.out.println("Usuário Autenticado: " + username);
+                return true;
             }
         }
-        return true;
+
+        System.out.println("Usuário não autenticado");
+        return false;
     }
 
     @Override
