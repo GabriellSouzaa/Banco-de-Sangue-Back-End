@@ -21,8 +21,6 @@ public class DonorRequest {
 
     private Long bCoinsBalance;
 
-    private String image;
-
     public PeopleRequest getPeople() {
         return people;
     }
@@ -85,13 +83,5 @@ public class DonorRequest {
 
     public void setbCoinsBalance(Long bCoinsBalance) {
         this.bCoinsBalance = bCoinsBalance;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

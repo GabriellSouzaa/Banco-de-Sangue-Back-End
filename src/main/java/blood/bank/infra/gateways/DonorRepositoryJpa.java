@@ -11,8 +11,10 @@ import blood.bank.infra.utils.reports.JasperReportUtils;
 import jakarta.persistence.EntityNotFoundException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,11 +26,8 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
 
     private final DonorRepository donorRepository;
 
-    private final DonorMapper donorMapper;
-
-    public DonorRepositoryJpa(DonorRepository donorRepository, DonorMapper donorMapper) {
+    public DonorRepositoryJpa(DonorRepository donorRepository) {
         this.donorRepository = donorRepository;
-        this.donorMapper = donorMapper;
     }
 
     @Override
@@ -83,7 +82,7 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
     }
 
     @Override
-    public Donor createDonor(DonorRequest donorRequest) {
+    public Donor createDonor(DonorRequest donorRequest, MultipartFile photo) {
         DonorEntity donorEntity = new DonorEntity();
         PeopleEntity peopleEntity = new PeopleEntity();
 
@@ -99,7 +98,12 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
         donorEntity.setEligibility(true);
         donorEntity.setMedicalNotes("");
         donorEntity.setbCoinsBalance(0L);
-        donorEntity.setImage("");
+        try{
+            String encodedImage = Base64.getEncoder().encodeToString(photo.getBytes());
+            donorEntity.setImage(encodedImage);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
 
         return DonorMapper.toDonor(donorRepository.save(donorEntity));
     }
@@ -122,7 +126,6 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
         donorEntity.setEligibility(donorRequest.getEligibility());
         donorEntity.setMedicalNotes(donorRequest.getMedicalNotes());
         donorEntity.setbCoinsBalance(donorRequest.getbCoinsBalance());
-        donorEntity.setImage(donorRequest.getImage());
 
         donorRepository.save(donorEntity);
     }

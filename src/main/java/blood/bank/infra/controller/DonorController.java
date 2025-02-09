@@ -6,8 +6,10 @@ import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.models.requests.AwardPointsRequest;
 import blood.bank.infra.models.requests.DonorRequest;
 import blood.bank.infra.models.responses.DonorResponse;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,9 +65,12 @@ public class DonorController {
         return this.generateReportOnActiveAndInactiveDonors.generateReportOnActiveAndInactiveDonors();
     }
 
-    @PostMapping
-    DonorResponse createDonor(@RequestBody DonorRequest donorRequest){
-        Donor donor = this.createDonor.createDonor(donorRequest);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    DonorResponse createDonor(
+            @RequestPart("donor") DonorRequest donorRequest,
+            @RequestPart("photo") MultipartFile photo
+    ){
+        Donor donor = this.createDonor.createDonor(donorRequest, photo);
         return new DonorResponse(donor);
     }
 

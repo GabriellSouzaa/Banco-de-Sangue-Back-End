@@ -4,6 +4,7 @@ import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.models.requests.DonorRequest;
 import blood.bank.infra.persistence.models.DonorEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface DonorRepositoryGateway {
 
     ResponseEntity<byte[]> generateReportOnActiveAndInactiveDonors();
 
-    Donor createDonor(DonorRequest donorRequest);
+    Donor createDonor(DonorRequest donorRequest, MultipartFile photo);
 
     void updateDonor(Long donorId, DonorRequest donorRequest);
 

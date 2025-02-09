@@ -23,7 +23,6 @@ public class EmployeeRequest {
 
     private String professionalRegistrationNumber;
 
-    private String photo;
 
     public Long getId() {
         return id;
@@ -97,11 +96,4 @@ public class EmployeeRequest {
         this.professionalRegistrationNumber = professionalRegistrationNumber;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 }

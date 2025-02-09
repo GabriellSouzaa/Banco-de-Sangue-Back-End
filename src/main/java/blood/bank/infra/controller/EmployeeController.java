@@ -7,7 +7,9 @@ import blood.bank.application.usecases.employee.UpdateEmployee;
 import blood.bank.domain.entities.employee.Employee;
 import blood.bank.infra.models.requests.EmployeeRequest;
 import blood.bank.infra.models.responses.EmployeeResponse;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,9 +39,12 @@ public class EmployeeController {
         return employees.stream().map(EmployeeResponse::new).collect(Collectors.toList());
     }
 
-    @PostMapping
-    void createEmployee(@RequestBody EmployeeRequest employeeRequest) {
-        this.createEmployee.createEmployee(employeeRequest);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    void createEmployee(
+            @RequestPart("employee") EmployeeRequest employeeRequest,
+            @RequestPart("photo") MultipartFile photo
+    ) {
+        this.createEmployee.createEmployee(employeeRequest, photo);
     }
 
     @PutMapping

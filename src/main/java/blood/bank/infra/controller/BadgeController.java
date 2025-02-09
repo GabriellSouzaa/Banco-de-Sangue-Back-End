@@ -7,7 +7,9 @@ import blood.bank.application.usecases.badge.UpdateBadge;
 import blood.bank.domain.entities.badge.Badge;
 import blood.bank.infra.models.requests.BadgeRequest;
 import blood.bank.infra.models.responses.BadgeResponse;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,9 +39,12 @@ public class BadgeController {
         return badges.stream().map(BadgeResponse::new).collect(Collectors.toList());
     }
 
-    @PostMapping
-    void createBadge(@RequestBody BadgeRequest badgeRequest){
-        createBadge.createBadge(badgeRequest);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    void createBadge(
+            @RequestPart("badge") BadgeRequest badgeRequest,
+            @RequestPart("photo") MultipartFile photo
+            ){
+        createBadge.createBadge(badgeRequest, photo);
     }
 
     @PutMapping

@@ -86,7 +86,6 @@ public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
                 donor.setEligibility(donation.getDonor().getEligibility());
                 donor.setMedicalNotes(donation.getDonor().getMedicalNotes());
                 donor.setbCoinsBalance(donation.getDonor().getbCoinsBalance());
-                donor.setImage(donation.getDonor().getImage());
                 donationEntity.setDonor(donor);
                 donationEntity.setDateDonation(donation.getDateDonation());
                 donationEntity.setDonatioType(donation.getDonatioType());
@@ -134,7 +133,6 @@ public class BloodBagRepositoryJpa implements BloodBagRepositoryGateway {
                 donor.setEligibility(donation.getDonor().getEligibility());
                 donor.setMedicalNotes(donation.getDonor().getMedicalNotes());
                 donor.setbCoinsBalance(donation.getDonor().getbCoinsBalance());
-                donor.setImage(donation.getDonor().getImage());
                 donationEntity.setDonor(donor);
                 donationEntity.setDateDonation(donation.getDateDonation());
                 donationEntity.setDonatioType(donation.getDonatioType());

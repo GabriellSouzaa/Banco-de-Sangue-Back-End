@@ -9,7 +9,10 @@ import blood.bank.infra.persistence.models.EmployeeEntity;
 import blood.bank.infra.persistence.models.PeopleEntity;
 import blood.bank.infra.persistence.repositories.EmployeeRepository;
 import blood.bank.infra.persistence.repositories.PeopleRepository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +37,7 @@ public class EmployeeRepositoryJpa implements EmployeeRepositoryGateway {
     }
 
     @Override
-    public void createEmployee(EmployeeRequest employeeRequest) {
+    public void createEmployee(EmployeeRequest employeeRequest, MultipartFile photo) {
         PeopleEntity peopleEntity = new PeopleEntity();
         AddressEntity addressEntity = new AddressEntity();
         EmployeeEntity employeeEntity = new EmployeeEntity();
@@ -61,7 +64,12 @@ public class EmployeeRepositoryJpa implements EmployeeRepositoryGateway {
         employeeEntity.setDepartment(employeeRequest.getDepartment());
         employeeEntity.setSalary(employeeRequest.getSalary());
         employeeEntity.setProfessionalRegistrationNumber(employeeRequest.getProfessionalRegistrationNumber());
-
+        try {
+            String encodedImage = Base64.getEncoder().encodeToString(photo.getBytes());
+            employeeEntity.setPhoto(encodedImage);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao processar a imagem", e);
+        }
         employeeRepository.save(employeeEntity);
     }
 

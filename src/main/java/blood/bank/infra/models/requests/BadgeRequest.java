@@ -6,8 +6,6 @@ public class BadgeRequest {
 
     private String badgeName;
 
-    private String image;
-
     private Integer necessaryPoints;
 
     private LocalDate dateOfAchievement;
@@ -18,14 +16,6 @@ public class BadgeRequest {
 
     public void setBadgeName(String badgeName) {
         this.badgeName = badgeName;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public Integer getNecessaryPoints() {

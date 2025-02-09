@@ -6,8 +6,10 @@ import blood.bank.infra.mappers.BadgeEntityMapper;
 import blood.bank.infra.models.requests.BadgeRequest;
 import blood.bank.infra.persistence.models.BadgeEntity;
 import blood.bank.infra.persistence.repositories.BadgeRepository;
-import jakarta.persistence.EntityNotFoundException;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,11 +17,8 @@ public class BadgeRepositoryJpa implements BadgeRepositoryGateway {
 
     private final BadgeRepository badgeRepository;
 
-    private final BadgeEntityMapper badgeEntityMapper;
-
     public BadgeRepositoryJpa(BadgeRepository badgeRepository, BadgeEntityMapper badgeEntityMapper) {
         this.badgeRepository = badgeRepository;
-        this.badgeEntityMapper = badgeEntityMapper;
     }
 
     @Override
@@ -29,13 +28,19 @@ public class BadgeRepositoryJpa implements BadgeRepositoryGateway {
     }
 
     @Override
-    public void createBadge(BadgeRequest badgeRequest) {
+    public void createBadge(BadgeRequest badgeRequest, MultipartFile photo) {
         BadgeEntity badgeEntity = new BadgeEntity();
 
         badgeEntity.setBadgeName(badgeRequest.getBadgeName());
-        badgeEntity.setImage(badgeRequest.getImage());
         badgeEntity.setNecessaryPoints(badgeRequest.getNecessaryPoints());
         badgeEntity.setDateOfAchievement(badgeRequest.getDateOfAchievement());
+
+        try{
+            String encodedImage = Base64.getEncoder().encodeToString(photo.getBytes());
+            badgeEntity.setImage(encodedImage);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
 
         this.badgeRepository.save(badgeEntity);
     }
@@ -45,7 +50,6 @@ public class BadgeRepositoryJpa implements BadgeRepositoryGateway {
         BadgeEntity badgeEntity = badgeRepository.findBadgeEntityByBadgeName(badgeName);
 
         badgeEntity.setBadgeName(badgeRequest.getBadgeName());
-        badgeEntity.setImage(badgeRequest.getImage());
         badgeEntity.setNecessaryPoints(badgeRequest.getNecessaryPoints());
         badgeEntity.setDateOfAchievement(badgeRequest.getDateOfAchievement());
 
