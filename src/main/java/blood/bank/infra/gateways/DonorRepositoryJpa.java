@@ -46,15 +46,17 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
     @Override
     public List<Donor> getAvailableDonors() {
         List<DonorEntity> donors = donorRepository.findAll();
-        return donors.stream().filter(this::isDonorElegible).map(DonorMapper::toDonor).collect(Collectors.toList());
+        return donors.stream()
+                .filter(donorEntity -> Objects.nonNull(donorEntity.getLastDonationDate()))
+                .filter(this::isDonorElegible).map(DonorMapper::toDonor).collect(Collectors.toList());
     }
 
     @Override
     public boolean isDonorElegible(DonorEntity donor) {
         long daysSinceLastDonation = ChronoUnit.DAYS.between(donor.getLastDonationDate(), LocalDate.now());
-        if(donor.getPeople().getGender().equals("Masculino")){
+        if(donor.getPeople().getGender().equals("M")){
             return daysSinceLastDonation >= 60;
-        } else if(donor.getPeople().getGender().equals("Feminino")){
+        } else if(donor.getPeople().getGender().equals("F")){
             return daysSinceLastDonation >= 90;
         }
         return false;
