@@ -2,11 +2,6 @@ package blood.bank.infra.models.responses;
 
 import blood.bank.domain.entities.donation.Donation;
 import blood.bank.domain.entities.donor.Donor;
-import blood.bank.infra.persistence.models.DonorEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
 
@@ -29,6 +24,7 @@ public class DonationResponse {
     private Integer donationScore;
 
     public DonationResponse(Donation donation) {
+        this.id = donation.getId();
         this.donor = donation.getDonor();
         this.dateDonation = donation.getDateDonation();
         this.donatioType = donation.getDonatioType();
@@ -36,6 +32,14 @@ public class DonationResponse {
         this.donationStatus = donation.getDonationStatus();
         this.observation = donation.getObservation();
         this.donationScore = donation.getDonationScore();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Donor getDonor() {

@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 public class HospitalClinicEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospital_seq")
+    @SequenceGenerator(name = "hospital_seq", sequenceName = "hospital_clinica_id_seq", allocationSize = 1)
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -23,7 +23,8 @@ public class HospitalClinicEntity {
 
     private String email;
 
-    public HospitalClinicEntity(AddressEntity addressEntity, String name, String phone, String email) {
+    public HospitalClinicEntity(Long id, AddressEntity addressEntity, String name, String phone, String email) {
+        this.id = id;
         this.address = addressEntity;
         this.name = name;
         this.phone = phone;

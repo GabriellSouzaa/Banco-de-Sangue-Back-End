@@ -1,11 +1,9 @@
 package blood.bank.infra.models.responses;
 
 import blood.bank.domain.entities.bloodBag.BloodBag;
-import blood.bank.domain.entities.donation.Donation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class BloodBagResponse {
 
@@ -33,10 +31,10 @@ public class BloodBagResponse {
 
     private LocalDateTime processingDate;
 
-    private List<Donation> donations;
+    private DonationResponse donation;
 
     public BloodBagResponse(BloodBag bloodBag) {
-        this.donations = bloodBag.getDonations();
+        this.donation = new DonationResponse(bloodBag.getDonation());
         this.bloodType = bloodBag.getBloodType();
         this.bloodComponent = bloodBag.getBloodComponent();
         this.bagVolume = bloodBag.getBagVolume();
@@ -51,12 +49,12 @@ public class BloodBagResponse {
         this.processingDate = bloodBag.getProcessingDate();
     }
 
-    public List<Donation> getDonations() {
-        return donations;
+    public DonationResponse getDonation() {
+        return donation;
     }
 
-    public void setDonations(List<Donation> donations) {
-        this.donations = donations;
+    public void setDonation(DonationResponse donation) {
+        this.donation = donation;
     }
 
     public String getBloodType() {

@@ -10,11 +10,11 @@ public class HospitalClinicEntityMapper {
 
     public static HospitalClinicEntity toEntity(HospitalClinic hospitalClinic) {
         AddressEntity addressEntity = AddressEntityMapper.toEntity(hospitalClinic.getAddress());
-        return new HospitalClinicEntity(addressEntity, hospitalClinic.getName(), hospitalClinic.getPhone(), hospitalClinic.getEmail());
+        return new HospitalClinicEntity(hospitalClinic.getId(), addressEntity, hospitalClinic.getName(), hospitalClinic.getPhone(), hospitalClinic.getEmail());
     }
 
     public static HospitalClinic toHospitalClinic(HospitalClinicEntity hospitalClinicEntity) {
         Address address = AddressEntityMapper.toAddress(hospitalClinicEntity.getAddress());
-        return new HospitalClinic(address, hospitalClinicEntity.getName(), hospitalClinicEntity.getPhone(), hospitalClinicEntity.getEmail());
+        return new HospitalClinic(hospitalClinicEntity.getId(), address, hospitalClinicEntity.getName(), hospitalClinicEntity.getPhone(), hospitalClinicEntity.getEmail());
     }
 }

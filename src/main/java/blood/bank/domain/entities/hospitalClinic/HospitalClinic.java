@@ -4,6 +4,8 @@ import blood.bank.domain.entities.address.Address;
 
 public class HospitalClinic {
 
+    private Long id;
+
     private Address address;
 
     private String name;
@@ -12,11 +14,20 @@ public class HospitalClinic {
 
     private String email;
 
-    public HospitalClinic(Address address, String name, String phone, String email) {
+    public HospitalClinic(Long id, Address address, String name, String phone, String email) {
+        this.id = id;
         this.address = address;
         this.name = name;
         this.phone = phone;
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Address getAddress() {

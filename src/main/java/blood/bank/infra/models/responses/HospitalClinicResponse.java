@@ -4,6 +4,8 @@ import blood.bank.domain.entities.hospitalClinic.HospitalClinic;
 
 public class HospitalClinicResponse {
 
+    private Long id;
+
     private String name;
 
     private String phone;
@@ -13,10 +15,19 @@ public class HospitalClinicResponse {
     private AddressResponse address;
 
     public HospitalClinicResponse(HospitalClinic hospitalClinic){
+        this.id = hospitalClinic.getId();
         this.address = new AddressResponse(hospitalClinic.getAddress());
         this.name = hospitalClinic.getName();
         this.phone = hospitalClinic.getPhone();
         this.email = hospitalClinic.getEmail();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AddressResponse getAddress() {

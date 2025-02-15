@@ -4,11 +4,10 @@ import blood.bank.domain.entities.donation.Donation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class BloodBag {
 
-    private List<Donation> donations;
+    private Donation donation;
 
     private String bloodType;
 
@@ -34,8 +33,8 @@ public class BloodBag {
 
     private LocalDateTime processingDate;
 
-    public BloodBag(List<Donation> donations, String bloodType, String bloodComponent, String bagVolume, LocalDate collectionDate, LocalDate expirationDate, String bagStatus, String testResult, String freezerNumber, String batchCode, String complianceStatus, String notes, LocalDateTime processingDate) {
-        this.donations = donations;
+    public BloodBag(Donation donation, String bloodType, String bloodComponent, String bagVolume, LocalDate collectionDate, LocalDate expirationDate, String bagStatus, String testResult, String freezerNumber, String batchCode, String complianceStatus, String notes, LocalDateTime processingDate) {
+        this.donation = donation;
         this.bloodType = bloodType;
         this.bloodComponent = bloodComponent;
         this.bagVolume = bagVolume;
@@ -51,12 +50,12 @@ public class BloodBag {
     }
 
 
-    public List<Donation> getDonations() {
-        return donations;
+    public Donation getDonation() {
+        return donation;
     }
 
-    public void setDonations(List<Donation> donations) {
-        this.donations = donations;
+    public void setDonation(Donation donation) {
+        this.donation = donation;
     }
 
     public String getBloodType() {

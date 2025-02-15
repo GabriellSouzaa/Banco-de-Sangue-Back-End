@@ -8,6 +8,7 @@ import blood.bank.application.usecases.bloodBag.ListBloodBag;
 import blood.bank.infra.gateways.BloodBagRepositoryJpa;
 import blood.bank.infra.mappers.BloodBagEntityMapper;
 import blood.bank.infra.persistence.repositories.BloodBagRepository;
+import blood.bank.infra.persistence.repositories.DonationRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,8 +22,8 @@ public class BloodBagConfig {
     }
 
     @Bean
-    BloodBagRepositoryJpa bloodBagRepositoryJpa(BloodBagRepository bloodBagRepository, BloodBagEntityMapper bloodBagEntityMapper, JdbcTemplate jdbcTemplate) {
-        return new BloodBagRepositoryJpa(bloodBagRepository, bloodBagEntityMapper, jdbcTemplate);
+    BloodBagRepositoryJpa bloodBagRepositoryJpa(BloodBagRepository bloodBagRepository, JdbcTemplate jdbcTemplate, DonationRepository donationRepository) {
+        return new BloodBagRepositoryJpa(bloodBagRepository, jdbcTemplate, donationRepository);
     }
 
     @Bean

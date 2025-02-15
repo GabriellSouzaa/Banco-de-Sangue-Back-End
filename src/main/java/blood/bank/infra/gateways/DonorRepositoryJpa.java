@@ -95,7 +95,7 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
         donorEntity.setPeople(peopleEntity);
         donorEntity.setBloodType(donorRequest.getBloodType());
         donorEntity.setRegisterDate(LocalDate.now());
-        donorEntity.setLastDonationDate(donorRequest.getLastDonationDate());
+        donorEntity.setLastDonationDate(null);
         donorEntity.setNumberOfDonations(0L);
         donorEntity.setEligibility(true);
         donorEntity.setMedicalNotes("");

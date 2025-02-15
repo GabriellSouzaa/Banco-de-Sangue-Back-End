@@ -2,10 +2,8 @@ package blood.bank.infra.persistence.models;
 
 import jakarta.persistence.*;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "bolsa_de_sangue")
@@ -17,9 +15,9 @@ public class BloodBagEntity {
     @Column(name = "id_bolsa_de_sangue")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_doacao")
-    private List<DonationEntity> donations;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "doacao_id_doacao")
+    private DonationEntity donation;
 
     @Column(name = "tipo_sanguineo")
     private String bloodType;
@@ -61,8 +59,8 @@ public class BloodBagEntity {
 
     }
 
-    public BloodBagEntity(List<DonationEntity> donations, String bloodType, String bloodComponent, String bagVolume, LocalDate collectionDate, LocalDate expirationDate, String bagStatus, String testResult, String freezerNumber, String batchCode, String complianceStatus, String notes, LocalDateTime processingDate) {
-        this.donations = donations;
+    public BloodBagEntity(DonationEntity donation, String bloodType, String bloodComponent, String bagVolume, LocalDate collectionDate, LocalDate expirationDate, String bagStatus, String testResult, String freezerNumber, String batchCode, String complianceStatus, String notes, LocalDateTime processingDate) {
+        this.donation = donation;
         this.bloodType = bloodType;
         this.bloodComponent = bloodComponent;
         this.bagVolume = bagVolume;
@@ -87,12 +85,12 @@ public class BloodBagEntity {
         this.id = id;
     }
 
-    public List<DonationEntity> getDonations() {
-        return donations;
+    public DonationEntity getDonation() {
+        return donation;
     }
 
-    public void setDonations(List<DonationEntity> donations) {
-        this.donations = donations;
+    public void setDonation(DonationEntity donation) {
+        this.donation = donation;
     }
 
     public String getBloodComponent() {

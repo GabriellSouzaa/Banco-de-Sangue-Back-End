@@ -2,11 +2,10 @@ package blood.bank.infra.models.requests;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class BloodBagRequest {
 
-    private List<DonationRequest> donations;
+    private Long donationId;
 
     private String bloodType;
 
@@ -32,12 +31,12 @@ public class BloodBagRequest {
 
     private LocalDateTime processingDate;
 
-    public List<DonationRequest> getDonations() {
-        return donations;
+    public Long getDonationId() {
+        return donationId;
     }
 
-    public void setDonations(List<DonationRequest> donations) {
-        this.donations = donations;
+    public void setDonationId(Long donationId) {
+        this.donationId = donationId;
     }
 
     public String getBloodType() {
