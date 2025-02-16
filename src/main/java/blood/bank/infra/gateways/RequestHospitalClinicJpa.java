@@ -57,7 +57,7 @@ public class RequestHospitalClinicJpa implements RequestHospitalClinicRepository
         HospitalClinicEntity hospitalClinicEntity = hospitalClinicRepository.findById(hospitalClinicRequest.getHospitalClinicId())
                 .orElseThrow(() -> new EntityNotFoundException("Hospital Clinic not found"));
         requestHospitalClinicEntity.setHospitalClinic(hospitalClinicEntity);
-        requestHospitalClinicEntity.setRequestDate(hospitalClinicRequest.getRequestDate());
+        requestHospitalClinicEntity.setRequestDate(LocalDateTime.now());
         requestHospitalClinicEntity.setRequestedBloodType(hospitalClinicRequest.getRequestedBloodType());
         requestHospitalClinicEntity.setRequestedBloodComponent(hospitalClinicRequest.getRequestedBloodComponent());
         requestHospitalClinicEntity.setRequestedQuantity(hospitalClinicRequest.getRequestedQuantity());
@@ -71,6 +71,9 @@ public class RequestHospitalClinicJpa implements RequestHospitalClinicRepository
     public void updateRequestHospitalClinic(Long id, RequestHospitalClinicRequest hospitalClinicRequest) {
         RequestHospitalClinicEntity requestHospitalClinicEntity = requestHospitalClinicRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Hospital Clinic not found"));
+        HospitalClinicEntity hospitalClinicEntity = hospitalClinicRepository.findById(hospitalClinicRequest.getHospitalClinicId())
+                .orElseThrow(() -> new EntityNotFoundException("Hospital Clinic not found"));
+        requestHospitalClinicEntity.setHospitalClinic(hospitalClinicEntity);
         requestHospitalClinicEntity.setRequestDate(hospitalClinicRequest.getRequestDate());
         requestHospitalClinicEntity.setRequestedBloodType(hospitalClinicRequest.getRequestedBloodType());
         requestHospitalClinicEntity.setRequestedBloodComponent(hospitalClinicRequest.getRequestedBloodComponent());
