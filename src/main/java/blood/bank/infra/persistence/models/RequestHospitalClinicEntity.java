@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 public class RequestHospitalClinicEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_solicitacao")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "solicitacao_hospital_clinica_id_seq")
+    @SequenceGenerator(name = "solicitacao_hospital_clinica_id_seq", sequenceName = "solicitacao_hospital_clinica_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "hospital_clinica_id")
     private HospitalClinicEntity hospitalClinic;
 
@@ -40,7 +41,8 @@ public class RequestHospitalClinicEntity {
     @Column(name = "observacao")
     private String observation;
 
-    public RequestHospitalClinicEntity(HospitalClinicEntity hospitalClinicEntity, LocalDateTime requestDate, String requestedBloodType, String requestedBloodComponent, LocalDate needByDate, String requestStatus, String observation) {
+    public RequestHospitalClinicEntity(Long id, HospitalClinicEntity hospitalClinicEntity, LocalDateTime requestDate, String requestedBloodType, String requestedBloodComponent, LocalDate needByDate, String requestStatus, String observation) {
+        this.id = id;
         this.hospitalClinic = hospitalClinicEntity;
         this.requestDate = requestDate;
         this.requestedBloodType = requestedBloodType;

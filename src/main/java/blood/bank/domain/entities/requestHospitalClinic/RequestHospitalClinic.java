@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 
 public class RequestHospitalClinic {
 
+    private Long id;
+
     private HospitalClinic hospitalClinic;
 
     private LocalDateTime requestDate;
@@ -23,7 +25,8 @@ public class RequestHospitalClinic {
 
     private String observation;
 
-    public RequestHospitalClinic(HospitalClinic hospitalClinic, LocalDateTime requestDate, String requestedBloodType, String requestedBloodComponent, Integer requestedQuantity, LocalDate needByDate, String requestStatus, String observation) {
+    public RequestHospitalClinic(Long id, HospitalClinic hospitalClinic, LocalDateTime requestDate, String requestedBloodType, String requestedBloodComponent, Integer requestedQuantity, LocalDate needByDate, String requestStatus, String observation) {
+        this.id = id;
         this.hospitalClinic = hospitalClinic;
         this.requestDate = requestDate;
         this.requestedBloodType = requestedBloodType;
@@ -32,6 +35,14 @@ public class RequestHospitalClinic {
         this.needByDate = needByDate;
         this.requestStatus = requestStatus;
         this.observation = observation;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public HospitalClinic getHospitalClinic() {

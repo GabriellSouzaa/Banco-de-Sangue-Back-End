@@ -9,11 +9,11 @@ public class RequestHospitalClinicEntityMapper {
 
     public static RequestHospitalClinicEntity toEntity(RequestHospitalClinic requestHospitalClinic){
         HospitalClinicEntity hospitalClinicEntity = HospitalClinicEntityMapper.toEntity(requestHospitalClinic.getHospitalClinic());
-        return new RequestHospitalClinicEntity(hospitalClinicEntity, requestHospitalClinic.getRequestDate(), requestHospitalClinic.getRequestedBloodType(), requestHospitalClinic.getRequestedBloodComponent(), requestHospitalClinic.getNeedByDate(), requestHospitalClinic.getRequestStatus(), requestHospitalClinic.getObservation());
+        return new RequestHospitalClinicEntity(hospitalClinicEntity.getId(), hospitalClinicEntity, requestHospitalClinic.getRequestDate(), requestHospitalClinic.getRequestedBloodType(), requestHospitalClinic.getRequestedBloodComponent(), requestHospitalClinic.getNeedByDate(), requestHospitalClinic.getRequestStatus(), requestHospitalClinic.getObservation());
     }
 
     public static RequestHospitalClinic toRequestHospitalClinic(RequestHospitalClinicEntity requestHospitalClinicEntity){
         HospitalClinic hospitalClinic = HospitalClinicEntityMapper.toHospitalClinic(requestHospitalClinicEntity.getHospitalClinic());
-        return new RequestHospitalClinic(hospitalClinic, requestHospitalClinicEntity.getRequestDate(), requestHospitalClinicEntity.getRequestedBloodType(), requestHospitalClinicEntity.getRequestedBloodComponent(), requestHospitalClinicEntity.getRequestedQuantity(), requestHospitalClinicEntity.getNeedByDate(), requestHospitalClinicEntity.getRequestStatus(), requestHospitalClinicEntity.getObservation());
+        return new RequestHospitalClinic(requestHospitalClinicEntity.getId(), hospitalClinic, requestHospitalClinicEntity.getRequestDate(), requestHospitalClinicEntity.getRequestedBloodType(), requestHospitalClinicEntity.getRequestedBloodComponent(), requestHospitalClinicEntity.getRequestedQuantity(), requestHospitalClinicEntity.getNeedByDate(), requestHospitalClinicEntity.getRequestStatus(), requestHospitalClinicEntity.getObservation());
     }
 }

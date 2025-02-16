@@ -3,8 +3,12 @@ package blood.bank.infra.gateways;
 import blood.bank.application.gateways.RequestHospitalClinicRepositoryGateway;
 import blood.bank.domain.entities.requestHospitalClinic.RequestHospitalClinic;
 import blood.bank.infra.mappers.RequestHospitalClinicEntityMapper;
+import blood.bank.infra.models.requests.RequestHospitalClinicRequest;
+import blood.bank.infra.persistence.models.HospitalClinicEntity;
 import blood.bank.infra.persistence.models.RequestHospitalClinicEntity;
+import blood.bank.infra.persistence.repositories.HospitalClinicRepository;
 import blood.bank.infra.persistence.repositories.RequestHospitalClinicRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,9 +21,12 @@ public class RequestHospitalClinicJpa implements RequestHospitalClinicRepository
 
     private final RequestHospitalClinicEntityMapper requestHospitalClinicEntityMapper;
 
-    public RequestHospitalClinicJpa(RequestHospitalClinicRepository requestHospitalClinicRepository, RequestHospitalClinicEntityMapper requestHospitalClinicEntityMapper) {
+    private final HospitalClinicRepository hospitalClinicRepository;
+
+    public RequestHospitalClinicJpa(RequestHospitalClinicRepository requestHospitalClinicRepository, RequestHospitalClinicEntityMapper requestHospitalClinicEntityMapper, HospitalClinicRepository hospitalClinicRepository) {
         this.requestHospitalClinicRepository = requestHospitalClinicRepository;
         this.requestHospitalClinicEntityMapper = requestHospitalClinicEntityMapper;
+        this.hospitalClinicRepository = hospitalClinicRepository;
     }
 
     @Override
@@ -42,5 +49,42 @@ public class RequestHospitalClinicJpa implements RequestHospitalClinicRepository
             this.requestHospitalClinicRepository.save(requestHospitalClinic);
         }
         return RequestHospitalClinicEntityMapper.toRequestHospitalClinic(requestHospitalClinicEntity.get());
+    }
+
+    @Override
+    public void createRequestHospitalClinic(RequestHospitalClinicRequest hospitalClinicRequest) {
+        RequestHospitalClinicEntity requestHospitalClinicEntity = new RequestHospitalClinicEntity();
+        HospitalClinicEntity hospitalClinicEntity = hospitalClinicRepository.findById(hospitalClinicRequest.getHospitalClinicId())
+                .orElseThrow(() -> new EntityNotFoundException("Hospital Clinic not found"));
+        requestHospitalClinicEntity.setHospitalClinic(hospitalClinicEntity);
+        requestHospitalClinicEntity.setRequestDate(hospitalClinicRequest.getRequestDate());
+        requestHospitalClinicEntity.setRequestedBloodType(hospitalClinicRequest.getRequestedBloodType());
+        requestHospitalClinicEntity.setRequestedBloodComponent(hospitalClinicRequest.getRequestedBloodComponent());
+        requestHospitalClinicEntity.setRequestedQuantity(hospitalClinicRequest.getRequestedQuantity());
+        requestHospitalClinicEntity.setNeedByDate(hospitalClinicRequest.getNeedByDate());
+        requestHospitalClinicEntity.setRequestStatus(hospitalClinicRequest.getRequestStatus());
+        requestHospitalClinicEntity.setObservation(hospitalClinicRequest.getObservation());
+        this.requestHospitalClinicRepository.save(requestHospitalClinicEntity);
+    }
+
+    @Override
+    public void updateRequestHospitalClinic(Long id, RequestHospitalClinicRequest hospitalClinicRequest) {
+        RequestHospitalClinicEntity requestHospitalClinicEntity = requestHospitalClinicRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Hospital Clinic not found"));
+        requestHospitalClinicEntity.setRequestDate(hospitalClinicRequest.getRequestDate());
+        requestHospitalClinicEntity.setRequestedBloodType(hospitalClinicRequest.getRequestedBloodType());
+        requestHospitalClinicEntity.setRequestedBloodComponent(hospitalClinicRequest.getRequestedBloodComponent());
+        requestHospitalClinicEntity.setRequestedQuantity(hospitalClinicRequest.getRequestedQuantity());
+        requestHospitalClinicEntity.setNeedByDate(hospitalClinicRequest.getNeedByDate());
+        requestHospitalClinicEntity.setRequestStatus(hospitalClinicRequest.getRequestStatus());
+        requestHospitalClinicEntity.setObservation(hospitalClinicRequest.getObservation());
+        this.requestHospitalClinicRepository.save(requestHospitalClinicEntity);
+    }
+
+    @Override
+    public void deleteRequestHospitalClinic(Long id) {
+        RequestHospitalClinicEntity requestHospitalClinicEntity = requestHospitalClinicRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Hospital Clinic not found"));
+        requestHospitalClinicRepository.delete(requestHospitalClinicEntity);
     }
 }
