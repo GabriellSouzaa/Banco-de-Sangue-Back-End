@@ -5,16 +5,23 @@ import blood.bank.domain.entities.address.Address;
 
 public class BloodCenter {
 
+    private Long id;
+
     private Address address;
 
     private String bloodCenterName;
 
     private String email;
 
-    public BloodCenter(Address address, String bloodCenterName, String email) {
+    public BloodCenter(Long id, Address address, String bloodCenterName, String email) {
+        this.id = id;
         this.address = address;
         this.bloodCenterName = bloodCenterName;
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getEmail() {

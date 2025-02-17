@@ -6,17 +6,17 @@ import blood.bank.application.usecases.bloodCenter.DeleteBloodCenter;
 import blood.bank.application.usecases.bloodCenter.ListBloodCenter;
 import blood.bank.application.usecases.bloodCenter.UpdateBloodCenter;
 import blood.bank.infra.gateways.BloodCenterRepositoryJpa;
-import blood.bank.infra.persistence.repositories.AddressRepository;
 import blood.bank.infra.persistence.repositories.BloodCenterRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class BloodCenterConfig {
 
     @Bean
-    BloodCenterRepositoryJpa bloodCenterRepositoryJpa(BloodCenterRepository repository, AddressRepository addressRepository) {
-        return new BloodCenterRepositoryJpa(repository, addressRepository);
+    BloodCenterRepositoryJpa bloodCenterRepositoryJpa(BloodCenterRepository repository, JdbcTemplate jdbcTemplate) {
+        return new BloodCenterRepositoryJpa(repository, jdbcTemplate);
     }
 
     @Bean

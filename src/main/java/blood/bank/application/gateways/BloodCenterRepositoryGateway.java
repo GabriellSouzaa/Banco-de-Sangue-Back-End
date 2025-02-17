@@ -9,7 +9,7 @@ public interface BloodCenterRepositoryGateway {
 
     List<BloodCenter> getBloodCenters();
 
-    void createBloodCenter(Long id, BloodCenterRequest bloodCenterRequest);
+    void createBloodCenter(BloodCenterRequest bloodCenterRequest);
 
     void updateBloodCenter(Long id, BloodCenterRequest bloodCenterRequest);
 

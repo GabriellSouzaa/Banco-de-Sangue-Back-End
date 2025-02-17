@@ -6,10 +6,10 @@ import blood.bank.infra.persistence.models.BloodCenterEntity;
 public class BloodCenterEntityMapper {
 
     public static BloodCenterEntity toEntity(BloodCenter center){
-        return new BloodCenterEntity(AddressEntityMapper.toEntity(center.getAddress()), center.getBloodCenterName(), center.getEmail());
+        return new BloodCenterEntity(center.getId(), AddressEntityMapper.toEntity(center.getAddress()), center.getBloodCenterName(), center.getEmail());
     }
 
     public static BloodCenter toBloodCenter(BloodCenterEntity entity){
-        return new BloodCenter(AddressEntityMapper.toAddress(entity.getAddress()), entity.getBloodCenterName(), entity.getEmail());
+        return new BloodCenter(entity.getId(), AddressEntityMapper.toAddress(entity.getAddress()), entity.getBloodCenterName(), entity.getEmail());
     }
 }

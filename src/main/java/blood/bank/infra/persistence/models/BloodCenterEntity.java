@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class BloodCenterEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hemocentro_id_seq")
+    @SequenceGenerator(name = "hemocentro_id_seq", sequenceName = "hemocentro_id_seq", allocationSize = 1)
     @Column(name = "id_hemocentro")
     private Long id;
 
@@ -25,7 +26,8 @@ public class BloodCenterEntity {
     public BloodCenterEntity() {
     }
 
-    public BloodCenterEntity(AddressEntity address, String bloodCenterName, String email) {
+    public BloodCenterEntity(Long id, AddressEntity address, String bloodCenterName, String email) {
+        this.id = id;
         this.address = address;
         this.bloodCenterName = bloodCenterName;
         this.email = email;

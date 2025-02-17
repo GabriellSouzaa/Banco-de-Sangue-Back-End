@@ -38,10 +38,10 @@ public class BloodCenterController {
         return bloodCenters.stream().map(BloodCenterResponse::new).collect(Collectors.toList());
     }
 
-    @PostMapping("/create/{idEndereco}")
-    public void createBloodCenter(@PathVariable Long idEndereco, @RequestBody BloodCenterRequest bloodCenterRequest)
+    @PostMapping("/create")
+    public void createBloodCenter(@RequestBody BloodCenterRequest bloodCenterRequest)
     {
-        this.createBloodCenter.createBloodCenter(idEndereco, bloodCenterRequest);
+        this.createBloodCenter.createBloodCenter(bloodCenterRequest);
     }
 
     @PutMapping("/update/{id}")

@@ -11,7 +11,7 @@ public class CreateBloodCenter {
         this.bloodCenterRepositoryGateway = bloodCenterRepositoryGateway;
     }
 
-    public void createBloodCenter(Long id, BloodCenterRequest bloodCenterRequest) {
-        this.bloodCenterRepositoryGateway.createBloodCenter(id, bloodCenterRequest);
+    public void createBloodCenter(BloodCenterRequest bloodCenterRequest) {
+        this.bloodCenterRepositoryGateway.createBloodCenter(bloodCenterRequest);
     }
 }
