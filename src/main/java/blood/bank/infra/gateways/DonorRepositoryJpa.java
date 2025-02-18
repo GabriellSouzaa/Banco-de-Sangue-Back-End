@@ -3,6 +3,7 @@ package blood.bank.infra.gateways;
 import blood.bank.application.gateways.DonorRepositoryGateway;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.mappers.DonorMapper;
+import blood.bank.infra.models.requests.DonorMobileRequest;
 import blood.bank.infra.models.requests.DonorRequest;
 import blood.bank.infra.persistence.models.DonorEntity;
 import blood.bank.infra.persistence.models.PeopleEntity;
@@ -107,6 +108,27 @@ public class DonorRepositoryJpa implements DonorRepositoryGateway {
             throw new RuntimeException(e);
         }
 
+        return DonorMapper.toDonor(donorRepository.save(donorEntity));
+    }
+
+    @Override
+    public Donor createDonorMobile(DonorMobileRequest donorRequest) {
+        DonorEntity donorEntity = new DonorEntity();
+        PeopleEntity peopleEntity = new PeopleEntity();
+
+        peopleEntity.setFullName(donorRequest.getPeople().getFullName());
+        peopleEntity.setDateOfBirth(donorRequest.getPeople().getDateOfBirth());
+        peopleEntity.setGender(donorRequest.getPeople().getGender());
+        peopleEntity.setEmail(donorRequest.getPeople().getEmail());
+        donorEntity.setPeople(peopleEntity);
+        donorEntity.setBloodType(donorRequest.getBloodType());
+        donorEntity.setRegisterDate(LocalDate.now());
+        donorEntity.setLastDonationDate(null);
+        donorEntity.setNumberOfDonations(0L);
+        donorEntity.setEligibility(true);
+        donorEntity.setMedicalNotes("");
+        donorEntity.setbCoinsBalance(0L);
+        donorEntity.setImage(donorRequest.getImage());
         return DonorMapper.toDonor(donorRepository.save(donorEntity));
     }
 

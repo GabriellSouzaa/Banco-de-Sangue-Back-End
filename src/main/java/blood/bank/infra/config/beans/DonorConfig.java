@@ -49,4 +49,9 @@ public class DonorConfig {
     DeleteDonor deleteDonor(DonorRepositoryGateway donorRepositoryGateway){
         return new DeleteDonor(donorRepositoryGateway);
     }
+
+    @Bean
+    CreateDonorMobile createDonorMobile(DonorRepositoryGateway donorRepositoryGateway) {
+        return new CreateDonorMobile(donorRepositoryGateway);
+    }
 }

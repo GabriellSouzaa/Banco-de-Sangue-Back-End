@@ -4,6 +4,7 @@ package blood.bank.infra.controller;
 import blood.bank.application.usecases.donor.*;
 import blood.bank.domain.entities.donor.Donor;
 import blood.bank.infra.models.requests.AwardPointsRequest;
+import blood.bank.infra.models.requests.DonorMobileRequest;
 import blood.bank.infra.models.requests.DonorRequest;
 import blood.bank.infra.models.responses.DonorResponse;
 import org.springframework.http.MediaType;
@@ -32,7 +33,9 @@ public class DonorController {
 
     private final DeleteDonor deleteDonor;
 
-    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors, GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors, CreateDonor createDonor, UpdateDonor updateDonor, DeleteDonor deleteDonor) {
+    private final CreateDonorMobile createDonorMobile;
+
+    public DonorController(ListDonor listDonor, AwardPoints awardPoints, GetAvaibleDonors getAvaibleDonors, GenerateReportOnActiveAndInactiveDonors generateReportOnActiveAndInactiveDonors, CreateDonor createDonor, UpdateDonor updateDonor, DeleteDonor deleteDonor, CreateDonorMobile createDonorMobile) {
         this.listDonor = listDonor;
         this.awardPoints = awardPoints;
         this.getAvaibleDonors = getAvaibleDonors;
@@ -40,6 +43,7 @@ public class DonorController {
         this.createDonor = createDonor;
         this.updateDonor = updateDonor;
         this.deleteDonor = deleteDonor;
+        this.createDonorMobile = createDonorMobile;
     }
 
     @GetMapping
@@ -71,6 +75,12 @@ public class DonorController {
             @RequestPart("photo") MultipartFile photo
     ){
         Donor donor = this.createDonor.createDonor(donorRequest, photo);
+        return new DonorResponse(donor);
+    }
+
+    @PostMapping("/create-donor-mobile")
+    DonorResponse donorResponse(@RequestBody DonorMobileRequest donorMobileRequest){
+        Donor donor = this.createDonorMobile.createDonorMobile(donorMobileRequest);
         return new DonorResponse(donor);
     }
 
